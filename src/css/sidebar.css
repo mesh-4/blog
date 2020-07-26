@@ -1,0 +1,75 @@
+.sidebar-container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 100vh;
+  z-index: 5;
+  list-style-type: none;
+  color: var(--senlima-text-color);
+  background-color: var(--senlima-background-color);
+}
+
+.sidebar-inner {
+  width: 100%;
+  height: 50px;
+}
+
+.sidebar-inner a {
+  border: none;
+  outline: none;
+}
+
+.sidebar-inner a:hover {
+  color: var(--senlima-primary-color);
+  background-color: var(--senlima-hover-color);
+}
+
+.sidebar-link {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--senlima-text-color);
+  font-size: 20px;
+  border: none;
+}
+
+.sidebar-link.active {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--senlima-primary-color);
+  background-color: var(--senlima-hover-color);
+  font-size: 20px;
+  border: none;
+}
+
+.base__inner_logout {
+  position: absolute;
+  right: 0;
+  bottom: 1em;
+}
+
+.base__inner_logout button {
+  cursor: pointer;
+  border: none;
+  width: 60px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  color: var(--senlima-text-color);
+  background-color: var(--senlima-background-color);
+}
+
+.base__inner_logout button:hover {
+  color: var(--senlima-primary-color);
+  background-color: var(--senlima-hover-color);
+}

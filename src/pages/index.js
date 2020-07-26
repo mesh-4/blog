@@ -1,0 +1,8 @@
+export { Home } from './Home'
+export { Login } from './Login'
+export { Audios } from './Audios'
+export { Article } from './Article'
+export { Articles } from './Articles'
+export { Editor } from './Editor'
+export { About } from './About'
+export { NotFound } from './NotFound'
