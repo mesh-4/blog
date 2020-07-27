@@ -9,9 +9,9 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 module.exports = {
   entry: ['./src/index.jsx'],
   output: {
-    filename: isDevelopment ? 'bundle.[hash].js' : 'bundle.[contenthash].js',
+    filename: isDevelopment ? 'bundle.[hash].js' : '[contenthash].bundle.js',
     path: resolve(__dirname, '..', 'dist'),
-    publicPath: isDevelopment ? '/' : 'https://senlima.blog',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],

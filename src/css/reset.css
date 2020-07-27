@@ -5,6 +5,8 @@
   width: 100%;
   height: 100%;
   background-color: var(--senlima-body-color);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .rhap_container {
@@ -31,6 +33,11 @@
 
 .lastest-articles-container {
   list-style-type: none;
+  padding: 0;
+}
+
+body {
+  margin: 0;
   padding: 0;
 }
 

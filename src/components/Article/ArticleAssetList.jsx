@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import Skeleton from '@material-ui/lab/Skeleton'
 
 import { firestore } from '../FirebaseProvider'
 
@@ -11,7 +12,20 @@ export const ArticleAssetList = () => {
     .orderBy('updatedAt', 'desc')
   const [value, loading] = useCollectionData(articlesQuery, { idField: 'id' })
 
-  if (loading) return <p>loading</p>
+  if (loading)
+    return (
+      <li className="assets-bar-files__inner">
+        <p style={{ fontSize: '18px', margin: 0 }}>
+          <Skeleton animation="wave" variant="text" width="40%" />
+        </p>
+        <p style={{ fontSize: '15px', marginBottom: '18px' }}>
+          <Skeleton animation="wave" variant="text" />
+        </p>
+        <p style={{ fontSize: '13px', margin: 0 }}>
+          <Skeleton animation="wave" variant="text" width="30%" />
+        </p>
+      </li>
+    )
 
   return value.map(({ id, slug, title, subtitle, updatedAt }) => (
     <li key={id} className="assets-bar-files__inner">

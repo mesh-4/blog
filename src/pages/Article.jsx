@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import Markdown from 'react-markdown'
@@ -7,6 +7,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { makeStyles } from '@material-ui/styles'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedinIcon from '@material-ui/icons/LinkedIn'
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 
 import '@/css/markdown.css'
 import { firestore } from '@/components/FirebaseProvider'
@@ -22,6 +23,11 @@ export function Article({ slug }) {
   const [article, loading, error] = useCollectionData(query, { idField: 'id' })
 
   const classes = useStyles()
+  const imgLoadRef = useRef()
+
+  const removePlaceholder = () => {
+    imgLoadRef.current.remove()
+  }
 
   if (loading) return <p>loading</p>
 
@@ -55,19 +61,38 @@ export function Article({ slug }) {
             url={`http://senlima.blog/article/${slug}`}
             title={article[0].title}
             summary={article[0].subtitle}
+            style={{ marginRight: '1em' }}
           >
             <LinkedinIcon />
           </LinkedinShareButton>
+          <a
+            rel="noreferrer"
+            target="_blank"
+            title="Support link"
+            aria-label="Senlima's support link"
+            href="https://www.buymeacoffee.com/senlima"
+          >
+            <MonetizationOnIcon />
+          </a>
         </aside>
 
+        <div
+          ref={imgLoadRef}
+          style={{
+            width: '100%',
+            paddingTop: '52%',
+            backgroundColor: '#c2c2c2',
+          }}
+        />
         <img
+          onLoad={removePlaceholder}
           src={article[0].cover}
           alt={`${article[0].title} cover`}
+          width="1200px"
           style={{
             display: 'block',
             margin: '10px 0',
             width: '100%',
-            backgroundColor: '#c2c2c2',
           }}
         />
 
@@ -88,9 +113,19 @@ export function Article({ slug }) {
             url={`http://senlima.blog/article/${slug}`}
             title={article[0].title}
             summary={article[0].subtitle}
+            style={{ marginRight: '1em' }}
           >
             <LinkedinIcon />
           </LinkedinShareButton>
+          <a
+            rel="noreferrer"
+            target="_blank"
+            title="Support link"
+            aria-label="Senlima's support link"
+            href="https://www.buymeacoffee.com/senlima"
+          >
+            <MonetizationOnIcon />
+          </a>
         </aside>
       </article>
     </>
