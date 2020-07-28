@@ -12,9 +12,9 @@ import {
 import { makeStyles } from '@material-ui/styles'
 
 import { playerAtom } from '@/store'
-import { firestore } from './FirebaseProvider'
-import { AudioDeleteModal } from './AudioDeleteModal'
-import { AudioPublishModal } from './AudioPublishModal'
+import { firestore } from '../FirebaseProvider'
+import { PodcastDeleteModal } from './PodcastDeleteModal'
+import { PodcastPublishModal } from './PodcastPublishModal'
 
 const useStyles = makeStyles(() => ({
   head: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-export function AudioItem({ audio }) {
+export function PodcastItem({ audio }) {
   const { id, title, description, fileName, url, draft } = audio
   const [player, setPlayer] = useRecoilState(playerAtom)
 
@@ -143,12 +143,12 @@ export function AudioItem({ audio }) {
         </CardContent>
       </Card>
 
-      <AudioDeleteModal
+      <PodcastDeleteModal
         open={modals.delete}
         onClose={() => handleModalStatus('delete', false)}
         target={{ id, fileName }}
       />
-      <AudioPublishModal
+      <PodcastPublishModal
         open={modals.publish}
         onClose={() => handleModalStatus('publish', false)}
         target={{ id, fileName }}
@@ -157,7 +157,7 @@ export function AudioItem({ audio }) {
   )
 }
 
-AudioItem.propTypes = {
+PodcastItem.propTypes = {
   audio: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

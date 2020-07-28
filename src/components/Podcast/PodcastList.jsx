@@ -3,8 +3,8 @@ import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-import { AudioItem } from './AudioItem'
-import { firestore } from './FirebaseProvider'
+import { PodcastItem } from './PodcastItem'
+import { firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   base: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export function AudioList() {
+export function PodcastList() {
   const query = firestore.collection('audio').orderBy('createdAt', 'desc')
   const [audios, loading] = useCollectionData(query, { idField: 'id' })
 
@@ -23,7 +23,7 @@ export function AudioList() {
 
   return audios.map(audio => (
     <Grid key={audio.id} className={classes.base} item xs={12}>
-      <AudioItem audio={audio} />
+      <PodcastItem audio={audio} />
     </Grid>
   ))
 }

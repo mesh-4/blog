@@ -3,8 +3,8 @@ import { CloudUpload } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import { Grid, Button, Hidden, Typography } from '@material-ui/core'
 
-import { AudioList } from '@/components/AudioList'
-import { AudioCreateModal } from '@/components/AudioCreateModal'
+import { PodcastList } from '@/components/Podcast/PodcastList'
+import { PodcastCreateModal } from '@/components/Podcast/PodcastCreateModal'
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -36,9 +36,9 @@ export function Audios() {
           Upload
         </Button>
 
-        <AudioList />
+        <PodcastList />
 
-        <AudioCreateModal
+        <PodcastCreateModal
           open={createOpen}
           onClose={() => setCreateOpen(false)}
         />

@@ -8,7 +8,7 @@ import { playerAtom } from '@/store'
 import { Navbar } from './Navbar'
 import { NavbarBottom } from './NavbarBottom'
 import { Assetsbar } from './Assetsbar'
-import { AudioPlayer } from '../AudioPlayer'
+import { PodcastPlayer } from '../Podcast/PodcastPlayer'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -49,7 +49,7 @@ export function Container({ children }) {
           </>
         )}
       </div>
-      {player.url && <AudioPlayer />}
+      {player.url && <PodcastPlayer />}
     </>
   )
 }
