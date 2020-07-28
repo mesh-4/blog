@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { navigate } from '@reach/router'
+import { useFirebase } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Grid, Button, TextField, Typography } from '@material-ui/core'
-
-import { auth } from '@/components/FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -17,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export function Login() {
   const classes = useStyles()
+  const firebase = useFirebase()
   const [loginForm, setForm] = useState({ email: '', password: '' })
 
   const handleLoginFieldChange = e => {
@@ -26,11 +26,9 @@ export function Login() {
 
   const handleLogin = async () => {
     try {
-      await auth.signInWithEmailAndPassword(
-        loginForm.email,
-        loginForm.password
-      )
-      toast.success('🎉 Login success')
+      const { email, password } = loginForm
+      await firebase.login({ email, password })
+      toast.success('💁🏻 Login success')
       navigate('/')
     } catch (err) {
       if (err) toast.error('😭 Invaild login')
