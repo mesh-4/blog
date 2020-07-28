@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, Modal, LinearProgress } from '@material-ui/core'
 
 import uploadImage from '@/assets/uploadImage.png'
-import { storage, firestore } from './FirebaseProvider'
+import { storage, firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export function AudioCreateModal({ open, onClose }) {
+export function PodcastCreateModal({ open, onClose }) {
   const classes = useStyles()
   const uploadRef = createRef()
   const [uploading, setUploading] = useState(false)
@@ -112,7 +112,7 @@ export function AudioCreateModal({ open, onClose }) {
   )
 }
 
-AudioCreateModal.propTypes = {
+PodcastCreateModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 }

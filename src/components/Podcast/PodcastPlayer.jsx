@@ -1,3 +1,4 @@
+// TODO aside of play audio
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import PlayerBase from 'react-h5-audio-player'
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export function AudioPlayer() {
+export function PodcastPlayer() {
   const [player, setPlayer] = useRecoilState(playerAtom)
   const [volume, setVolume] = useState(1.0)
   const classes = useStyles()

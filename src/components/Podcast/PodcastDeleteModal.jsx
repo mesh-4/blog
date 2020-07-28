@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, Modal } from '@material-ui/core'
 
 import deleteImage from '@/assets/deleteImage.png'
-import { storage, firestore } from './FirebaseProvider'
+import { storage, firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export function AudioDeleteModal({ open, onClose, target }) {
+export function PodcastDeleteModal({ open, onClose, target }) {
   const classes = useStyles()
 
   const handleDelete = async () => {
@@ -63,7 +63,7 @@ export function AudioDeleteModal({ open, onClose, target }) {
   )
 }
 
-AudioDeleteModal.propTypes = {
+PodcastDeleteModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   target: PropTypes.shape({

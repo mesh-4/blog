@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, Modal } from '@material-ui/core'
 
 import publishImage from '@/assets/publishImage.png'
-import { firestore } from './FirebaseProvider'
+import { firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export function AudioPublishModal({ open, onClose, target }) {
+export function PodcastPublishModal({ open, onClose, target }) {
   const classes = useStyles()
 
   const handlePublish = async () => {
@@ -64,7 +64,7 @@ export function AudioPublishModal({ open, onClose, target }) {
   )
 }
 
-AudioPublishModal.propTypes = {
+PodcastPublishModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   target: PropTypes.shape({
