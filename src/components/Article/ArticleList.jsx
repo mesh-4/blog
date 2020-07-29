@@ -1,11 +1,9 @@
-// TODO Published articles list
 import React from 'react'
 import { Link } from '@reach/router'
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-
-import { firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   base: {
@@ -29,19 +27,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export function ArticleList() {
-  const query = firestore
-    .collection('markdowns')
-    .where('draft', '==', false)
-    .orderBy('updatedAt', 'desc')
-  const [articles, loading] = useCollectionData(query, { idField: 'id' })
-
   const classes = useStyles()
+  const articles = useSelector(state => state.firestore.ordered.publishedArticles)
 
-  if (loading) {
-    return <li>loading</li>
+  if (!isLoaded(articles)) {
+    return <div>Loading...</div>
   }
 
-  if (!loading && articles.length === 0) {
+  if (isEmpty(articles)) {
     return <li className={classes.base}>No any article.</li>
   }
 
@@ -55,27 +48,25 @@ export function ArticleList() {
           width: '100px',
           height: '100px',
           marginRight: '1em',
-          backgroundImage: `url(${cover})`,
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundOrigin: 'border-box',
-          backgroundSize: 'cover',
+          backgroundImage: `url(${cover})`,
         }}
       />
 
       <article className={classes.root}>
         <div className={classes.details}>
           <Link to={`/article/${slug}`}>
-            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 600 }}>
-              {title}
-            </h2>
+            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 600 }}>{title}</h2>
           </Link>
           <Link to={`/article/${slug}`}>
             <p
               style={{
                 margin: 0,
+                color: '#9c9c9c',
                 fontSize: '14px',
                 fontWeight: 500,
-                color: '#9c9c9c',
               }}
             >
               {subtitle}
@@ -83,11 +74,7 @@ export function ArticleList() {
           </Link>
         </div>
 
-        <Typography
-          variant="caption"
-          display="block"
-          style={{ marginTop: '12px' }}
-        >
+        <Typography variant="caption" display="block" style={{ marginTop: '12px' }}>
           lastest updated at {updatedAt.toDate().toLocaleDateString()}
         </Typography>
       </article>
