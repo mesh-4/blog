@@ -1,26 +1,29 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { ToastContainer } from 'react-toastify'
+
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/firestore'
-import { createStore } from 'redux'
+
+import { RecoilRoot } from 'recoil'
 import { Provider } from 'react-redux'
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
-import { ToastContainer } from 'react-toastify'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 
 import './css/reset.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
-import { rootReducer } from './store/reducers'
+import { configureStore } from './store/createStore'
 import App from './App'
 
 firebase.initializeApp(firebaseConfig)
 firebase.firestore()
 
-const initialState = {}
-const store = createStore(rootReducer, initialState)
+// eslint-disable-next-line
+const initialState = window && window.__INITIAL_STATE__
+const store = configureStore(initialState)
 
 const rrfProps = {
   firebase,
@@ -30,21 +33,23 @@ const rrfProps = {
 }
 
 render(
-  <Provider store={store}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
-      <ToastContainer
-        position="bottom-right"
-        hideProgressBar={false}
-        newestOnTop={false}
-        autoClose={3000}
-        closeOnClick
-        rtl={false}
-        draggable
-        pauseOnHover
-        pauseOnFocusLoss
-      />
-    </ReactReduxFirebaseProvider>
-  </Provider>,
+  <RecoilRoot>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <App />
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar={false}
+          newestOnTop={false}
+          autoClose={3000}
+          closeOnClick
+          rtl={false}
+          draggable
+          pauseOnHover
+          pauseOnFocusLoss
+        />
+      </ReactReduxFirebaseProvider>
+    </Provider>
+  </RecoilRoot>,
   document.getElementById('root')
 )

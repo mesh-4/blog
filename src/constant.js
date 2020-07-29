@@ -1,4 +1,4 @@
-import { Home, Login, Editor, Audios, About, Articles } from '@/pages'
+import { Home, Login, About, Articles, Editor } from '@/pages'
 
 export const routes = [
   {
@@ -8,6 +8,7 @@ export const routes = [
     public: true,
     inContainer: true,
   },
+  /*
   {
     path: '/audios',
     name: 'Audios',
@@ -15,6 +16,7 @@ export const routes = [
     public: false,
     inContainer: true,
   },
+  */
   {
     path: '/editor',
     name: 'Editor',
