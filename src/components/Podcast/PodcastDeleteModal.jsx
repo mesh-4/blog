@@ -1,35 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { toast } from 'react-toastify'
+import { useFirebase, useFirestore } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
-import { Button, Typography, Modal } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 
 import deleteImage from '@/assets/deleteImage.png'
-import { storage, firestore } from '../FirebaseProvider'
+import { ModalContainer } from '@/components/Layout/ModalContainer'
 
 const useStyles = makeStyles(theme => ({
-  content: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: `translate(-50%, -50%)`,
-    width: '40vw',
-    color: 'black',
-    textAlign: 'center',
-    backgroundColor: 'white',
-    outline: 'none',
-    borderRadius: '8px',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
-      width: '95vw',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '75vw',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '50vw',
-    },
-  },
   image: {
     margin: '0 30%',
     paddingTop: theme.spacing(3),
@@ -41,25 +20,31 @@ const useStyles = makeStyles(theme => ({
 
 export function PodcastDeleteModal({ open, onClose, target }) {
   const classes = useStyles()
+  const firebase = useFirebase()
+  const firestore = useFirestore()
 
   const handleDelete = async () => {
-    await firestore.collection('audio').doc(target.id).delete()
-    await storage.ref(`audio/${target.fileName}`).delete()
-    onClose()
+    try {
+      await firestore.collection('audio').doc(target.id).delete()
+      await firebase.storage().ref(`audio/${target.fileName}`).delete()
+      toast.success('Delete audio success!')
+      onClose()
+    } catch (err) {
+      toast.error(`Failed on delete audio: ${err.message}`)
+      onClose()
+    }
   }
 
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className={classes.content}>
-        <Typography variant="h4">Delete {target.fileName}?</Typography>
+    <ModalContainer open={open} onClose={onClose}>
+      <Typography variant="h4">Delete {target.fileName}?</Typography>
 
-        <img className={classes.image} src={deleteImage} alt="delete" />
+      <img className={classes.image} src={deleteImage} alt="delete" />
 
-        <Button variant="contained" color="primary" onClick={handleDelete}>
-          Confirm
-        </Button>
-      </div>
-    </Modal>
+      <Button variant="contained" color="primary" onClick={handleDelete}>
+        Confirm
+      </Button>
+    </ModalContainer>
   )
 }
 
