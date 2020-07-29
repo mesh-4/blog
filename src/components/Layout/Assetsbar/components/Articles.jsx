@@ -1,18 +1,19 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import Skeleton from '@material-ui/lab/Skeleton'
 
-import { firestore } from '../FirebaseProvider'
-
 export const ArticleAssetList = () => {
-  const articlesQuery = firestore
-    .collection('markdowns')
-    .where('draft', '==', false)
-    .orderBy('updatedAt', 'desc')
-  const [value, loading] = useCollectionData(articlesQuery, { idField: 'id' })
+  const articles = useSelector(state => state.firestore.ordered.publishedArticles)
+  useFirestoreConnect({
+    collection: `markdowns`,
+    where: [['draft', '==', false]],
+    orderBy: [['updatedAt', 'desc']],
+    storeAs: 'publishedArticles',
+  })
 
-  if (loading)
+  if (!isLoaded(articles))
     return (
       <li className="assets-bar-files__inner">
         <p style={{ fontSize: '18px', margin: 0 }}>
@@ -27,7 +28,11 @@ export const ArticleAssetList = () => {
       </li>
     )
 
-  return value.map(({ id, slug, title, subtitle, updatedAt }) => (
+  if (isEmpty(articles)) {
+    return <li>No any article.</li>
+  }
+
+  return articles.map(({ id, slug, title, subtitle, updatedAt }) => (
     <li key={id} className="assets-bar-files__inner">
       <article>
         <div
@@ -40,10 +45,7 @@ export const ArticleAssetList = () => {
             marginBottom: '16px',
           }}
         >
-          <Link
-            to={`/article/${slug}`}
-            style={{ flex: '0 0 auto', fontSize: '18px' }}
-          >
+          <Link to={`/article/${slug}`} style={{ flex: '0 0 auto', fontSize: '18px' }}>
             <h2 className="text-ellipsis" style={{ fontWeight: 600 }}>
               {title}
             </h2>

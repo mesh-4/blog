@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react'
 import { Link } from '@reach/router'
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
 import EditIcon from '@material-ui/icons/Edit'
 import GraphicEqIcon from '@material-ui/icons/GraphicEq'
 
 import '@/css/sidebar.css'
-import { useFirebase } from '../FirebaseProvider'
 
 export const routes = [
   {
@@ -35,13 +36,13 @@ export const routes = [
   },
 ]
 
-export function Navbar() {
-  const { user } = useFirebase()
+export function Sidebar() {
+  const auth = useSelector(state => state.firebase.auth)
 
   return (
     <ul className="sidebar-container" role="navigation">
       {routes.map(({ name, path, icon: Icon, public: isPublic }) => {
-        if (!isPublic && !user) return <Fragment key={name} />
+        if (!isPublic && isLoaded(auth) && isEmpty(auth)) return <Fragment key={name} />
 
         return (
           <li key={name} className="sidebar-inner">
