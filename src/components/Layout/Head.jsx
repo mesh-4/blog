@@ -15,7 +15,7 @@ export function Head({ url, type, cover, title, description }) {
       <meta property="og:image" content={cover} />
 
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:site" content={url} />
+      <meta name="twitter:site" content="@senlima4" />
       <meta name="twitter:creator" content="@senlima4" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={cover} />
