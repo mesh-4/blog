@@ -16,7 +16,7 @@ export function Home() {
   return (
     <>
       <Head
-        title="Senlima Blog | Home"
+        title="Home"
         description="紀錄網頁開發以及心路歷程等內容。不僅包含文章，也有 podcast內容。"
       />
       <div style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}>

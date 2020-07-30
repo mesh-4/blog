@@ -1,29 +1,19 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 import { hot } from 'react-hot-loader/root'
+import { useSelector } from 'react-redux'
+import { isLoaded } from 'react-redux-firebase'
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import { Routes } from './Routes'
-import { themeAtom } from './store'
+import { LoadingScreen } from './components/LoadingScreen'
 
-const lightTheme = createMuiTheme({
-  palette: {
-    background: {
-      default: '#ffffff',
-    },
-    secondary: {
-      main: '#515151',
-    },
-  },
-})
-
-const darkTheme = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     type: 'dark',
     background: {
-      default: '#000000',
+      default: '#161616',
     },
     primary: {
       main: '#37f570',
@@ -35,10 +25,12 @@ const darkTheme = createMuiTheme({
 })
 
 export function App() {
-  const theme = useRecoilValue(themeAtom)
+  const auth = useSelector(state => state.firebase.auth)
+
+  if (!isLoaded(auth)) return <LoadingScreen />
 
   return (
-    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes />
     </ThemeProvider>

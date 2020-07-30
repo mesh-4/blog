@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/styles'
 import { useMediaQuery } from '@material-ui/core'
 
 import { playerAtom } from '@/store'
-import { Navbar } from './Navbar'
-import { NavbarBottom } from './NavbarBottom'
+import { Sidebar } from './Sidebar'
+import { Bottombar } from './Bottombar'
 import { Assetsbar } from './Assetsbar'
-import { PodcastPlayer } from '../Podcast/PodcastPlayer'
+import { PodcastPlayer } from './PodcastPlayer'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -27,6 +27,8 @@ const useStyles = makeStyles(theme => ({
 
 export function Container({ children }) {
   const player = useRecoilValue(playerAtom)
+
+  // TODO window.matchMedia
   const isMobile = useMediaQuery('(max-width:959px)')
   const classes = useStyles()
 
@@ -41,11 +43,11 @@ export function Container({ children }) {
             }),
           })}
         {isMobile ? (
-          <NavbarBottom />
+          <Bottombar />
         ) : (
           <>
             <Assetsbar />
-            <Navbar />
+            <Sidebar />
           </>
         )}
       </div>

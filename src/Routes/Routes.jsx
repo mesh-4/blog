@@ -1,9 +1,9 @@
 import React from 'react'
 import { Router } from '@reach/router'
 
+import { routes } from '@/constant'
 import { Article, NotFound } from '@/pages'
 import { Container } from '@/components/Layout/Container'
-import { routes } from './constant'
 import { PrivateRoute } from './PrivateRoute'
 
 export function Routes() {
@@ -32,7 +32,6 @@ export function Routes() {
             <PrivateRoute key={name} as={Component} path={path} />
           )
         )}
-
       <NotFound default />
     </Router>
   )

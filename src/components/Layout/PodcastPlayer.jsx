@@ -1,4 +1,3 @@
-// TODO aside of play audio
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import PlayerBase from 'react-h5-audio-player'
@@ -66,11 +65,7 @@ export function PodcastPlayer() {
         }}
       >
         <span className={classes.title}>{player.title}</span>
-        <IconButton
-          className={classes.closeBtn}
-          size="small"
-          onClick={handlePlayerClear}
-        >
+        <IconButton className={classes.closeBtn} size="small" onClick={handlePlayerClear}>
           <CloseIcon />
         </IconButton>
       </div>

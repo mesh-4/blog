@@ -1,0 +1,17 @@
+.article-editor__header {
+  display: grid;
+  width: 100%;
+  height: 40px;
+  grid-gap: 0px 10px;
+  grid-template-rows: 1fr;
+  grid-template-columns: auto 120px;
+}
+
+.article-editor__actions {
+  margin: 10px 0;
+  width: '100%';
+}
+
+.article-editor__actions button {
+  margin-right: 1em;
+}

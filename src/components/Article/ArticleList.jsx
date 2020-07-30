@@ -1,11 +1,9 @@
-// TODO Published articles list
 import React from 'react'
 import { Link } from '@reach/router'
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty, useFirestoreConnect } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-
-import { firestore } from '../FirebaseProvider'
 
 const useStyles = makeStyles(theme => ({
   base: {
@@ -29,19 +27,22 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export function ArticleList() {
-  const query = firestore
-    .collection('markdowns')
-    .where('draft', '==', false)
-    .orderBy('updatedAt', 'desc')
-  const [articles, loading] = useCollectionData(query, { idField: 'id' })
-
   const classes = useStyles()
+  const articles = useSelector(
+    state => state.firestore.ordered.publishedArticles
+  )
+  useFirestoreConnect({
+    collection: `markdowns`,
+    where: [['draft', '==', false]],
+    orderBy: [['updatedAt', 'desc']],
+    storeAs: 'publishedArticles',
+  })
 
-  if (loading) {
-    return <li>loading</li>
+  if (!isLoaded(articles)) {
+    return <div>Loading...</div>
   }
 
-  if (!loading && articles.length === 0) {
+  if (isEmpty(articles)) {
     return <li className={classes.base}>No any article.</li>
   }
 
@@ -55,10 +56,10 @@ export function ArticleList() {
           width: '100px',
           height: '100px',
           marginRight: '1em',
-          backgroundImage: `url(${cover})`,
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundOrigin: 'border-box',
-          backgroundSize: 'cover',
+          backgroundImage: `url(${cover})`,
         }}
       />
 
@@ -73,9 +74,9 @@ export function ArticleList() {
             <p
               style={{
                 margin: 0,
+                color: '#9c9c9c',
                 fontSize: '14px',
                 fontWeight: 500,
-                color: '#9c9c9c',
               }}
             >
               {subtitle}

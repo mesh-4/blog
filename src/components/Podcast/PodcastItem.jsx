@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { toast } from 'react-toastify'
 import { useRecoilState } from 'recoil'
+import { useFirestore } from 'react-redux-firebase'
 import {
   Button,
   TextField,
@@ -12,7 +14,6 @@ import {
 import { makeStyles } from '@material-ui/styles'
 
 import { playerAtom } from '@/store'
-import { firestore } from '../FirebaseProvider'
 import { PodcastDeleteModal } from './PodcastDeleteModal'
 import { PodcastPublishModal } from './PodcastPublishModal'
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     display: 'flex',
     alignItems: 'center',
+    paddingTop: 0,
     justifyContent: 'space-between',
     paddingBottom: '1em !important',
   },
@@ -31,33 +33,20 @@ const useStyles = makeStyles(() => ({
 
 export function PodcastItem({ audio }) {
   const { id, title, description, fileName, url, draft } = audio
+  const firestore = useFirestore()
   const [player, setPlayer] = useRecoilState(playerAtom)
 
-  const audioCollection = firestore.collection('audio')
-
   const classes = useStyles()
-  const [modals, setModals] = useState({
-    delete: false,
-    publish: false,
-  })
   const [editorOpen, setEditorOpen] = useState(false)
-  const [editorForm, setForm] = useState({
-    title,
-    description,
-  })
+  const [editorForm, setForm] = useState({ title, description })
+  const [modals, setModals] = useState({ delete: false, publish: false })
 
   const handleModalStatus = (field, value) => {
-    setModals({
-      ...modals,
-      [field]: value,
-    })
+    setModals({ ...modals, [field]: value })
   }
 
   const handlePlayAudio = () => {
-    setPlayer({
-      title,
-      url,
-    })
+    setPlayer({ title, url })
   }
 
   const handleEditorOpen = () => {
@@ -66,17 +55,20 @@ export function PodcastItem({ audio }) {
 
   const handleEditorChange = e => {
     const { name, value } = e.currentTarget
-    setForm({
-      ...editorForm,
-      [name]: value,
-    })
+    setForm({ ...editorForm, [name]: value })
   }
 
   const handleEditorSubmit = async () => {
-    await audioCollection.doc(id).update({
-      ...editorForm,
-    })
-    setEditorOpen(false)
+    try {
+      await firestore
+        .collection('audio')
+        .doc(id)
+        .update({ ...editorForm })
+      toast.success("Successfully update podcast's info")
+      setEditorOpen(false)
+    } catch (err) {
+      toast.error(err.message)
+    }
   }
 
   return (

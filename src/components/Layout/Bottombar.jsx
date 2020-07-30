@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
+import AssessmentIcon from '@material-ui/icons/Assessment'
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark'
 
 export const routes = [
@@ -19,6 +20,11 @@ export const routes = [
     path: '/about',
     name: 'About',
     icon: InfoIcon,
+  },
+  {
+    path: '/podcasts',
+    name: 'Podcasts',
+    icon: AssessmentIcon,
   },
   {
     path: '/articles',
@@ -34,19 +40,21 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-export function NavbarBottom() {
+export function Bottombar() {
   const classes = useStyles()
   const location = useLocation()
   const [value, setValue] = useState(location.pathname)
+
+  function handleValueChange(_event, val) {
+    setValue(val)
+  }
 
   return (
     <BottomNavigation
       className={classes.base}
       showLabels
       value={value}
-      onChange={(_event, newValue) => {
-        setValue(newValue)
-      }}
+      onChange={handleValueChange}
     >
       {routes.map(({ name, path, icon: Icon }) => (
         <BottomNavigationAction

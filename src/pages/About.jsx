@@ -8,7 +8,7 @@ import { Head } from '@/components/Layout/Head'
 export function About() {
   return (
     <>
-      <Head title="Senlima Blog | About" description="關於作者" />
+      <Head title="About" description="關於作者" />
       <main
         style={{
           margin: '40px auto',

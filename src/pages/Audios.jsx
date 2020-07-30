@@ -3,6 +3,7 @@ import { CloudUpload } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import { Grid, Button, Hidden, Typography } from '@material-ui/core'
 
+import { Head } from '@/components/Layout/Head'
 import { PodcastList } from '@/components/Podcast/PodcastList'
 import { PodcastCreateModal } from '@/components/Podcast/PodcastCreateModal'
 
@@ -17,35 +18,38 @@ export function Audios() {
   const [createOpen, setCreateOpen] = useState(false)
 
   return (
-    <Grid container spacing={0}>
-      <Hidden smDown>
-        <Grid item md={1} />
-      </Hidden>
-      <Grid item xs={12} md={10}>
-        <Typography className={classes.title} variant="h5" gutterBottom>
-          Audios
-        </Typography>
+    <>
+      <Head title="Podcasts" />
+      <Grid container spacing={0}>
+        <Hidden smDown>
+          <Grid item md={1} />
+        </Hidden>
+        <Grid item xs={12} md={10}>
+          <Typography className={classes.title} variant="h5" gutterBottom>
+            Audios
+          </Typography>
 
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          startIcon={<CloudUpload />}
-          onClick={() => setCreateOpen(true)}
-        >
-          Upload
-        </Button>
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            startIcon={<CloudUpload />}
+            onClick={() => setCreateOpen(true)}
+          >
+            Upload
+          </Button>
 
-        <PodcastList />
+          <PodcastList />
 
-        <PodcastCreateModal
-          open={createOpen}
-          onClose={() => setCreateOpen(false)}
-        />
+          <PodcastCreateModal
+            open={createOpen}
+            onClose={() => setCreateOpen(false)}
+          />
+        </Grid>
+        <Hidden smDown>
+          <Grid item md={1} />
+        </Hidden>
       </Grid>
-      <Hidden smDown>
-        <Grid item md={1} />
-      </Hidden>
-    </Grid>
+    </>
   )
 }

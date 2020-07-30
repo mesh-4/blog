@@ -1,38 +1,32 @@
-// TODO Button to new draft
 import React from 'react'
 import { toast } from 'react-toastify'
-import { useSetRecoilState } from 'recoil'
+import { useFirestore } from 'react-redux-firebase'
 import { Button } from '@material-ui/core'
 
-import { editorAtom } from '@/store'
-import { firestore } from '../FirebaseProvider'
-
 export function ArticleNewDraft() {
-  const markdownRef = firestore.collection('markdowns')
-  const setArticle = useSetRecoilState(editorAtom)
+  const firestore = useFirestore()
 
   const handleNewArticle = async () => {
-    const { id } = await markdownRef.add({
-      title: 'Untitled',
-      subtitle: '',
-      content: '',
-      slug: '',
-      cover: '',
-      draft: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
+    try {
+      await firestore.collection('markdowns').add({
+        title: 'Untitled',
+        subtitle: '',
+        content: '',
+        slug: '',
+        cover: '',
+        draft: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
 
-    setArticle(id)
-    toast.success('✍️ New draft successfully')
+      toast.success('✍️ New draft successfully')
+    } catch (err) {
+      toast.error(`Failed on create new draft: ${err.code}`)
+    }
   }
 
   return (
-    <Button
-      color="primary"
-      variant="contained"
-      onClick={() => handleNewArticle()}
-    >
+    <Button color="primary" variant="contained" onClick={() => handleNewArticle()}>
       New Draft
     </Button>
   )

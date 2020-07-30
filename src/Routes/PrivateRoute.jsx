@@ -1,11 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from '@reach/router'
-import { useFirebase } from '@/components/FirebaseProvider'
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 
 export const PrivateRoute = ({ as: Component, path }) => {
-  const { user } = useFirebase()
-  return user ? <Component path={path} /> : <Redirect to="login" noThrow />
+  const auth = useSelector(state => state.firebase.auth)
+
+  return isLoaded(auth) && !isEmpty(auth) ? (
+    <Component path={path} />
+  ) : (
+    <Redirect to="login" noThrow />
+  )
 }
 
 PrivateRoute.propTypes = {
