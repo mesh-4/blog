@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
+import { useFirestoreConnect, isLoaded } from 'react-redux-firebase'
 import { TwitterShareButton, LinkedinShareButton } from 'react-share'
 import { makeStyles } from '@material-ui/styles'
 import TwitterIcon from '@material-ui/icons/Twitter'
@@ -20,20 +21,22 @@ const useStyles = makeStyles(theme => ({
 export function Article({ slug }) {
   const classes = useStyles()
   const imgLoadRef = useRef()
-  const { title, subtitle, cover, content } = useSelector(
-    ({
-      firestore: {
-        ordered: { publishedArticles },
-      },
-    }) => publishedArticles.filter(target => target.slug === slug)[0]
-  )
+  const [coverLoading, updateCoverLoading] = useState(true)
+  const article = useSelector(state => state.firestore.ordered.trackingArticle)
+  useFirestoreConnect({
+    collection: `markdowns`,
+    where: [['slug', '==', slug]],
+    storeAs: 'trackingArticle',
+  })
 
   const removePlaceholder = () => {
-    imgLoadRef.current.remove()
+    updateCoverLoading(false)
   }
 
-  return (
-    <>
+  if (!isLoaded(article)) return <p>loading</p>
+
+  return article.map(({ title, subtitle, cover, content }) => (
+    <Fragment key={slug}>
       <Head title={title} description={subtitle} cover={cover} />
       <article
         className="medium-article"
@@ -75,22 +78,26 @@ export function Article({ slug }) {
         <div
           ref={imgLoadRef}
           style={{
+            position: 'relative',
             width: '100%',
             paddingTop: '52%',
-            backgroundColor: '#c2c2c2',
+            marginBottom: '2em',
+            backgroundColor: coverLoading ? '#c2c2c2' : 'transparent',
           }}
-        />
-        <img
-          onLoad={removePlaceholder}
-          src={cover}
-          alt={`${title} cover`}
-          width="1200px"
-          style={{
-            display: 'block',
-            margin: '10px 0',
-            width: '100%',
-          }}
-        />
+        >
+          <img
+            onLoad={removePlaceholder}
+            src={cover}
+            alt={`${title} cover`}
+            width="1200px"
+            style={{
+              position: 'absolute',
+              top: 0,
+              display: 'block',
+              width: '100%',
+            }}
+          />
+        </div>
 
         <main>
           <Markdown source={content} escapeHtml={false} />
@@ -124,8 +131,8 @@ export function Article({ slug }) {
           </a>
         </aside>
       </article>
-    </>
-  )
+    </Fragment>
+  ))
 }
 
 Article.defaultProps = {
