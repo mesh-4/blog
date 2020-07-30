@@ -1,4 +1,12 @@
-import { Home, Login, About, Articles, Editor } from '@/pages'
+import {
+  Home,
+  Login,
+  About,
+  Audios,
+  Podcasts,
+  Editor,
+  Articles,
+} from '@/pages'
 
 export const routes = [
   {
@@ -8,7 +16,6 @@ export const routes = [
     public: true,
     inContainer: true,
   },
-  /*
   {
     path: '/audios',
     name: 'Audios',
@@ -16,7 +23,6 @@ export const routes = [
     public: false,
     inContainer: true,
   },
-  */
   {
     path: '/editor',
     name: 'Editor',
@@ -42,6 +48,13 @@ export const routes = [
     path: '/articles',
     name: 'Articles',
     component: Articles,
+    public: true,
+    inContainer: true,
+  },
+  {
+    path: '/podcasts',
+    name: 'Podcasts',
+    component: Podcasts,
     public: true,
     inContainer: true,
   },

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import { useSelector } from 'react-redux'
-import { isLoaded, isEmpty } from 'react-redux-firebase'
+import { isLoaded, isEmpty, useFirestoreConnect } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
 
@@ -28,7 +28,15 @@ const useStyles = makeStyles(theme => ({
 
 export function ArticleList() {
   const classes = useStyles()
-  const articles = useSelector(state => state.firestore.ordered.publishedArticles)
+  const articles = useSelector(
+    state => state.firestore.ordered.publishedArticles
+  )
+  useFirestoreConnect({
+    collection: `markdowns`,
+    where: [['draft', '==', false]],
+    orderBy: [['updatedAt', 'desc']],
+    storeAs: 'publishedArticles',
+  })
 
   if (!isLoaded(articles)) {
     return <div>Loading...</div>
@@ -58,7 +66,9 @@ export function ArticleList() {
       <article className={classes.root}>
         <div className={classes.details}>
           <Link to={`/article/${slug}`}>
-            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 600 }}>{title}</h2>
+            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 600 }}>
+              {title}
+            </h2>
           </Link>
           <Link to={`/article/${slug}`}>
             <p
@@ -74,7 +84,11 @@ export function ArticleList() {
           </Link>
         </div>
 
-        <Typography variant="caption" display="block" style={{ marginTop: '12px' }}>
+        <Typography
+          variant="caption"
+          display="block"
+          style={{ marginTop: '12px' }}
+        >
           lastest updated at {updatedAt.toDate().toLocaleDateString()}
         </Typography>
       </article>

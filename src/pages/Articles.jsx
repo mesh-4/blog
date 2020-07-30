@@ -18,7 +18,7 @@ export function Articles() {
   return (
     <>
       <Head
-        title="Senlima Blog | Articles"
+        title="Articles"
         description="All articles that from Senlima's blog"
       />
       <main style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}>

@@ -15,11 +15,11 @@ const useStyles = makeStyles(theme => ({
 
 export function PodcastList() {
   const classes = useStyles()
-  const podcasts = useSelector(state => state.firestore.ordered.publishedPodcasts)
+  const podcasts = useSelector(state => state.firestore.ordered.allPodcasts)
   useFirestoreConnect({
-    collection: `audios`,
+    collection: `audio`,
     orderBy: [['createdAt', 'desc']],
-    storeAs: 'publishedPodcasts',
+    storeAs: 'allPodcasts',
   })
 
   if (!isLoaded(podcasts)) return <p>loading</p>

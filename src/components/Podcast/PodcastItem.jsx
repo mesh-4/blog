@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { useRecoilState } from 'recoil'
 import { useFirestore } from 'react-redux-firebase'
-import { Button, TextField, Typography, Card, CardActions, CardContent } from '@material-ui/core'
+import {
+  Button,
+  TextField,
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import { playerAtom } from '@/store'
@@ -15,6 +22,7 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     display: 'flex',
     alignItems: 'center',
+    paddingTop: 0,
     justifyContent: 'space-between',
     paddingBottom: '1em !important',
   },
@@ -83,7 +91,11 @@ export function PodcastItem({ audio }) {
           )}
 
           <CardActions>
-            <Button color="primary" disabled={player.url === url} onClick={handlePlayAudio}>
+            <Button
+              color="primary"
+              disabled={player.url === url}
+              onClick={handlePlayAudio}
+            >
               Play
             </Button>
 
@@ -93,9 +105,15 @@ export function PodcastItem({ audio }) {
               <Button onClick={handleEditorOpen}>Edit</Button>
             )}
 
-            {draft && <Button onClick={() => handleModalStatus('publish', true)}>Publish</Button>}
+            {draft && (
+              <Button onClick={() => handleModalStatus('publish', true)}>
+                Publish
+              </Button>
+            )}
 
-            <Button onClick={() => handleModalStatus('delete', true)}>Delete</Button>
+            <Button onClick={() => handleModalStatus('delete', true)}>
+              Delete
+            </Button>
           </CardActions>
         </CardContent>
 

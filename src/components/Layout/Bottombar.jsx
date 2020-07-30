@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { useLocation, Link } from '@reach/router'
-import { makeStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import {
+  makeStyles,
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
+import AssessmentIcon from '@material-ui/icons/Assessment'
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark'
 
 export const routes = [
@@ -15,6 +20,11 @@ export const routes = [
     path: '/about',
     name: 'About',
     icon: InfoIcon,
+  },
+  {
+    path: '/podcasts',
+    name: 'Podcasts',
+    icon: AssessmentIcon,
   },
   {
     path: '/articles',
