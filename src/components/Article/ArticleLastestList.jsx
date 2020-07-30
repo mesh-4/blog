@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 export function ArticleLastestList() {
-  const articles = useSelector(state => state.firestore.ordered.recommendArticles)
+  const articles = useSelector(
+    state => state.firestore.ordered.recommendArticles
+  )
   useFirestoreConnect({
     collection: `markdowns`,
     where: [['draft', '==', false]],
@@ -26,13 +28,22 @@ export function ArticleLastestList() {
       <article style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <Link to={`/article/${slug}`}>
-            <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 500 }}>{title}</h2>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: '17px',
+                fontWeight: 500,
+                marginBottom: '5px',
+              }}
+            >
+              {title}
+            </h2>
           </Link>
           <Link to={`/article/${slug}`}>
             <p
               style={{
                 color: '#9c9c9c',
-                fontSize: '16px',
+                fontSize: '14px',
                 fontWeight: 500,
               }}
             >

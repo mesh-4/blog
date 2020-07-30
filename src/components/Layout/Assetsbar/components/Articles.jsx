@@ -5,7 +5,9 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import Skeleton from '@material-ui/lab/Skeleton'
 
 export const ArticleAssetList = () => {
-  const articles = useSelector(state => state.firestore.ordered.publishedArticles)
+  const articles = useSelector(
+    state => state.firestore.ordered.publishedArticles
+  )
   useFirestoreConnect({
     collection: `markdowns`,
     where: [['draft', '==', false]],
@@ -41,18 +43,30 @@ export const ArticleAssetList = () => {
             flexWrap: 'wrap',
             flexDirection: 'column',
             width: '100%',
-            maxHeight: '50px',
             marginBottom: '16px',
           }}
         >
-          <Link to={`/article/${slug}`} style={{ flex: '0 0 auto', fontSize: '18px' }}>
-            <h2 className="text-ellipsis" style={{ fontWeight: 600 }}>
-              {title}
-            </h2>
+          <Link
+            to={`/article/${slug}`}
+            style={{
+              display: 'block',
+              fontSize: '18px',
+              width: '100%',
+              lineHeight: '20px',
+              marginBottom: '10px',
+            }}
+          >
+            <h2 style={{ fontWeight: 600 }}>{title}</h2>
           </Link>
-          <Link to={`/article/${slug}`} style={{ fontSize: '15px' }}>
+          <Link
+            to={`/article/${slug}`}
+            style={{
+              display: 'block',
+              fontSize: '14px',
+              width: '100%',
+            }}
+          >
             <p
-              className="text-ellipsis"
               style={{
                 color: '#9c9c9c',
                 fontWeight: 400,
