@@ -19,7 +19,8 @@ export function Podcasts() {
     <>
       <Head
         title="Podcasts"
-        description="All podcasts that from Senlima's blog"
+        description="包含所有由 Senlima Sun創造的 Podcast內容。"
+        url="https://senlima.blog/podcasts"
       />
       <main style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}>
         <h1 className={classes.title}>Podcasts</h1>

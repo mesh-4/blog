@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const { ReactLoadablePlugin } = require('react-loadable/webpack')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -111,6 +112,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
+    }),
+    new ReactLoadablePlugin({
+      filename: './dist/react-loadable.json',
     }),
     new ManifestPlugin(),
     new CleanWebpackPlugin(),

@@ -37,7 +37,13 @@ export function Article({ slug }) {
 
   return article.map(({ title, subtitle, cover, content }) => (
     <Fragment key={slug}>
-      <Head title={title} description={subtitle} cover={cover} />
+      <Head
+        type="article"
+        cover={cover}
+        title={title}
+        description={subtitle}
+        url={`https://senlima.blog/${slug}`}
+      />
       <article
         className="medium-article"
         style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}

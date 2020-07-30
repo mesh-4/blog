@@ -8,7 +8,12 @@ import { Head } from '@/components/Layout/Head'
 export function About() {
   return (
     <>
-      <Head title="About" description="關於作者" />
+      <Head
+        type="profile"
+        title="About"
+        description="關於作者"
+        url="https://senlima.blog/about"
+      />
       <main
         style={{
           margin: '40px auto',
