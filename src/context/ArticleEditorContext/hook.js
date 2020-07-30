@@ -4,6 +4,7 @@ import { useFirestore } from 'react-redux-firebase'
 
 import { ArticleEditorContext } from './provider'
 
+/*
 const editorProto = {
   id: '',
   slug: '',
@@ -13,6 +14,7 @@ const editorProto = {
   cover: '',
   draft: true,
 }
+*/
 
 const articleProto = {
   title: 'Untitled',
@@ -34,10 +36,12 @@ export function useArticleEditorContext() {
   }
 
   function initEditor(currentArticle) {
+    /*
     updateMarkdown(draft => {
       // eslint-disable-next-line
       draft = { ...editorProto }
     })
+    */
     updateMarkdown(draft => {
       draft.id = currentArticle.id
       draft.slug = currentArticle.slug
@@ -51,19 +55,17 @@ export function useArticleEditorContext() {
 
   async function createArticle() {
     try {
-      const articleId = await firestore
+      const { id } = await firestore
         .collection('markdowns')
         .add({ ...articleProto })
 
-      // eslint-disable-next-line
-      console.log(articleId)
-
       updateMarkdown(draft => {
-        draft.id = ''
+        draft.id = id
         draft.slug = ''
         draft.title = 'Untitled'
         draft.subtitle = ''
         draft.content = ''
+        draft.draft = true
       })
 
       toast.success('Article updated successfully')
@@ -81,6 +83,7 @@ export function useArticleEditorContext() {
         draft.title = ''
         draft.subtitle = ''
         draft.content = ''
+        draft.draft = true
       })
 
       toast.success('Article deleted successfully')

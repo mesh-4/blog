@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from '@material-ui/core'
 
+import { useArticleEditorContext } from '@/context'
 import { ArticlePublishModal } from './ArticlePublishModal'
 
 export function ArticlePublishButton({ disabled }) {
   const [open, setOpen] = useState(false)
+  const { updateEditorContent } = useArticleEditorContext()
 
   return (
     <>
       <Button
-        size="small"
         color="secondary"
         variant="contained"
         disabled={disabled}
-        onClick={() => setOpen(true)}
+        onClick={async () => {
+          await updateEditorContent()
+          setOpen(true)
+        }}
       >
         Publish
       </Button>

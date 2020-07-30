@@ -8,7 +8,6 @@ export function ArticleUpdateButton() {
 
   return (
     <Button
-      size="small"
       color="primary"
       variant="contained"
       onClick={() => updateEditorContent()}

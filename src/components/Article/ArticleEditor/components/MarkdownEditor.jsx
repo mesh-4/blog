@@ -9,7 +9,7 @@ import { useArticleEditorContext } from '@/context'
 
 const useStyles = makeStyles(theme => ({
   editorField: {
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
 }))
 
@@ -58,7 +58,7 @@ export function MarkdownEditor() {
         />
       </div>
 
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <EditorBase
           config={{
             view: { menu: true, md: true, html: false },

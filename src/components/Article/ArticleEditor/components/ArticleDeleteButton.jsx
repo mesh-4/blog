@@ -9,7 +9,6 @@ export function ArticleDeleteButton() {
   return (
     <>
       <Button
-        size="small"
         color="secondary"
         variant="contained"
         onClick={() => setOpen(true)}

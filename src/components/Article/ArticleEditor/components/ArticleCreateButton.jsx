@@ -8,6 +8,7 @@ export function ArticleCreateButton() {
 
   return (
     <Button
+      fullWidth
       color="primary"
       variant="contained"
       onClick={() => createArticle()}

@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
 
+import './index.css'
 import { useArticleEditorContext } from '@/context'
 import { MarkdownEditor } from './components/MarkdownEditor'
 import { ArticleSelector } from './components/ArticleSelector'
@@ -9,27 +9,18 @@ import { ArticleUpdateButton } from './components/ArticleUpdateButton'
 import { ArticleDeleteButton } from './components/ArticleDeleteButton'
 import { ArticlePublishButton } from './components/ArticlePublishButton'
 
-const useStyles = makeStyles(() => ({
-  selectArticle: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-  },
-}))
-
 export function ArticleEditor() {
-  const classes = useStyles()
   const { markdown } = useArticleEditorContext()
 
   return (
     <>
-      <div>
+      <div className="article-editor__header">
         <ArticleSelector />
         <ArticleCreateButton />
       </div>
       {markdown.id !== '' && (
         <>
-          <div className={classes.selectArticle}>
+          <div className="article-editor__actions">
             <ArticleUpdateButton />
             {markdown.draft && (
               <ArticlePublishButton disabled={markdown.slug === ''} />

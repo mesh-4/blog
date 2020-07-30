@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded } from 'react-redux-firebase'
 import { Autocomplete } from '@material-ui/lab'
-import { useMediaQuery, TextField } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 
 import { useArticleEditorContext } from '@/context'
 
 export function ArticleSelector() {
   const [keyword, setKeyword] = useState('')
-  const isMobile = useMediaQuery('(max-width:600px)')
   const { markdown, initEditor } = useArticleEditorContext()
   const articles = useSelector(state => state.firestore.ordered.articleOptions)
   useFirestoreConnect({
@@ -32,8 +31,8 @@ export function ArticleSelector() {
     <Autocomplete
       size="small"
       freeSolo
+      fullWidth
       disableClearable
-      style={{ width: isMobile ? 200 : 300, marginRight: '30px' }}
       options={articles}
       getOptionLabel={option => (option.title ? option.title : '')}
       getOptionSelected={(option, currentVal) => option.id === currentVal.id}
@@ -41,7 +40,9 @@ export function ArticleSelector() {
       onChange={handleSelectArticle}
       inputValue={keyword}
       onInputChange={handleKeywordChange}
-      renderInput={params => <TextField {...params} label="Article" variant="outlined" />}
+      renderInput={params => (
+        <TextField {...params} label="Article" variant="outlined" />
+      )}
     />
   )
 }
