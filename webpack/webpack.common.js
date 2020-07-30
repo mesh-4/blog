@@ -13,6 +13,10 @@ module.exports = {
     path: resolve(__dirname, '..', 'dist'),
     publicPath: '/',
   },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
@@ -24,7 +28,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
+          'eslint-loader',
+        ],
       },
       {
         test: /\.css$/,
@@ -40,10 +52,30 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpg|gif|jpe?g)$/,
         use: [
+          'file-loader',
           {
-            loader: 'file-loader',
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 75,
+              },
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
+            },
           },
         ],
       },
@@ -58,6 +90,7 @@ module.exports = {
       filename: 'index.html',
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
+      hash: true,
       inject: true,
       minify: isDevelopment
         ? {}
