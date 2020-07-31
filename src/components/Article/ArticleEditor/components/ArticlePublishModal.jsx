@@ -5,7 +5,7 @@ import { useFirebase, useFirestore } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, LinearProgress } from '@material-ui/core'
 
-import publishImage from '@/assets/publishImage.png'
+import imageUrl from '@/images/upload_file.svg'
 import { useArticleEditorContext } from '@/context'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
@@ -80,7 +80,7 @@ export function ArticlePublishModal({ open, onClose }) {
 
       <img
         className={classes.image}
-        src={publishImage}
+        src={imageUrl}
         alt="a human is publish somthing"
       />
 

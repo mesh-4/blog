@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
 import { useArticleEditorContext } from '@/context'
-import deleteImage from '@/assets/deleteImage.png'
+import imageUrl from '@/images/throw_trash.svg'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +27,7 @@ export function ArticleDeleteModal({ open, onClose }) {
 
       <img
         className={classes.image}
-        src={deleteImage}
+        src={imageUrl}
         alt="a human delete somthing"
       />
 
