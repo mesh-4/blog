@@ -5,7 +5,7 @@ import { useFirestore } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
-import publishImage from '@/assets/publishImage.png'
+import imageUrl from '@/images/put_files.svg'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +24,10 @@ export function PodcastPublishModal({ open, onClose, target }) {
 
   const handlePublish = async () => {
     try {
-      await firestore.collection('audio').doc(target.id).update({ draft: false })
+      await firestore
+        .collection('audio')
+        .doc(target.id)
+        .update({ draft: false })
       onClose()
     } catch (err) {
       toast.error(`Failed on publish podcast: ${err.message}`)
@@ -36,7 +39,7 @@ export function PodcastPublishModal({ open, onClose, target }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Publish {target.fileName}?</Typography>
 
-      <img className={classes.image} src={publishImage} alt="publish" />
+      <img className={classes.image} src={imageUrl} alt="publish" />
 
       <Button variant="contained" color="primary" onClick={handlePublish}>
         Continue

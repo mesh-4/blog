@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, Link } from '@reach/router'
-import {
-  makeStyles,
-  BottomNavigation,
-  BottomNavigationAction,
-} from '@material-ui/core'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
 import AssessmentIcon from '@material-ui/icons/Assessment'

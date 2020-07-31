@@ -5,7 +5,7 @@ import { useFirebase, useFirestore } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
-import deleteImage from '@/assets/deleteImage.png'
+import imageUrl from '@/images/throw_trash.svg'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
 const useStyles = makeStyles(theme => ({
@@ -39,7 +39,7 @@ export function PodcastDeleteModal({ open, onClose, target }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Delete {target.fileName}?</Typography>
 
-      <img className={classes.image} src={deleteImage} alt="delete" />
+      <img className={classes.image} src={imageUrl} alt="delete" />
 
       <Button variant="contained" color="primary" onClick={handleDelete}>
         Confirm

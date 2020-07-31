@@ -4,6 +4,46 @@
     "@babel/plugin-transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/core",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "tree-shaking-mui-core"
+    ],
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/core/styles",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "tree-shaking-mui-styles"
+    ],
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/icons",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "tree-shaking-mui-icons"
+    ],
     "react-hot-loader/babel"
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "transform-react-remove-prop-types",
+          {
+            "mode": "wrap",
+            "ignoreFilenames": ["node_modules"]
+          }
+        ]
+      ]
+    }
+  }
 }

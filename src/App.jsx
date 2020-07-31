@@ -7,7 +7,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import { Routes } from './Routes'
-import { LoadingScreen } from './components/LoadingScreen'
+import { LoadingScreen } from './components/Loading'
 
 const theme = createMuiTheme({
   palette: {
