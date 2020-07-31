@@ -1,7 +1,7 @@
 import Loadable from 'react-loadable'
 
 import { Home, Login, About } from '@/pages'
-import { LoadingScreen } from '@/components/LoadingScreen'
+import { LoadingScreen } from '@/components/Loading'
 
 const Articles = Loadable({
   loader: () => import('@/pages/Articles').then(module => module.Articles),
