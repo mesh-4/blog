@@ -13,6 +13,7 @@ import { createFirestoreInstance } from 'redux-firestore'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 
 import './css/reset.css'
+import './css/markdown.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
 import { configureStore } from './store/createStore'

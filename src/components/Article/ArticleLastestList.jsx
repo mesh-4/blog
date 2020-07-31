@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from '@reach/router'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import Skeleton from '@material-ui/lab/Skeleton'
+
+import { ArticleItem } from './ArticleItem'
 
 export function ArticleLastestList() {
   const articles = useSelector(
@@ -16,7 +18,16 @@ export function ArticleLastestList() {
   })
 
   if (!isLoaded(articles)) {
-    return <li>loading</li>
+    return (
+      <li>
+        <h2 style={{ marginBottom: '10px' }}>
+          <Skeleton animation="wave" variant="text" width="100px" />
+        </h2>
+        <p style={{ margin: 0 }}>
+          <Skeleton animation="wave" variant="text" width="200px" />
+        </p>
+      </li>
+    )
   }
 
   if (isEmpty(articles)) {
@@ -24,34 +35,6 @@ export function ArticleLastestList() {
   }
 
   return articles.map(({ id, slug, title, subtitle }) => (
-    <li key={id} style={{ marginBottom: '1em' }}>
-      <article style={{ display: 'flex' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Link to={`/article/${slug}`}>
-            <h2
-              style={{
-                margin: 0,
-                fontSize: '17px',
-                fontWeight: 500,
-                marginBottom: '5px',
-              }}
-            >
-              {title}
-            </h2>
-          </Link>
-          <Link to={`/article/${slug}`}>
-            <p
-              style={{
-                color: '#9c9c9c',
-                fontSize: '14px',
-                fontWeight: 500,
-              }}
-            >
-              {subtitle}
-            </p>
-          </Link>
-        </div>
-      </article>
-    </li>
+    <ArticleItem key={id} article={{ slug, title, subtitle }} gutterBottom />
   ))
 }

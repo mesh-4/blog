@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from '@reach/router'
 import { useSelector } from 'react-redux'
 import { isLoaded, isEmpty, useFirestoreConnect } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
-import { Typography } from '@material-ui/core'
+
+import { ArticleItem } from './ArticleItem'
 
 const useStyles = makeStyles(theme => ({
   base: {
@@ -47,51 +47,18 @@ export function ArticleList() {
   }
 
   return articles.map(({ id, slug, title, subtitle, cover, updatedAt }) => (
-    <li key={id} className={classes.base}>
-      <Link
-        to={`/article/${slug}`}
-        style={{
-          display: 'block',
-          flex: 'none',
-          width: '100px',
-          height: '100px',
-          marginRight: '1em',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundOrigin: 'border-box',
-          backgroundImage: `url(${cover})`,
-        }}
-      />
-
-      <article className={classes.root}>
-        <div className={classes.details}>
-          <Link to={`/article/${slug}`}>
-            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 600 }}>
-              {title}
-            </h2>
-          </Link>
-          <Link to={`/article/${slug}`}>
-            <p
-              style={{
-                margin: 0,
-                color: '#9c9c9c',
-                fontSize: '14px',
-                fontWeight: 500,
-              }}
-            >
-              {subtitle}
-            </p>
-          </Link>
-        </div>
-
-        <Typography
-          variant="caption"
-          display="block"
-          style={{ marginTop: '12px' }}
-        >
-          lastest updated at {updatedAt.toDate().toLocaleDateString()}
-        </Typography>
-      </article>
-    </li>
+    <ArticleItem
+      key={id}
+      imgNeed
+      showTime
+      article={{
+        slug,
+        cover,
+        title,
+        subtitle,
+        updatedAt: updatedAt.toDate().toLocaleDateString(),
+      }}
+      gutterBottom
+    />
   ))
 }

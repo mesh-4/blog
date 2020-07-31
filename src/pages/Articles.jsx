@@ -20,6 +20,7 @@ export function Articles() {
       <Head
         title="Articles"
         description="All articles that from Senlima's blog"
+        url="https://senlima.blog/articles"
       />
       <main style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}>
         <h1 className={classes.title}>Articles</h1>

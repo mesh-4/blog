@@ -5,7 +5,7 @@ import { useFirebase, useFirestore } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, LinearProgress } from '@material-ui/core'
 
-import uploadImage from '@/assets/uploadImage.png'
+import imageUrl from '@/images/upload_file.svg'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
 const useStyles = makeStyles(theme => ({
@@ -37,7 +37,9 @@ export function PodcastCreateModal({ open, onClose }) {
       'state_changed',
       snapshot => {
         setUploading(true)
-        setPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100))
+        setPercent(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        )
       },
       err => {
         setPercent(0)
@@ -66,10 +68,12 @@ export function PodcastCreateModal({ open, onClose }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Upload audio file</Typography>
 
-      <img className={classes.uploadImage} src={uploadImage} alt="upload" />
+      <img className={classes.uploadImage} src={imageUrl} alt="upload" />
 
       <div style={{ margin: '1em 5%', width: '90%' }}>
-        {uploading && <LinearProgress variant="determinate" value={uploadPercent} />}
+        {uploading && (
+          <LinearProgress variant="determinate" value={uploadPercent} />
+        )}
       </div>
 
       <Button variant="contained" color="primary" onClick={focusUpload}>

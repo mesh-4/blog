@@ -1,12 +1,27 @@
-import {
-  Home,
-  Login,
-  About,
-  Audios,
-  Podcasts,
-  Editor,
-  Articles,
-} from '@/pages'
+import Loadable from 'react-loadable'
+
+import { Home, Login, About } from '@/pages'
+import { LoadingScreen } from '@/components/Loading'
+
+const Articles = Loadable({
+  loader: () => import('@/pages/Articles').then(module => module.Articles),
+  loading: LoadingScreen,
+})
+
+const Podcasts = Loadable({
+  loader: () => import('@/pages/Podcasts').then(module => module.Podcasts),
+  loading: LoadingScreen,
+})
+
+const Audios = Loadable({
+  loader: () => import('@/pages/Audios').then(module => module.Audios),
+  loading: LoadingScreen,
+})
+
+const Editor = Loadable({
+  loader: () => import('@/pages/Editor').then(module => module.Editor),
+  loading: LoadingScreen,
+})
 
 export const routes = [
   {

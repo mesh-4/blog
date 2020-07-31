@@ -1,0 +1,10 @@
+.loading-screen__container {
+  position: absolute;
+  top: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  place-items: center;
+  color: var(--senlima-text-color);
+  background-color: var(--senlima-background-color);
+}
