@@ -32,7 +32,9 @@ export const Assetsbar = () => {
         {genreList.map(({ title }) => (
           <button
             key={title}
-            className={`assets-bar-select__option ${genre === title ? 'activate' : ''}`}
+            className={`assets-bar-select__option ${
+              genre === title ? 'activate' : ''
+            }`}
             type="button"
             disabled={genre === title}
             onClick={() => handleGenreSwitch(title)}
@@ -45,7 +47,14 @@ export const Assetsbar = () => {
       <ul className="assets-bar-files__base">
         {genreList.map(({ title, Source }) => {
           if (genre === title && title === 'Series')
-            return <p key={`${title}-list`}>Comming soon</p>
+            return (
+              <p
+                key={`${title}-list`}
+                style={{ width: '90%', margin: '1em 5%' }}
+              >
+                Comming soon
+              </p>
+            )
           return genre === title && <Source key={`${title}-list`} />
         })}
       </ul>

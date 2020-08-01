@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import { ToastContainer } from 'react-toastify'
 
 import firebase from 'firebase/app'
@@ -33,7 +33,7 @@ const rrfProps = {
   createFirestoreInstance,
 }
 
-render(
+ReactDOM.render(
   <RecoilRoot>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfProps}>

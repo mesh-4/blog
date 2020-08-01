@@ -58,8 +58,9 @@ export function MarkdownEditor() {
         />
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div>
         <EditorBase
+          style={{ height: '400px' }}
           config={{
             view: { menu: true, md: true, html: false },
             canView: {
@@ -67,7 +68,7 @@ export function MarkdownEditor() {
               md: true,
               html: false,
               fullScreen: false,
-              hideMenu: true,
+              hideMenu: false,
             },
           }}
           renderHTML={text => mdParser.render(text)}
