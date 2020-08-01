@@ -32,6 +32,7 @@ module.exports = merge(common, {
       ios: true,
       inject: true,
       ios: {
+        'apple-mobile-web-app-capable': 'yes',
         'apple-mobile-web-app-title': "Senlima's blog",
         'apple-mobile-web-app-status-bar-style': 'black',
       },
@@ -52,5 +53,5 @@ module.exports = merge(common, {
       ],
     }),
   ],
-  devtool: 'source-map',
+  devtool: 'none',
 })
