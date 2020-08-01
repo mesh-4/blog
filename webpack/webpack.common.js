@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const { ReactLoadablePlugin } = require('react-loadable/webpack')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -87,6 +88,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'public/index.html',
@@ -117,7 +119,17 @@ module.exports = {
       filename: './dist/react-loadable.json',
     }),
     new ManifestPlugin(),
-    new CleanWebpackPlugin(),
+    new WorkboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('https://senlima.blog'),
+          handler: 'StaleWhileRevalidate',
+        },
+      ],
+    }),
   ],
   performance: false,
 }
