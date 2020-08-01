@@ -21,6 +21,13 @@ const useStyles = makeStyles(theme => ({
     width: '300px',
     border: `1px solid ${theme.palette.divider}`,
     zIndex: 5,
+    [theme.breakpoints.down(960)]: {
+      right: 0,
+      bottom: '60px',
+      borderRadius: 0,
+      width: '100vw',
+      border: 'none',
+    },
   },
   player: {
     outline: 'none',
@@ -28,6 +35,7 @@ const useStyles = makeStyles(theme => ({
   title: {
     flex: 'auto',
     width: '100%',
+    fontSize: '18px',
     textOverflow: 'ellipsis',
     marginRight: theme.spacing(1),
   },
@@ -65,7 +73,11 @@ export function PodcastPlayer() {
         }}
       >
         <span className={classes.title}>{player.title}</span>
-        <IconButton className={classes.closeBtn} size="small" onClick={handlePlayerClear}>
+        <IconButton
+          className={classes.closeBtn}
+          size="small"
+          onClick={handlePlayerClear}
+        >
           <CloseIcon />
         </IconButton>
       </div>
