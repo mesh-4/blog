@@ -89,3 +89,8 @@
   margin-bottom: 0;
   color: var(--senlima-text-color);
 }
+
+.assets-bar-audio__inner-header section {
+  margin: 0;
+  margin-bottom: 16px;
+}

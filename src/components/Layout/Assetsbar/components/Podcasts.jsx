@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useSetRecoilState } from 'recoil'
+import LinesEllipsis from 'react-lines-ellipsis'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import Skeleton from '@material-ui/lab/Skeleton'
 import { IconButton } from '@material-ui/core'
@@ -10,7 +11,9 @@ import { playerAtom } from '@/store'
 
 export function PodcastAssetList() {
   const setPlayerUrl = useSetRecoilState(playerAtom)
-  const podcasts = useSelector(state => state.firestore.ordered.publishedPodcasts)
+  const podcasts = useSelector(
+    state => state.firestore.ordered.publishedPodcasts
+  )
   useFirestoreConnect({
     collection: `audio`,
     where: [['draft', '==', false]],
@@ -43,11 +46,21 @@ export function PodcastAssetList() {
       <div className="assets-bar-audio__inner-header">
         <h2 style={{ height: '18px' }}>{title}</h2>
 
-        <IconButton size="small" aria-label="play" onClick={() => setPlayerUrl({ title, url })}>
+        <IconButton
+          size="small"
+          aria-label="play"
+          onClick={() => setPlayerUrl({ title, url })}
+        >
           <PlayCircleFilledIcon />
         </IconButton>
       </div>
-      <p style={{ margin: 0, marginBottom: '16px' }}>{description}</p>
+      <LinesEllipsis
+        maxLine="2"
+        ellipsis="..."
+        basedOn="letters"
+        text={description}
+        component="section"
+      />
       <p style={{ marginTop: '12px', marginBottom: 0, fontSize: '13px' }}>
         created at {createdAt.toDate().toLocaleDateString()}
       </p>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { useRecoilState } from 'recoil'
+import LinesEllipsis from 'react-lines-ellipsis'
+import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 import { useFirestore } from 'react-redux-firebase'
 import {
   Button,
@@ -16,6 +18,8 @@ import { makeStyles } from '@material-ui/styles'
 import { playerAtom } from '@/store'
 import { PodcastDeleteModal } from './PodcastDeleteModal'
 import { PodcastPublishModal } from './PodcastPublishModal'
+
+const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 
 const useStyles = makeStyles(() => ({
   head: {
@@ -130,7 +134,13 @@ export function PodcastItem({ audio }) {
               onChange={handleEditorChange}
             />
           ) : (
-            <Typography variant="body1">{description}</Typography>
+            <ResponsiveEllipsis
+              maxLine="2"
+              ellipsis="..."
+              basedOn="letters"
+              text={description}
+              component="section"
+            />
           )}
         </CardContent>
       </Card>

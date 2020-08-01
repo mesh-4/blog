@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     width: '100%',
     height: '100vh',
+    overflowX: 'hidden',
     display: 'grid',
     gridTemplateRows: '100%',
     gridTemplateColumns: 'auto 315px 60px',
