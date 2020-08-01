@@ -34,7 +34,7 @@ export function Article() {
         cover={cover}
         title={title}
         description={subtitle}
-        url={`https://senlima.blog/${slug}`}
+        url={`https://senlima.blog/article/${slug}`}
       />
       <article
         className="medium-article"
