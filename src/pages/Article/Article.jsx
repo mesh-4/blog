@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import { useParams } from '@reach/router'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
@@ -9,7 +9,8 @@ import { Head } from '@/components/Layout/Head'
 import { ShareRow } from '@/components/Article/ShareRow'
 import { ArticleSkeleton } from './Skeleton'
 
-export function Article({ slug }) {
+export function Article() {
+  const { slug } = useParams()
   const [coverLoading, updateCoverLoading] = useState(true)
   const article = useSelector(state => state.firestore.ordered.trackingArticle)
   useFirestoreConnect({
@@ -64,12 +65,4 @@ export function Article({ slug }) {
       </article>
     </Fragment>
   ))
-}
-
-Article.defaultProps = {
-  slug: '',
-}
-
-Article.propTypes = {
-  slug: PropTypes.string,
 }
