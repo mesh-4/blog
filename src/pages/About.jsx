@@ -4,6 +4,7 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 
 import { Head } from '@/components/Layout/Head'
+import { Footer } from '@/components/Layout/Footer'
 
 export function About() {
   return (
@@ -95,6 +96,7 @@ export function About() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

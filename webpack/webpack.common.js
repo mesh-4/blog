@@ -125,7 +125,9 @@ module.exports = {
       skipWaiting: true,
       runtimeCaching: [
         {
-          urlPattern: new RegExp('https://senlima.blog'),
+          urlPattern: isDevelopment
+            ? new RegExp('localhost:7070')
+            : new RegExp('https://senlima.blog'),
           handler: 'StaleWhileRevalidate',
         },
       ],

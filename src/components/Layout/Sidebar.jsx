@@ -5,6 +5,7 @@ import { isLoaded, isEmpty } from 'react-redux-firebase'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
 import EditIcon from '@material-ui/icons/Edit'
+import SearchIcon from '@material-ui/icons/Search'
 import GraphicEqIcon from '@material-ui/icons/GraphicEq'
 
 import '@/css/sidebar.css'
@@ -20,6 +21,12 @@ export const routes = [
     path: '/about',
     name: 'About',
     icon: InfoIcon,
+    public: true,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    icon: SearchIcon,
     public: true,
   },
   {
@@ -42,7 +49,8 @@ export function Sidebar() {
   return (
     <ul className="sidebar-container" role="navigation">
       {routes.map(({ name, path, icon: Icon, public: isPublic }) => {
-        if (!isPublic && isLoaded(auth) && isEmpty(auth)) return <Fragment key={name} />
+        if (!isPublic && isLoaded(auth) && isEmpty(auth))
+          return <Fragment key={name} />
 
         return (
           <li key={name} className="sidebar-inner">

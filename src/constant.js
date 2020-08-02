@@ -23,6 +23,11 @@ const Editor = Loadable({
   loading: LoadingScreen,
 })
 
+const Search = Loadable({
+  loader: () => import('@/pages/Search').then(module => module.Search),
+  loading: LoadingScreen,
+})
+
 export const routes = [
   {
     path: '/',
@@ -56,6 +61,13 @@ export const routes = [
     path: '/about',
     name: 'About',
     component: About,
+    public: true,
+    inContainer: true,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
     public: true,
     inContainer: true,
   },

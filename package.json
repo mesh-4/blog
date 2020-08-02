@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
     "build": "NODE_ENV=production BABEL_ENV=production webpack --mode production --config ./webpack/webpack.prod.js",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
