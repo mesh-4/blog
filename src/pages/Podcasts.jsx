@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 import { Head } from '@/components/Layout/Head'
+import { Footer } from '@/components/Layout/Footer'
 import { PodcastPublishList } from '@/components/Podcast/PodcastPublishList'
 
 const useStyles = makeStyles(() => ({
@@ -29,6 +30,7 @@ export function Podcasts() {
           <PodcastPublishList />
         </ul>
       </main>
+      <Footer />
     </>
   )
 }

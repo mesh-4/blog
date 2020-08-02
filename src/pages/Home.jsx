@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 import { Head } from '@/components/Layout/Head'
+import { Footer } from '@/components/Layout/Footer'
 import { ArticleLastestList } from '@/components/Article/ArticleLastestList'
 
 const useStyles = makeStyles(() => ({
@@ -18,7 +19,7 @@ export function Home() {
       <Head
         title="Home"
         description="紀錄網頁開發以及心路歷程等內容。不僅包含文章，也有 podcast內容。"
-        cover="https://drscdn.500px.org/photo/1019605743/m%3D900/v2?sig=92be0cdab57bb6c7646935f0b3724b3bfc12b37a2a829421e94e90df39e28126"
+        cover="gs://blog-282901.appspot.com/images/_blog-cover.jpg"
         url="https://senlima.blog"
       />
       <div style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}>
@@ -51,6 +52,7 @@ export function Home() {
           <ArticleLastestList />
         </ul>
       </div>
+      <Footer />
     </>
   )
 }

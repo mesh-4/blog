@@ -4,6 +4,7 @@ import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
+import SearchIcon from '@material-ui/icons/Search'
 import AssessmentIcon from '@material-ui/icons/Assessment'
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark'
 
@@ -17,6 +18,11 @@ export const routes = [
     path: '/about',
     name: 'About',
     icon: InfoIcon,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    icon: SearchIcon,
   },
   {
     path: '/podcasts',

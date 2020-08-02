@@ -6,6 +6,7 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 import './index.css'
 import { Head } from '@/components/Layout/Head'
+import { Footer } from '@/components/Layout/Footer'
 import { ShareRow } from '@/components/Article/ShareRow'
 import { ArticleSkeleton } from './Skeleton'
 
@@ -63,6 +64,7 @@ export function Article() {
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
       </article>
+      <Footer isAbsolute={false} />
     </Fragment>
   ))
 }

@@ -5,12 +5,15 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 const RobotstxtPlugin = require('robotstxt-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
   mode: 'production',
   optimization: {
     namedModules: true,
+    usedExports: true,
     splitChunks: {
       chunks: 'all',
     },
@@ -20,6 +23,9 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
     new CaseSensitivePathsPlugin(),
     new WebpackPwaManifest({
       name: "Senlima's Blog",
