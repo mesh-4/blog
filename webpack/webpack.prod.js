@@ -13,7 +13,6 @@ module.exports = merge(common, {
   mode: 'production',
   optimization: {
     namedModules: true,
-    usedExports: true,
     splitChunks: {
       chunks: 'all',
     },
@@ -59,5 +58,5 @@ module.exports = merge(common, {
       ],
     }),
   ],
-  devtool: 'none',
+  devtool: 'cheap-module-source-map',
 })
