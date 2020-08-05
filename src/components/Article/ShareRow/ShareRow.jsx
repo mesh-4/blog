@@ -7,20 +7,20 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 
 export function ShareRow({ slug, title, subtitle }) {
   return (
-    <div style={{ margin: '1em 0' }}>
+    <div className="my-4">
       <TwitterShareButton
+        className="mr-4"
         via="senlima4"
         title={title}
         url={`http://senlima.blog/article/${slug}`}
-        style={{ marginRight: '1em' }}
       >
         <TwitterIcon />
       </TwitterShareButton>
       <LinkedinShareButton
+        className="mr-4"
         title={title}
         summary={subtitle}
         url={`http://senlima.blog/article/${slug}`}
-        style={{ marginRight: '1em' }}
       >
         <LinkedinIcon />
       </LinkedinShareButton>

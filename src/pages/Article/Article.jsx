@@ -13,7 +13,9 @@ import { ArticleSkeleton } from './Skeleton'
 export function Article() {
   const { slug } = useParams()
   const [coverLoading, updateCoverLoading] = useState(true)
-  const article = useSelector(state => state.firestore.ordered.trackingArticle)
+  const article = useSelector(
+    state => state.firestore.ordered.trackingArticle
+  )
   useFirestoreConnect({
     collection: `markdowns`,
     where: [['slug', '==', slug]],
@@ -37,10 +39,7 @@ export function Article() {
         description={subtitle}
         url={`https://senlima.blog/article/${slug}`}
       />
-      <article
-        className="medium-article"
-        style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}
-      >
+      <article className="m-auto mt-12 mb-0 w-11/12 max-w-screen-sm medium-article">
         <section>
           <h1 className="article__title">{title}</h1>
           <h2 className="article__subtitle">{subtitle}</h2>
@@ -48,7 +47,9 @@ export function Article() {
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
 
-        <div className={`article__cover-loading ${coverLoading ? '' : 'end'}`}>
+        <div
+          className={`article__cover-loading ${coverLoading ? '' : 'end'}`}
+        >
           <img
             className="article__cover-image"
             src={cover}
@@ -64,7 +65,7 @@ export function Article() {
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
       </article>
-      <Footer isAbsolute={false} />
+      <Footer freeGap isAbsolute={false} />
     </Fragment>
   ))
 }

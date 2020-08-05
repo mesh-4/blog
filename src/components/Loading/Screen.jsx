@@ -1,16 +1,16 @@
 import React from 'react'
-import Typewriter from 'typewriter-effect'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 export function LoadingScreen() {
   return (
-    <div className="loading-screen__container">
-      <Typewriter
-        options={{
-          strings: ["Welcome to Senlima's blog..."],
-          autoStart: true,
-          loop: true,
-        }}
-      />
-    </div>
+    <CircularProgress
+      color="primary"
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+    />
   )
 }
