@@ -44,6 +44,7 @@
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0",
     "rich-markdown-editor": "^10.4.0-1",
+    "tailwindcss": "^1.6.2",
     "typewriter-effect": "^2.13.1",
     "use-immer": "^0.4.1"
   },
@@ -60,7 +61,7 @@
     "@testing-library/react": "^10.4.7",
     "@testing-library/react-hooks": "^3.3.0",
     "@testing-library/user-event": "^7.1.2",
-    "autoprefixer": "^9.8.5",
+    "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",
@@ -86,6 +87,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
     "react-refresh": "^0.8.3",
@@ -117,15 +119,10 @@
       "last 1 safari version"
     ]
   },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
   "prettier": {
     "semi": false,
     "tabWidth": 2,
-    "printWidth": 79,
+    "printWidth": 78,
     "useTabs": false,
     "endOfLine": "lf",
     "singleQuote": true,
@@ -193,7 +190,8 @@
       "dist/",
       "webpack.*.js",
       "sw.js",
-      "functions/"
+      "functions/",
+      "*.config.js"
     ]
   }
 }
