@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { join, resolve } = require('path')
 const { merge } = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
@@ -7,6 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
@@ -45,7 +46,20 @@ module.exports = merge(common, {
       icons: [
         {
           src: resolve('public/logo1024.png'),
+          sizes: [120, 152, 167, 180, 1024],
+          destination: join('icons', 'ios'),
+          ios: true,
+        },
+        {
+          src: resolve('public/logo1024.png'),
+          size: 1024,
+          destination: join('icons', 'ios'),
+          ios: 'startup',
+        },
+        {
+          src: resolve('public/logo1024.png'),
           sizes: [96, 128, 192, 256, 384, 512, 1024],
+          destination: join('icons', 'web'),
         },
       ],
     }),
@@ -55,6 +69,17 @@ module.exports = merge(common, {
           userAgent: '*',
           allow: '/',
           disallow: '/login',
+        },
+      ],
+    }),
+    new WorkboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('https://senlima.blog'),
+          handler: 'StaleWhileRevalidate',
         },
       ],
     }),
