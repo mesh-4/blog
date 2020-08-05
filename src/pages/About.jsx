@@ -1,4 +1,5 @@
 import React from 'react'
+import FaceIcon from '@material-ui/icons/Face'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
@@ -15,29 +16,25 @@ export function About() {
         description="關於作者"
         url="https://senlima.blog/about"
       />
-      <main
-        style={{
-          margin: '40px auto',
-          width: '90%',
-          maxWidth: '680px',
-          textAlign: 'left',
-        }}
-      >
-        <p style={{ fontWeight: 100, marginBottom: '1em', fontSize: '36px' }}>
-          About me
-        </p>
+      <main className="mt-6 mx-auto max-w-screen-sm text-left">
+        <p className="mb-4 text-4xl font-hairline">About me</p>
 
-        <h1
-          style={{ marginBottom: '10px', fontSize: '24px', fontWeight: 600 }}
-        >
-          Senlima Sun
-        </h1>
-        <h2 style={{ margin: '0', fontSize: '18px' }}>
-          Full Stack Developer, Cola Taster
-        </h2>
+        <h1 className="mb-1 text-3xl font-semibold">Senlima Sun</h1>
+        <h2 className="m-0 text-xl">Full Stack Developer, Cola Taster</h2>
 
-        <nav className="home-information">
+        <nav className="my-4">
           <a
+            className="mr-4"
+            rel="noreferrer"
+            target="_blank"
+            title="Profile"
+            aria-label="Senlima's personal profile"
+            href="https://www.senlima.info"
+          >
+            <FaceIcon />
+          </a>
+          <a
+            className="mr-4"
             rel="noreferrer"
             target="_blank"
             title="Github"
@@ -47,6 +44,7 @@ export function About() {
             <GitHubIcon />
           </a>
           <a
+            className="mr-4"
             rel="noreferrer"
             target="_blank"
             title="Twitter"
@@ -56,6 +54,7 @@ export function About() {
             <TwitterIcon />
           </a>
           <a
+            className="mr-4"
             rel="noreferrer"
             target="_blank"
             title="Support link"
@@ -75,10 +74,10 @@ export function About() {
         <p>
           我仍在尋找工作機會以及接案機會，您可以透過{' '}
           <a
-            href="mailto:senlima0430@gmail.com"
+            className="text-primary"
             target="_top"
             aria-label="email link"
-            style={{ color: '#37f570' }}
+            href="mailto:senlima0430@gmail.com"
           >
             email
           </a>{' '}
@@ -86,13 +85,11 @@ export function About() {
         </p>
 
         <div>
-          <p style={{ fontSize: '18px', marginBottom: '0.5em' }}>
-            What I can work with?
-          </p>
+          <p className="text-xl mb-2">What I can work with?</p>
           <div>
-            Nodejs, Typescript, VanillaJS, CSS, React, Vue, Sass/Scss, PostCSS,
-            Webpack(self-config), Jest, Lerna, Python, MySQL, PostgreSQL,
-            MongoDB, Firebase, Docker, Jenkins, Figma, Slack
+            Nodejs, Typescript, VanillaJS, CSS, React, Vue, Sass/Scss,
+            PostCSS, Webpack(self-config), Jest, Lerna, Python, MySQL,
+            PostgreSQL, MongoDB, Firebase, Docker, Jenkins, Figma, Slack
           </div>
         </div>
       </main>

@@ -6,13 +6,14 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/firestore'
+import 'firebase/analytics'
 
 import { RecoilRoot } from 'recoil'
 import { Provider } from 'react-redux'
 import { createFirestoreInstance } from 'redux-firestore'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 
-import './css/reset.css'
+import './styles.css'
 import './css/markdown.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
@@ -20,6 +21,7 @@ import { configureStore } from './store/createStore'
 import App from './App'
 
 firebase.initializeApp(firebaseConfig)
+firebase.analytics()
 firebase.firestore()
 
 // eslint-disable-next-line
