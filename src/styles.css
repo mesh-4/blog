@@ -30,3 +30,8 @@ body {
 .rhap_time {
   color: var(--senlima-text-color) !important;
 }
+
+button {
+  outline: none;
+  border: none;
+}
