@@ -1,14 +1,25 @@
 import React, { useState, Fragment } from 'react'
 import { useParams } from '@reach/router'
+import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
 import './index.css'
 import { Head } from '@/components/Layout/Head'
 import { Footer } from '@/components/Layout/Footer'
 import { ShareRow } from '@/components/Article/ShareRow'
 import { ArticleSkeleton } from './Skeleton'
+
+const CodeSection = ({ language, value }) => {
+  return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>
+}
+
+CodeSection.propTypes = {
+  language: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+}
 
 export function Article() {
   const { slug } = useParams()
@@ -60,7 +71,11 @@ export function Article() {
         </div>
 
         <main>
-          <Markdown source={content} escapeHtml={false} />
+          <Markdown
+            source={content}
+            escapeHtml={false}
+            renderers={{ code: CodeSection }}
+          />
         </main>
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
