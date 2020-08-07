@@ -57,17 +57,35 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then(registration => {
-        // eslint-disable-next-line
-        console.log('SW registered: ', registration)
-      })
-      .catch(registrationError => {
-        // eslint-disable-next-line
-        console.log('SW registration failed: ', registrationError)
-      })
-  })
-}
+// eslint-disable-next-line
+window.isUpdateAvailable = new Promise((resolve, reject) => {
+  // lazy way of disabling service workers while developing
+  if (
+    'serviceWorker' in navigator &&
+    ['localhost', '127'].indexOf(window.location.hostname) === -1
+  ) {
+    window.addEventListener('load', () => {
+      // register service worker file
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(reg => {
+          reg.onupdatefound = () => {
+            const installingWorker = reg.installing
+            installingWorker.onstatechange = () => {
+              if (installingWorker.state === 'installed') {
+                if (navigator.serviceWorker.controller) {
+                  resolve(true)
+                } else {
+                  resolve(false)
+                }
+              }
+            }
+          }
+        })
+        .catch(err => {
+          // eslint-disable-next-line
+          console.error('[SW ERROR]', err)
+        })
+    })
+  }
+})
