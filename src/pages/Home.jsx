@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Head } from '@/components/Layout/Head'
 import { Footer } from '@/components/Layout/Footer'
-import { ArticleLastestList } from '@/components/Article/ArticleLastestList'
+import { ArticleList } from '@article/components/ArticleList'
 
 export function Home() {
   return (
@@ -22,9 +22,7 @@ export function Home() {
         </header>
 
         <p className="mt-8 mb-2 text-2xl font-hairline">Lastest articles</p>
-        <ul className="list-none p-0">
-          <ArticleLastestList />
-        </ul>
+        <ArticleList type="recommand" />
       </div>
       <Footer />
     </>

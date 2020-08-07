@@ -4,22 +4,25 @@ import { Home, Login, About } from '@/pages'
 import { LoadingScreen } from '@/components/Loading'
 
 const Articles = Loadable({
-  loader: () => import('@/pages/Articles').then(module => module.Articles),
+  loader: () =>
+    import('@article/views/Articles').then(module => module.Articles),
   loading: LoadingScreen,
 })
 
 const Podcasts = Loadable({
-  loader: () => import('@/pages/Podcasts').then(module => module.Podcasts),
+  loader: () =>
+    import('@podcast/views/Podcasts').then(module => module.Podcasts),
   loading: LoadingScreen,
 })
 
 const Audios = Loadable({
-  loader: () => import('@/pages/Audios').then(module => module.Audios),
+  loader: () => import('@podcast/views/Audios').then(module => module.Audios),
   loading: LoadingScreen,
 })
 
 const Editor = Loadable({
-  loader: () => import('@/pages/Editor').then(module => module.Editor),
+  loader: () =>
+    import('@markdown/views/Editor').then(module => module.Editor),
   loading: LoadingScreen,
 })
 

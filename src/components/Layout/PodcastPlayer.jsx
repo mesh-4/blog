@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '8px',
     border: `2px solid ${theme.palette.divider}`,
     background: '#161616',
-    zIndex: 5,
+    zIndex: 55,
     [theme.breakpoints.down(960)]: {
       right: '2.5vw',
       bottom: '10px',

@@ -24,6 +24,10 @@ module.exports = {
     alias: {
       '@': resolve('src'),
       '@store': resolve('src/store'),
+      '@modules': resolve('src/modules'),
+      '@article': resolve('src/modules/article'),
+      '@podcast': resolve('src/modules/podcast'),
+      '@markdown': resolve('src/modules/markdown'),
     },
   },
   module: {
