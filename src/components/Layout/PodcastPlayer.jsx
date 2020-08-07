@@ -15,11 +15,12 @@ const useStyles = makeStyles(theme => ({
     bottom: '2.5vh',
     transition: 'all 0.3s ease-in-out',
     display: 'flex',
-    borderRadius: '8px',
     outline: 'none',
     flexWrap: 'wrap',
     width: '300px',
+    borderRadius: '8px',
     border: `1px solid ${theme.palette.divider}`,
+    background: '#161616',
     zIndex: 5,
     [theme.breakpoints.down(960)]: {
       right: 0,
@@ -28,21 +29,6 @@ const useStyles = makeStyles(theme => ({
       width: '100vw',
       border: 'none',
     },
-  },
-  player: {
-    outline: 'none',
-  },
-  title: {
-    flex: 'auto',
-    width: '100%',
-    fontSize: '18px',
-    textOverflow: 'ellipsis',
-    marginRight: theme.spacing(1),
-  },
-  closeBtn: {
-    padding: 0,
-    flex: 'none',
-    width: '24px',
   },
 }))
 
@@ -72,9 +58,12 @@ export function PodcastPlayer() {
           alignItems: 'center',
         }}
       >
-        <span className={classes.title}>{player.title}</span>
+        <span className="w-full flex-auto mr-1 text-lg truncate">
+          {player.title}
+        </span>
+
         <IconButton
-          className={classes.closeBtn}
+          className="flex-none p-0 w-4"
           size="small"
           onClick={handlePlayerClear}
         >
@@ -82,7 +71,7 @@ export function PodcastPlayer() {
         </IconButton>
       </div>
       <PlayerBase
-        className={classes.player}
+        className="outline-none"
         src={player.url}
         volume={volume}
         preload="metadata"

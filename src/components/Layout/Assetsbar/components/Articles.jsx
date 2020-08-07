@@ -37,26 +37,12 @@ export const ArticleAssetList = () => {
   return articles.map(({ id, slug, title, subtitle, updatedAt }) => (
     <li key={id} className="assets-bar-files__inner">
       <article>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'column',
-            width: '100%',
-            marginBottom: '16px',
-          }}
-        >
+        <div className="flex flex-col flex-wrap w-full mb-4">
           <Link
+            className="block w-full text-lg leading-snug mb-2"
             to={`/article/${slug}`}
-            style={{
-              display: 'block',
-              fontSize: '18px',
-              width: '100%',
-              lineHeight: '20px',
-              marginBottom: '10px',
-            }}
           >
-            <h2 style={{ fontWeight: 600 }}>{title}</h2>
+            <h2>{title}</h2>
           </Link>
           <Link
             to={`/article/${slug}`}

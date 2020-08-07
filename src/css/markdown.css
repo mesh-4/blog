@@ -1,8 +1,7 @@
 .medium-article {
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
-    serif;
-  font-size: 14px;
   line-height: 1.5em;
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times,
+    'Times New Roman', serif !important;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }

@@ -1,8 +1,10 @@
 import React, { useState, Fragment } from 'react'
 import { useParams } from '@reach/router'
+import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
 import './index.css'
 import { Head } from '@/components/Layout/Head'
@@ -10,10 +12,21 @@ import { Footer } from '@/components/Layout/Footer'
 import { ShareRow } from '@/components/Article/ShareRow'
 import { ArticleSkeleton } from './Skeleton'
 
+const CodeSection = ({ language, value }) => {
+  return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>
+}
+
+CodeSection.propTypes = {
+  language: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+}
+
 export function Article() {
   const { slug } = useParams()
   const [coverLoading, updateCoverLoading] = useState(true)
-  const article = useSelector(state => state.firestore.ordered.trackingArticle)
+  const article = useSelector(
+    state => state.firestore.ordered.trackingArticle
+  )
   useFirestoreConnect({
     collection: `markdowns`,
     where: [['slug', '==', slug]],
@@ -37,10 +50,7 @@ export function Article() {
         description={subtitle}
         url={`https://senlima.blog/article/${slug}`}
       />
-      <article
-        className="medium-article"
-        style={{ margin: '40px auto', width: '90%', maxWidth: '680px' }}
-      >
+      <article className="m-auto mt-12 mb-0 w-11/12 max-w-screen-sm medium-article">
         <section>
           <h1 className="article__title">{title}</h1>
           <h2 className="article__subtitle">{subtitle}</h2>
@@ -48,7 +58,9 @@ export function Article() {
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
 
-        <div className={`article__cover-loading ${coverLoading ? '' : 'end'}`}>
+        <div
+          className={`article__cover-loading ${coverLoading ? '' : 'end'}`}
+        >
           <img
             className="article__cover-image"
             src={cover}
@@ -59,12 +71,16 @@ export function Article() {
         </div>
 
         <main>
-          <Markdown source={content} escapeHtml={false} />
+          <Markdown
+            source={content}
+            escapeHtml={false}
+            renderers={{ code: CodeSection }}
+          />
         </main>
 
         <ShareRow slug={slug} title={title} subtitle={subtitle} />
       </article>
-      <Footer isAbsolute={false} />
+      <Footer freeGap isAbsolute={false} />
     </Fragment>
   ))
 }

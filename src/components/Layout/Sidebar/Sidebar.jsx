@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import SearchIcon from '@material-ui/icons/Search'
 import GraphicEqIcon from '@material-ui/icons/GraphicEq'
 
-import '@/css/sidebar.css'
+import './index.css'
 
 export const routes = [
   {

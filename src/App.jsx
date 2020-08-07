@@ -27,7 +27,12 @@ const theme = createMuiTheme({
 export function App() {
   const auth = useSelector(state => state.firebase.auth)
 
-  if (!isLoaded(auth)) return <LoadingScreen />
+  if (!isLoaded(auth))
+    return (
+      <ThemeProvider theme={theme}>
+        <LoadingScreen />
+      </ThemeProvider>
+    )
 
   return (
     <ThemeProvider theme={theme}>
