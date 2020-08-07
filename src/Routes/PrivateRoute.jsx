@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { auth } from 'firebase/app'
 import { Redirect } from '@reach/router'
-import { useSelector } from 'react-redux'
-import { isLoaded, isEmpty } from 'react-redux-firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const PrivateRoute = ({ as: Component, path }) => {
-  const auth = useSelector(state => state.firebase.auth)
+  const [user, loading] = useAuthState(auth())
 
-  return isLoaded(auth) && !isEmpty(auth) ? (
+  return !loading && user ? (
     <Component path={path} />
   ) : (
     <Redirect to="login" noThrow />

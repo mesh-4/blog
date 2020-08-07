@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded } from 'react-redux-firebase'
-import { Autocomplete } from '@material-ui/lab'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+
 import { TextField } from '@material-ui/core'
+import { Autocomplete } from '@material-ui/lab'
 
 import { useArticleEditorContext } from '@/context'
 
 export function ArticleSelector() {
   const [keyword, setKeyword] = useState('')
   const { markdown, initEditor } = useArticleEditorContext()
-  const articles = useSelector(state => state.firestore.ordered.articleOptions)
-  useFirestoreConnect({
-    collection: `markdowns`,
-    orderBy: [['createdAt', 'desc']],
-    storeAs: 'articleOptions',
-  })
+  const [articles, loading] = useCollectionData(
+    firestore().collection('markdowns').orderBy('createdAt', 'desc')
+  )
 
   function handleKeywordChange(_event, word) {
     setKeyword(word)
@@ -25,7 +23,7 @@ export function ArticleSelector() {
     initEditor({ id, slug, cover, title, subtitle, content, draft })
   }
 
-  if (!isLoaded(articles)) return <p>loading</p>
+  if (loading) return <p>loading</p>
 
   return (
     <Autocomplete

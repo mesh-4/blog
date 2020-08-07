@@ -10,6 +10,7 @@ export function Routes() {
   return (
     <Router>
       <Container path="/">
+        <Article path="/article/:slug" />
         {routes
           .filter(({ inContainer }) => inContainer)
           .map(({ public: isPublic, name, path, component: Component }) =>
@@ -19,8 +20,6 @@ export function Routes() {
               <PrivateRoute key={name} as={Component} path={path} />
             )
           )}
-
-        <Article path="/article/:slug" />
       </Container>
 
       {routes

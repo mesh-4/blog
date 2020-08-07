@@ -1,36 +1,34 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import Skeleton from '@material-ui/lab/Skeleton'
 
 export const ArticleAssetList = () => {
-  const articles = useSelector(
-    state => state.firestore.ordered.publishedArticles
+  const [articles, loading] = useCollectionData(
+    firestore()
+      .collection('markdowns')
+      .where('draft', '==', false)
+      .orderBy('updatedAt', 'desc'),
+    { idField: 'id' }
   )
-  useFirestoreConnect({
-    collection: `markdowns`,
-    where: [['draft', '==', false]],
-    orderBy: [['updatedAt', 'desc']],
-    storeAs: 'publishedArticles',
-  })
 
-  if (!isLoaded(articles))
+  if (loading)
     return (
       <li className="assets-bar-files__inner">
-        <p style={{ fontSize: '18px', margin: 0 }}>
+        <p className="text-base m-0">
           <Skeleton animation="wave" variant="text" width="40%" />
         </p>
-        <p style={{ fontSize: '15px', marginBottom: '18px' }}>
+        <p className="text-sm mb-4">
           <Skeleton animation="wave" variant="text" />
         </p>
-        <p style={{ fontSize: '13px', margin: 0 }}>
+        <p className="text-xs m-0">
           <Skeleton animation="wave" variant="text" width="30%" />
         </p>
       </li>
     )
 
-  if (isEmpty(articles)) {
+  if (articles.length === 0) {
     return <li>No any article.</li>
   }
 
@@ -39,30 +37,16 @@ export const ArticleAssetList = () => {
       <article>
         <div className="flex flex-col flex-wrap w-full mb-4">
           <Link
-            className="block w-full text-lg leading-snug mb-2"
+            className="block w-full mb-2 text-base"
             to={`/article/${slug}`}
           >
-            <h2>{title}</h2>
+            <h2 className="text-base leading-normal">{title}</h2>
           </Link>
-          <Link
-            to={`/article/${slug}`}
-            style={{
-              display: 'block',
-              fontSize: '14px',
-              width: '100%',
-            }}
-          >
-            <p
-              style={{
-                color: '#9c9c9c',
-                fontWeight: 400,
-              }}
-            >
-              {subtitle}
-            </p>
+          <Link className="block text-sm w-full" to={`/article/${slug}`}>
+            <p className="text-secondary font-normal">{subtitle}</p>
           </Link>
         </div>
-        <p style={{ marginTop: '12px', marginBottom: 0, fontSize: '13px' }}>
+        <p className="mt-3 mb-0 text-xs">
           lastest updated at {updatedAt.toDate().toLocaleDateString()}
         </p>
       </article>

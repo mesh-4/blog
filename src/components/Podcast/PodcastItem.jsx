@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useRecoilState } from 'recoil'
 import LinesEllipsis from 'react-lines-ellipsis'
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
-import { useFirestore } from 'react-redux-firebase'
+import { firestore } from 'firebase/app'
 import {
   Button,
   TextField,
@@ -37,7 +37,6 @@ const useStyles = makeStyles(() => ({
 
 export function PodcastItem({ audio }) {
   const { id, title, description, fileName, url, draft } = audio
-  const firestore = useFirestore()
   const [player, setPlayer] = useRecoilState(playerAtom)
 
   const classes = useStyles()
@@ -64,7 +63,7 @@ export function PodcastItem({ audio }) {
 
   const handleEditorSubmit = async () => {
     try {
-      await firestore
+      await firestore()
         .collection('audio')
         .doc(id)
         .update({ ...editorForm })
