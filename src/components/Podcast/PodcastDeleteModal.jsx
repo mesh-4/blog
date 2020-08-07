@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { useFirebase, useFirestore } from 'react-redux-firebase'
+import { storage, firestore } from 'firebase/app'
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
@@ -20,13 +20,12 @@ const useStyles = makeStyles(theme => ({
 
 export function PodcastDeleteModal({ open, onClose, target }) {
   const classes = useStyles()
-  const firebase = useFirebase()
-  const firestore = useFirestore()
 
   const handleDelete = async () => {
     try {
-      await firestore.collection('audio').doc(target.id).delete()
-      await firebase.storage().ref(`audio/${target.fileName}`).delete()
+      await firestore().collection('audio').doc(target.id).delete()
+      await storage().ref(`audio/${target.fileName}`).delete()
+
       toast.success('Delete audio success!')
       onClose()
     } catch (err) {

@@ -1,33 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { useFirestore } from 'react-redux-firebase'
-import { makeStyles } from '@material-ui/styles'
+import { firestore } from 'firebase/app'
 import { Button, Typography } from '@material-ui/core'
 
 import imageUrl from '@/images/put_files.svg'
 import { ModalContainer } from '@/components/Layout/ModalContainer'
 
-const useStyles = makeStyles(theme => ({
-  image: {
-    margin: '0 30%',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    width: '40%',
-    height: 'auto',
-  },
-}))
-
 export function PodcastPublishModal({ open, onClose, target }) {
-  const classes = useStyles()
-  const firestore = useFirestore()
-
   const handlePublish = async () => {
     try {
-      await firestore
+      await firestore()
         .collection('audio')
         .doc(target.id)
         .update({ draft: false })
+
       onClose()
     } catch (err) {
       toast.error(`Failed on publish podcast: ${err.message}`)
@@ -39,7 +26,12 @@ export function PodcastPublishModal({ open, onClose, target }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Publish {target.fileName}?</Typography>
 
-      <img className={classes.image} src={imageUrl} alt="publish" />
+      <img
+        className="py-4"
+        style={{ margin: '0 30%', width: '40%', height: 'auto' }}
+        src={imageUrl}
+        alt="publish"
+      />
 
       <Button variant="contained" color="primary" onClick={handlePublish}>
         Continue

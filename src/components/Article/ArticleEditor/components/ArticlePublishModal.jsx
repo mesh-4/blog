@@ -1,7 +1,10 @@
 import React, { createRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { useFirebase, useFirestore } from 'react-redux-firebase'
+
+import { firestore, storage } from 'firebase/app'
+import { useDocumentData } from 'react-firebase-hooks/firestore'
+
 import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, LinearProgress } from '@material-ui/core'
 
@@ -21,15 +24,16 @@ const useStyles = makeStyles(theme => ({
 
 export function ArticlePublishModal({ open, onClose }) {
   const classes = useStyles()
-  const uploadRef = createRef()
-  const firebase = useFirebase()
-  const firestore = useFirestore()
   const {
     markdown,
     updateMarkdown,
     publishArticle,
   } = useArticleEditorContext()
-  const articleRef = firestore.collection('markdowns').doc(markdown.id)
+  const uploadRef = createRef()
+  const [article, loading] = useDocumentData(
+    firestore().doc(`markdowns/${markdown.id}`)
+  )
+
   const [uploading, setUploading] = useState(false)
   const [uploadPercent, setPercent] = useState(0)
 
@@ -39,7 +43,7 @@ export function ArticlePublishModal({ open, onClose }) {
 
   const handleUpload = e => {
     const file = e.target.files[0]
-    const audioRef = firebase.storage().ref(`images/${file.name}`)
+    const audioRef = storage().ref(`images/${file.name}`)
 
     const uploadTask = audioRef.put(file)
     uploadTask.on(
@@ -59,8 +63,11 @@ export function ArticlePublishModal({ open, onClose }) {
       () => {
         setUploading(false)
         setPercent(0)
+
         uploadTask.snapshot.ref.getDownloadURL().then(async downloadURL => {
-          await articleRef.update({ cover: downloadURL })
+          await firestore()
+            .doc(`markdowns/${markdown.id}`)
+            .update({ cover: downloadURL })
           updateMarkdown(draft => {
             draft.cover = downloadURL
           })
@@ -73,6 +80,8 @@ export function ArticlePublishModal({ open, onClose }) {
   const handlePublish = async () => {
     await publishArticle()
   }
+
+  if (loading) return <p>loading</p>
 
   return (
     <ModalContainer open={open} onClose={onClose}>
@@ -93,9 +102,9 @@ export function ArticlePublishModal({ open, onClose }) {
       <Button
         variant="contained"
         color="primary"
-        onClick={markdown.cover === '' ? focusUpload : handlePublish}
+        onClick={article.cover === '' ? focusUpload : handlePublish}
       >
-        {markdown.cover === '' ? 'Upload cover' : 'Publish'}
+        {article.cover === '' ? 'Upload cover' : 'Publish'}
       </Button>
 
       <input

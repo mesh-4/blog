@@ -10,7 +10,7 @@ export function Home() {
       <Head
         title="Home"
         description="紀錄網頁開發以及心路歷程等內容。不僅包含文章，也有 podcast內容。"
-        cover="gs://blog-282901.appspot.com/images/_blog-cover.jpg"
+        cover="https://senlima.blog/assets/cover.png"
         url="https://senlima.blog"
       />
       <div className="m-auto mt-12 mb-0 w-11/12 max-w-screen-sm">
@@ -21,7 +21,7 @@ export function Home() {
           </h2>
         </header>
 
-        <p className="mt-8 mb-1 text-2xl font-hairline">Lastest articles</p>
+        <p className="mt-8 mb-2 text-2xl font-hairline">Lastest articles</p>
         <ul className="list-none p-0">
           <ArticleLastestList />
         </ul>

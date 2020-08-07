@@ -16,3 +16,9 @@
   --senlima-dark-200: #202020;
   --senlima-dark-300: #272727;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+.family-cookie {
+  font-family: 'Cookie', cursive;
+}

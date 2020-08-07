@@ -30,7 +30,7 @@ export function Articles() {
           <ArticleList />
         </ul>
       </main>
-      <Footer />
+      <Footer isAbsolute={false} />
     </>
   )
 }

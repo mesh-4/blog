@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { toast } from 'react-toastify'
-import { useFirestore } from 'react-redux-firebase'
+import { firestore } from 'firebase/app'
 
 import { ArticleEditorContext } from './provider'
 
@@ -28,7 +28,6 @@ const articleProto = {
 }
 
 export function useArticleEditorContext() {
-  const firestore = useFirestore()
   const [markdown, updateMarkdown] = useContext(ArticleEditorContext)
 
   if (updateMarkdown === undefined) {
@@ -55,7 +54,7 @@ export function useArticleEditorContext() {
 
   async function createArticle() {
     try {
-      const { id } = await firestore
+      const { id } = await firestore()
         .collection('markdowns')
         .add({ ...articleProto })
 
@@ -76,7 +75,7 @@ export function useArticleEditorContext() {
 
   async function deleteArticle() {
     try {
-      await firestore.collection('markdowns').doc(markdown.id).delete()
+      await firestore().collection('markdowns').doc(markdown.id).delete()
       updateMarkdown(draft => {
         draft.id = ''
         draft.slug = ''
@@ -98,7 +97,7 @@ export function useArticleEditorContext() {
       updateMarkdown(draft => {
         draft.draft = false
       })
-      await firestore.collection('markdowns').doc(id).update({
+      await firestore().collection('markdowns').doc(id).update({
         draft: false,
       })
 
@@ -118,7 +117,7 @@ export function useArticleEditorContext() {
         draft.content = content
       })
 
-      await firestore.collection('markdowns').doc(id).update({
+      await firestore().collection('markdowns').doc(id).update({
         slug,
         title,
         subtitle,

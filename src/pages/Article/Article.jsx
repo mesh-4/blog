@@ -1,10 +1,14 @@
 import React, { useState, Fragment } from 'react'
-import { useParams } from '@reach/router'
+import { useParams, Link } from '@reach/router'
 import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
-import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { FaAngleLeft } from 'react-icons/fa'
+import { useMediaQuery } from '@material-ui/core'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import js from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus'
 
 import './index.css'
 import { Head } from '@/components/Layout/Head'
@@ -12,8 +16,16 @@ import { Footer } from '@/components/Layout/Footer'
 import { ShareRow } from '@/components/Article/ShareRow'
 import { ArticleSkeleton } from './Skeleton'
 
+SyntaxHighlighter.registerLanguage('javascript', js)
+
 const CodeSection = ({ language, value }) => {
-  return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>
+  // eslint-disable-next-line
+  console.log(language || '')
+  return (
+    <SyntaxHighlighter language={language} style={dark}>
+      {value}
+    </SyntaxHighlighter>
+  )
 }
 
 CodeSection.propTypes = {
@@ -23,25 +35,20 @@ CodeSection.propTypes = {
 
 export function Article() {
   const { slug } = useParams()
-  const [coverLoading, updateCoverLoading] = useState(true)
-  const article = useSelector(
-    state => state.firestore.ordered.trackingArticle
+  const [result, loading] = useCollectionData(
+    firestore().collection('markdowns').where('slug', '==', slug),
+    { idField: 'id' }
   )
-  useFirestoreConnect({
-    collection: `markdowns`,
-    where: [['slug', '==', slug]],
-    storeAs: 'trackingArticle',
-  })
+  const isMobile = useMediaQuery('(max-width:959px)')
+  const [coverLoading, updateCoverLoading] = useState(true)
 
   const removePlaceholder = () => {
     updateCoverLoading(false)
   }
 
-  if (!isLoaded(article)) return <ArticleSkeleton />
+  if (loading) return <ArticleSkeleton />
 
-  if (isEmpty(article)) return <p>Article not found</p>
-
-  return article.map(({ title, subtitle, cover, content }) => (
+  return result.map(({ title, subtitle, cover, content }) => (
     <Fragment key={slug}>
       <Head
         type="article"
@@ -51,6 +58,14 @@ export function Article() {
         url={`https://senlima.blog/article/${slug}`}
       />
       <article className="m-auto mt-12 mb-0 w-11/12 max-w-screen-sm medium-article">
+        {isMobile && (
+          <div className="mb-4 w-1/2">
+            <Link className="flex items-center" to="/">
+              <FaAngleLeft className="inline mr-2" />
+              to home page
+            </Link>
+          </div>
+        )}
         <section>
           <h1 className="article__title">{title}</h1>
           <h2 className="article__subtitle">{subtitle}</h2>
