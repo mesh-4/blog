@@ -19,15 +19,15 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     width: '300px',
     borderRadius: '8px',
-    border: `1px solid ${theme.palette.divider}`,
+    border: `2px solid ${theme.palette.divider}`,
     background: '#161616',
     zIndex: 5,
     [theme.breakpoints.down(960)]: {
-      right: 0,
-      bottom: '60px',
-      borderRadius: 0,
-      width: '100vw',
-      border: 'none',
+      right: '2.5vw',
+      bottom: '10px',
+      border: '1px solid white',
+      borderRadius: '0.375rem',
+      width: '95vw',
     },
   },
 }))
@@ -50,14 +50,7 @@ export function PodcastPlayer() {
 
   return (
     <aside className={classes.paper}>
-      <div
-        style={{
-          width: '100%',
-          padding: '15px',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      <div className="p-4 w-full flex items-center">
         <span className="w-full flex-auto mr-1 text-lg truncate">
           {player.title}
         </span>
@@ -71,7 +64,7 @@ export function PodcastPlayer() {
         </IconButton>
       </div>
       <PlayerBase
-        className="outline-none"
+        className="outline-none rounded-md"
         src={player.url}
         volume={volume}
         preload="metadata"

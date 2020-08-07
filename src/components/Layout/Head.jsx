@@ -19,7 +19,7 @@ export function Head({ url, type, cover, title, description }) {
       <meta name="twitter:creator" content="@senlima4" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={cover} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
     </Helmet>
   )
 }

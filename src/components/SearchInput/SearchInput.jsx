@@ -23,6 +23,7 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
     <TextField
       fullWidth
       autoFocus
+      size="small"
       color="primary"
       variant="outlined"
       helperText="Search by Algolia"
@@ -34,6 +35,7 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
+              size="small"
               title="Reset Query"
               aria-label="reset search query"
               onClick={() => refine('')}

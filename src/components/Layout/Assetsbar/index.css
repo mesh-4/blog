@@ -6,7 +6,8 @@
   z-index: 4;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 40px calc(100vh - 40px);
+  grid-template-rows: 200px 40px calc(100vh - 40px);
+  z-index: 100;
 }
 
 .assets-bar-select__base {
@@ -72,12 +73,6 @@
   font-weight: 300;
   color: var(--senlima-text-color);
   background-color: var(--senlima-background-secondary-color);
-}
-
-.assets-bar-files__inner h2 {
-  display: block;
-  font-size: 18px;
-  margin: 0;
 }
 
 .assets-bar-audio__inner-header {

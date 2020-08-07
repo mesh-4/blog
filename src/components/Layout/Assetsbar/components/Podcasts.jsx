@@ -1,50 +1,53 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useSetRecoilState } from 'recoil'
 import LinesEllipsis from 'react-lines-ellipsis'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
-import Skeleton from '@material-ui/lab/Skeleton'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { IconButton } from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
 
 import { playerAtom } from '@/store'
 
 export function PodcastAssetList() {
   const setPlayerUrl = useSetRecoilState(playerAtom)
-  const podcasts = useSelector(
-    state => state.firestore.ordered.publishedPodcasts
+  const [podcasts, loading] = useCollectionData(
+    firestore()
+      .collection('audio')
+      .where('draft', '==', false)
+      .orderBy('createdAt', 'desc'),
+    {
+      idField: 'id',
+    }
   )
-  useFirestoreConnect({
-    collection: `audio`,
-    where: [['draft', '==', false]],
-    orderBy: [['createdAt', 'desc']],
-    storeAs: 'publishedPodcasts',
-  })
 
-  if (!isLoaded(podcasts)) {
+  if (loading) {
     return (
       <li className="assets-bar-files__inner">
-        <p style={{ fontSize: '18px', margin: 0 }}>
+        <p className="text-base m-0">
           <Skeleton animation="wave" variant="text" width="40%" />
         </p>
-        <p style={{ fontSize: '15px', marginBottom: '18px' }}>
+        <p className="text-sm mb-4">
           <Skeleton animation="wave" variant="text" />
         </p>
-        <p style={{ fontSize: '13px', margin: 0 }}>
+        <p className="text-xs m-0">
           <Skeleton animation="wave" variant="text" width="30%" />
         </p>
       </li>
     )
   }
 
-  if (isEmpty(podcasts)) {
-    return <li>No any article.</li>
+  if (podcasts.length === 0) {
+    return <li>No any podcast.</li>
   }
 
   return podcasts.map(({ id, url, title, description, createdAt }) => (
     <li key={id} className="assets-bar-files__inner">
-      <div className="assets-bar-audio__inner-header">
-        <h2 style={{ height: '18px' }}>{title}</h2>
+      <div
+        className="w-full flex items-center justify-between mb-0 text-primary"
+        style={{ height: '24px' }}
+      >
+        <h2 className="text-base">{title}</h2>
 
         <IconButton
           size="small"
@@ -55,13 +58,14 @@ export function PodcastAssetList() {
         </IconButton>
       </div>
       <LinesEllipsis
+        className="mb-3"
         maxLine="2"
         ellipsis="..."
         basedOn="letters"
         text={description}
         component="section"
       />
-      <p style={{ marginTop: '12px', marginBottom: 0, fontSize: '13px' }}>
+      <p className="m-0 text-xs">
         created at {createdAt.toDate().toLocaleDateString()}
       </p>
     </li>

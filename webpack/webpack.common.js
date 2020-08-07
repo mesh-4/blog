@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -85,6 +86,18 @@ module.exports = {
         test: /\.svg$/,
         use: ['@svgr/webpack', 'url-loader'],
       },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -114,6 +127,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
+    }),
+    new CopyPlugin({
+      patterns: [{ from: './src/assets', to: './assets' }],
     }),
     new ReactLoadablePlugin({
       filename: './dist/react-loadable.json',

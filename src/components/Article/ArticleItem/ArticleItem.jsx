@@ -4,17 +4,14 @@ import { Link } from '@reach/router'
 
 export function ArticleItem({ article, imgNeed, showTime, gutterBottom }) {
   return (
-    <li style={{ width: '100%', marginBottom: gutterBottom ? '1em' : '0px' }}>
-      <article style={{ display: 'flex', flexDirection: 'column' }}>
+    <li className={`w-full ${gutterBottom ? 'mb-2' : 'mb-0'}`}>
+      <article className="flex flex-col">
         {imgNeed && (
           <Link
             to={`/article/${article.slug}`}
+            className="block flex-none w-full mb-4"
             style={{
-              display: 'block',
-              flex: 'none',
-              width: '100%',
               paddingTop: '52%',
-              marginRight: '1em',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundOrigin: 'border-box',
@@ -23,54 +20,22 @@ export function ArticleItem({ article, imgNeed, showTime, gutterBottom }) {
           />
         )}
 
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'column',
-            width: '100%',
-            marginBottom: '16px',
-          }}
-        >
+        <div className="flex flex-col flex-wrap w-full mb-4">
           <Link
             to={`/article/${article.slug}`}
-            style={{
-              display: 'block',
-              width: '100%',
-              lineHeight: '20px',
-            }}
+            className="block w-full leading-normal"
           >
-            <h2
-              style={{
-                fontSize: '18px',
-                fontWeight: 600,
-                marginBottom: '10px',
-              }}
-            >
-              {article.title}
-            </h2>
+            <h2 className="mb-2 text-base font-semibold">{article.title}</h2>
           </Link>
-          <Link
-            to={`/article/${article.slug}`}
-            style={{
-              display: 'block',
-              width: '100%',
-            }}
-          >
-            <p
-              style={{
-                color: '#9c9c9c',
-                fontSize: '14px',
-                fontWeight: 400,
-              }}
-            >
+          <Link className="block w-full" to={`/article/${article.slug}`}>
+            <p className="text-sm text-secondary font-normal">
               {article.subtitle}
             </p>
           </Link>
         </div>
 
         {showTime && (
-          <p style={{ margin: '0', fontSize: '13px' }}>
+          <p className="m-0 text-xs">
             lastest updated at {article.updatedAt}
           </p>
         )}

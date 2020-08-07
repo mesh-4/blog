@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { auth } from 'firebase/app'
 import { toast } from 'react-toastify'
 import { navigate } from '@reach/router'
-import { useFirebase } from 'react-redux-firebase'
 import { makeStyles } from '@material-ui/styles'
 import { Grid, Button, TextField, Typography } from '@material-ui/core'
 
@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 export function Login() {
   const classes = useStyles()
-  const firebase = useFirebase()
   const [loginForm, setForm] = useState({ email: '', password: '' })
 
   const handleLoginFieldChange = e => {
@@ -27,7 +26,8 @@ export function Login() {
   const handleLogin = async () => {
     try {
       const { email, password } = loginForm
-      await firebase.login({ email, password })
+      await auth().signInWithEmailAndPassword(email, password)
+
       toast.success('💁🏻 Login success')
       navigate('/')
     } catch (err) {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useSetRecoilState } from 'recoil'
-import { isLoaded, isEmpty, useFirestoreConnect } from 'react-redux-firebase'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { IconButton } from '@material-ui/core'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
 
@@ -9,19 +9,17 @@ import { playerAtom } from '@/store'
 
 export function PodcastPublishList() {
   const setPlayerUrl = useSetRecoilState(playerAtom)
-  const podcasts = useSelector(
-    state => state.firestore.ordered.publishedPodcasts
+  const [podcasts, loading] = useCollectionData(
+    firestore()
+      .collection('audio')
+      .where('draft', '==', false)
+      .orderBy('createdAt', 'desc'),
+    { idField: 'id' }
   )
-  useFirestoreConnect({
-    collection: `audio`,
-    where: [['draft', '==', false]],
-    orderBy: [['createdAt', 'desc']],
-    storeAs: 'publishedPodcasts',
-  })
 
-  if (!isLoaded(podcasts)) return <p>loading</p>
+  if (loading) return <p>loading</p>
 
-  if (isEmpty(podcasts)) return <p>Did not found any podcast</p>
+  if (podcasts.length === 0) return <p>Did not found any podcast</p>
 
   return podcasts.map(({ id, url, title, description, createdAt }) => (
     <li

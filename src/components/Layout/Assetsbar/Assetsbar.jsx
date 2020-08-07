@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import './index.css'
+import { Profile } from './components/Profile'
 import { ArticleAssetList } from './components/Articles'
 import { PodcastAssetList } from './components/Podcasts'
 
@@ -28,6 +29,8 @@ export const Assetsbar = () => {
 
   return (
     <div className="assets-bar__base">
+      <Profile />
+
       <div className="assets-bar-select__base">
         {genreList.map(({ title }) => (
           <button
