@@ -13,7 +13,7 @@ module.exports = {
   output: {
     filename: isDevelopment ? 'bundle.[hash].js' : '[contenthash].bundle.js',
     path: resolve(__dirname, '..', 'dist'),
-    publicPath: isDevelopment ? '/' : 'https://senlima.blog',
+    publicPath: isDevelopment ? '/' : 'https://senlima.blog/',
   },
   externals: {
     react: 'React',
