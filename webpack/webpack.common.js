@@ -13,7 +13,7 @@ module.exports = {
   output: {
     filename: isDevelopment ? 'bundle.[hash].js' : '[contenthash].bundle.js',
     path: resolve(__dirname, '..', 'dist'),
-    publicPath: isDevelopment ? '/' : 'https://senlima.blog',
+    publicPath: isDevelopment ? '/' : 'https://senlima.blog/',
   },
   externals: {
     react: 'React',
@@ -24,6 +24,10 @@ module.exports = {
     alias: {
       '@': resolve('src'),
       '@store': resolve('src/store'),
+      '@modules': resolve('src/modules'),
+      '@article': resolve('src/modules/article'),
+      '@podcast': resolve('src/modules/podcast'),
+      '@markdown': resolve('src/modules/markdown'),
     },
   },
   module: {
@@ -56,31 +60,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|jpe?g)$/,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 75,
-              },
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              webp: {
-                quality: 75,
-              },
-            },
-          },
-        ],
+        use: ['file-loader'],
       },
       {
         test: /\.svg$/,
