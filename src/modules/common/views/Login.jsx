@@ -2,20 +2,9 @@ import React, { useState } from 'react'
 import { auth } from 'firebase/app'
 import { toast } from 'react-toastify'
 import { navigate } from '@reach/router'
-import { makeStyles } from '@material-ui/styles'
-import { Grid, Button, TextField, Typography } from '@material-ui/core'
-
-const useStyles = makeStyles(theme => ({
-  field: {
-    marginBottom: theme.spacing(2),
-  },
-  base: {
-    height: '100vh',
-  },
-}))
+import { Grid, Button, TextField } from '@material-ui/core'
 
 export function Login() {
-  const classes = useStyles()
   const [loginForm, setForm] = useState({ email: '', password: '' })
 
   const handleLoginFieldChange = e => {
@@ -36,14 +25,12 @@ export function Login() {
   }
 
   return (
-    <Grid className={classes.base} container alignItems="center">
+    <Grid className="h-screen" container alignItems="center">
       <Grid item xs={1} md={3} lg={4} />
       <Grid item xs={10} md={6} lg={4}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Welcome
-        </Typography>
+        <p className="w-full text-xl text-center mb-6">Welcome</p>
 
-        <div className={classes.field}>
+        <div className="mb-4">
           <TextField
             type="text"
             fullWidth
@@ -55,7 +42,7 @@ export function Login() {
             onChange={handleLoginFieldChange}
           />
         </div>
-        <div className={classes.field}>
+        <div className="mb-4">
           <TextField
             type="password"
             fullWidth
