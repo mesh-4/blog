@@ -12,13 +12,13 @@ module.exports = {
       xl: '1280px',
     },
     primary: 'var(--senlima-primary-color)',
-    textColor: {
+    textColor: theme => ({
+      ...theme('colors'),
       primary: 'var(--senlima-text-color)',
       secondary: 'var(--senlima-text-secondary-color)',
       'theme-primary': 'var(--senlima-primary-color)',
-    },
-    borderColor: theme => ({
-      ...theme('colors'),
+    }),
+    borderColor: () => ({
       primary: 'var(--senlima-primary-color)',
     }),
     backgroundColor: theme => ({

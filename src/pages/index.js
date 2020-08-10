@@ -1,5 +1,0 @@
-export { Home } from './Home'
-export { Login } from './Login'
-export { About } from './About'
-export { NotFound } from './NotFound'
-export { Search } from './Search'

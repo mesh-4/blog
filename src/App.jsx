@@ -1,5 +1,6 @@
 import React from 'react'
 import { auth } from 'firebase/app'
+import { Router } from '@reach/router'
 import { hot } from 'react-hot-loader/root'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -7,8 +8,14 @@ import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 
-import { Routes } from './Routes'
-import { LoadingScreen } from './components/Loading'
+import { NotFound } from '@/pages'
+import { Article } from '@article/views/Article'
+import { PrivateRoute } from '@components/PrivateRoute'
+import { LoadingScreen } from '@components/LoadingScreen'
+
+import { useRoutes } from './hooks/useRoutes'
+
+import { Container } from './components/Layout/Container'
 
 const theme = createMuiTheme({
   palette: {
@@ -28,6 +35,7 @@ const theme = createMuiTheme({
 export function App() {
   // eslint-disable-next-line
   const [user, loading] = useAuthState(auth())
+  const routes = useRoutes('all')
 
   if (loading)
     return (
@@ -39,7 +47,31 @@ export function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes />
+      <Router>
+        <Container path="/">
+          <Article path="/article/:slug" />
+          {routes
+            .filter(({ inContainer }) => inContainer)
+            .map(({ public: isPublic, name, path, component: Component }) =>
+              isPublic ? (
+                <Component key={name} path={path} />
+              ) : (
+                <PrivateRoute key={name} as={Component} path={path} />
+              )
+            )}
+        </Container>
+
+        {routes
+          .filter(({ inContainer }) => !inContainer)
+          .map(({ public: isPublic, name, path, component: Component }) =>
+            isPublic ? (
+              <Component key={name} path={path} />
+            ) : (
+              <PrivateRoute key={name} as={Component} path={path} />
+            )
+          )}
+        <NotFound default />
+      </Router>
     </ThemeProvider>
   )
 }

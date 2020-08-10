@@ -75,6 +75,10 @@
   background-color: var(--senlima-background-secondary-color);
 }
 
+.assets-bar-files__inner:last-child {
+  border-bottom: none;
+}
+
 .assets-bar-audio__inner-header {
   width: 100%;
   height: 24px;

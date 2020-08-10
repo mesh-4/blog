@@ -10,9 +10,9 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
 import dark from 'react-syntax-highlighter/dist/cjs/styles/prism/vsc-dark-plus'
 
-import './Article.css'
-import { Head } from '@/components/Layout/Head'
-import { Footer } from '@/components/Layout/Footer'
+import './index.css'
+import { Head } from '@components/seo/Head'
+import { Footer } from '@components/seo/Footer'
 
 import { ShareRow } from '@article/components/ShareRow'
 import { ArticleSkeleton } from '@article/components/ArticleSkeleton'
@@ -20,8 +20,6 @@ import { ArticleSkeleton } from '@article/components/ArticleSkeleton'
 SyntaxHighlighter.registerLanguage('javascript', js)
 
 const CodeSection = ({ language, value }) => {
-  // eslint-disable-next-line
-  console.log(language || '')
   return (
     <SyntaxHighlighter language={language} style={dark}>
       {value}
