@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
       "@modules/*": ["./src/modules/*"],
+      "@common/*": ["./src/modules/common/*"],
       "@article/*": ["./src/modules/article/*"],
       "@podcast/*": ["./src/modules/podcast/*"],
       "@markdown/*": ["./src/modules/markdown/*"]

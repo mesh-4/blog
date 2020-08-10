@@ -40,7 +40,9 @@ export const ArticleAssetList = () => {
             className="block w-full mb-2 text-base"
             to={`/article/${slug}`}
           >
-            <h2 className="text-base leading-normal">{title}</h2>
+            <h2 className="text-base font-semibold leading-normal">
+              {title}
+            </h2>
           </Link>
           <Link className="block text-sm w-full" to={`/article/${slug}`}>
             <p className="text-secondary font-normal">{subtitle}</p>

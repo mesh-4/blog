@@ -6,8 +6,8 @@ import avatar from '@/images/avatar.png'
 
 export function Profile() {
   return (
-    <div className="px-4 py-4">
-      <div className="flex mb-3">
+    <div className="relative px-4 py-4 flex flex-col">
+      <div className="flex flex-none mb-3" style={{ height: '85px' }}>
         <Link
           to="/"
           className="block flex-none"
@@ -60,9 +60,9 @@ export function Profile() {
         </div>
       </div>
 
-      <p className="mt-0">Keep sharp.</p>
+      <p className="mt-0 flex-auto h-full">Keep sharp.</p>
 
-      <div className="flex items-center relative bottom-0">
+      <div className="flex flex-none items-center" style={{ height: '30px' }}>
         <a
           className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center mr-2"
           title="Email contact"

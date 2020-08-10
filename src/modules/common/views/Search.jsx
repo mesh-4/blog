@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Head } from '@/components/Layout/Head'
-import { Footer } from '@/components/Layout/Footer'
+import { Head } from '@components/seo/Head'
+import { Footer } from '@components/seo/Footer'
+
 import { SearchInput } from '@/components/SearchInput'
 
 export function Search() {

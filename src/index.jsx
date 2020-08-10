@@ -10,15 +10,15 @@ import 'firebase/analytics'
 
 import { RecoilRoot } from 'recoil'
 
-import './styles.css'
-import './css/markdown.css'
+import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
 import App from './App'
 
 firebase.initializeApp(firebaseConfig)
-firebase.analytics()
+firebase.storage()
 firebase.firestore()
+firebase.analytics()
 
 ReactDOM.render(
   <RecoilRoot>

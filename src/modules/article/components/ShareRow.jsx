@@ -1,28 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TwitterShareButton, LinkedinShareButton } from 'react-share'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import LinkedinIcon from '@material-ui/icons/LinkedIn'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
+import { FaTwitter, FaLinkedin, FaHandHoldingUsd } from 'react-icons/fa'
 
 export function ShareRow({ slug, title, subtitle }) {
   return (
-    <div className="my-4">
+    <div className="my-4 flex items-center justify-start">
       <TwitterShareButton
-        className="mr-4"
+        className="mr-6"
         via="senlima4"
         title={title}
         url={`http://senlima.blog/article/${slug}`}
       >
-        <TwitterIcon />
+        <FaTwitter className="w-6 h-6" />
       </TwitterShareButton>
       <LinkedinShareButton
-        className="mr-4"
+        className="mr-6"
         title={title}
         summary={subtitle}
         url={`http://senlima.blog/article/${slug}`}
       >
-        <LinkedinIcon />
+        <FaLinkedin className="w-6 h-6" />
       </LinkedinShareButton>
       <a
         rel="noreferrer"
@@ -31,7 +29,7 @@ export function ShareRow({ slug, title, subtitle }) {
         aria-label="Senlima's support link"
         href="https://www.buymeacoffee.com/senlima"
       >
-        <MonetizationOnIcon />
+        <FaHandHoldingUsd className="w-6 h-6" />
       </a>
     </div>
   )

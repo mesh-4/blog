@@ -47,7 +47,7 @@ export function PodcastAssetList() {
         className="w-full flex items-center justify-between mb-0 text-primary"
         style={{ height: '24px' }}
       >
-        <h2 className="text-base">{title}</h2>
+        <h2 className="text-base font-semibold">{title}</h2>
 
         <IconButton
           size="small"
