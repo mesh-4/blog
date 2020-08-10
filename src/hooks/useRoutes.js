@@ -74,6 +74,17 @@ export const routes = [
       loading: LoadingScreen,
     }),
   },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    public: false,
+    inContainer: true,
+    component: Loadable({
+      loader: () =>
+        import('@components/Dashboard').then(module => module.Dashboard),
+      loading: LoadingScreen,
+    }),
+  },
 ]
 
 export function useRoutes(type) {

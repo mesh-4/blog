@@ -1,10 +1,14 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router'
+import { auth } from 'firebase/app'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaInfoCircle, FaGithub, FaTwitter } from 'react-icons/fa'
 
 import avatar from '@/images/avatar.png'
 
 export function Profile() {
+  const [user, loading] = useAuthState(auth())
+
   return (
     <div className="relative px-4 py-4 flex flex-col">
       <div className="flex flex-none mb-3" style={{ height: '85px' }}>
@@ -63,24 +67,36 @@ export function Profile() {
       <p className="mt-0 flex-auto h-full">Keep sharp.</p>
 
       <div className="flex flex-none items-center" style={{ height: '30px' }}>
-        <a
-          className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center mr-2"
-          title="Email contact"
-          aria-label="Email link"
-          href="mailto:senlima0430@gmail.com"
-        >
-          <span>Contact</span>
-        </a>
-        <a
-          className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center"
-          rel="noopener noreferrer"
-          target="_blank"
-          title="Buy me a coffee"
-          aria-label="Buy me a coffee profile"
-          href="https://www.buymeacoffee.com/senlima"
-        >
-          <span>Support</span>
-        </a>
+        {!loading && !user ? (
+          <>
+            <a
+              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center mr-2"
+              title="Email contact"
+              aria-label="Email link"
+              href="mailto:senlima0430@gmail.com"
+            >
+              <span>Contact</span>
+            </a>
+            <a
+              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center"
+              rel="noopener noreferrer"
+              target="_blank"
+              title="Buy me a coffee"
+              aria-label="Buy me a coffee profile"
+              href="https://www.buymeacoffee.com/senlima"
+            >
+              <span>Support</span>
+            </a>
+          </>
+        ) : (
+          <button
+            className="flex-auto block text-primary bg-teal-700 rounded w-full h-full text-xs"
+            type="button"
+            onClick={() => navigate('/dashboard')}
+          >
+            <span>Dashboard</span>
+          </button>
+        )}
       </div>
     </div>
   )
