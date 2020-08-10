@@ -8,7 +8,7 @@ import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 
-import { NotFound } from '@/pages'
+import { NotFound } from '@common/views/NotFound'
 import { Article } from '@article/views/Article'
 import { PrivateRoute } from '@components/PrivateRoute'
 import { LoadingScreen } from '@components/LoadingScreen'
