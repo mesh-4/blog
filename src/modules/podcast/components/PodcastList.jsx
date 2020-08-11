@@ -1,7 +1,6 @@
 import React from 'react'
 import { firestore } from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Grid } from '@material-ui/core'
 
 import { PodcastItem } from './PodcastItem'
 
@@ -18,8 +17,11 @@ export function PodcastList() {
   if (podcasts.length === 0) return <p>Did not found any podcast</p>
 
   return podcasts.map(podcast => (
-    <Grid key={podcast.id} className="mt-3 mb-3" item xs={12}>
+    <li
+      key={podcast.id}
+      className="mt-3 mb-3 border-b border-solid border-primary"
+    >
       <PodcastItem audio={podcast} />
-    </Grid>
+    </li>
   ))
 }

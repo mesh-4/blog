@@ -1,55 +1,31 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { useRecoilState } from 'recoil'
 import LinesEllipsis from 'react-lines-ellipsis'
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 import { firestore } from 'firebase/app'
+import { TextField } from '@material-ui/core'
 import {
-  Button,
-  TextField,
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+  FaRegTrashAlt,
+  FaCloudUploadAlt,
+  FaPenSquare,
+  FaPollH,
+} from 'react-icons/fa'
 
-import { playerAtom } from '@/store'
 import { PodcastDeleteModal } from './PodcastDeleteModal'
 import { PodcastPublishModal } from './PodcastPublishModal'
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 
-const useStyles = makeStyles(() => ({
-  head: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: 0,
-    justifyContent: 'space-between',
-    paddingBottom: '1em !important',
-  },
-  body: {
-    paddingTop: '0px !important',
-  },
-}))
-
 export function PodcastItem({ audio }) {
-  const { id, title, description, fileName, url, draft } = audio
-  const [player, setPlayer] = useRecoilState(playerAtom)
+  const { id, title, description, fileName, draft } = audio
 
-  const classes = useStyles()
   const [editorOpen, setEditorOpen] = useState(false)
   const [editorForm, setForm] = useState({ title, description })
   const [modals, setModals] = useState({ delete: false, publish: false })
 
   const handleModalStatus = (field, value) => {
     setModals({ ...modals, [field]: value })
-  }
-
-  const handlePlayAudio = () => {
-    setPlayer({ title, url })
   }
 
   const handleEditorOpen = () => {
@@ -76,51 +52,56 @@ export function PodcastItem({ audio }) {
 
   return (
     <>
-      <Card>
-        <CardContent className={classes.head}>
+      <div className="my-4">
+        <div
+          className={`w-full flex items-center justify-between ${
+            editorOpen ? 'pb-4' : 'pb-2'
+          }`}
+        >
           {editorOpen ? (
             <TextField
               fullWidth
+              size="small"
               name="title"
               label="Title"
+              color="primary"
               variant="outlined"
               value={editorForm.title}
               onChange={handleEditorChange}
+              style={{ marginRight: '20px' }}
             />
           ) : (
-            <Typography variant="h6" display="inline">
-              {title}
-            </Typography>
+            <p className="text-lg font-semibold">{title}</p>
           )}
 
-          <CardActions>
-            <Button
-              color="primary"
-              disabled={player.url === url}
-              onClick={handlePlayAudio}
-            >
-              Play
-            </Button>
-
+          <div className="flex-none w-12 flex items-center justify-between">
             {editorOpen ? (
-              <Button onClick={handleEditorSubmit}>Submit</Button>
+              <FaPollH
+                className="cursor-pointer"
+                onClick={handleEditorSubmit}
+              />
             ) : (
-              <Button onClick={handleEditorOpen}>Edit</Button>
+              <FaPenSquare
+                className="cursor-pointer"
+                onClick={handleEditorOpen}
+              />
             )}
 
             {draft && (
-              <Button onClick={() => handleModalStatus('publish', true)}>
-                Publish
-              </Button>
+              <FaCloudUploadAlt
+                className="cursor-pointer"
+                onClick={() => handleModalStatus('publish', true)}
+              />
             )}
 
-            <Button onClick={() => handleModalStatus('delete', true)}>
-              Delete
-            </Button>
-          </CardActions>
-        </CardContent>
+            <FaRegTrashAlt
+              className="cursor-pointer text-red-700"
+              onClick={() => handleModalStatus('delete', true)}
+            />
+          </div>
+        </div>
 
-        <CardContent className={classes.body}>
+        <div className="pt-0 text-base">
           {editorOpen ? (
             <TextField
               rows={4}
@@ -141,8 +122,8 @@ export function PodcastItem({ audio }) {
               component="section"
             />
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <PodcastDeleteModal
         open={modals.delete}

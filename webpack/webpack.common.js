@@ -9,7 +9,7 @@ const { ReactLoadablePlugin } = require('react-loadable/webpack')
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: ['./src/index.jsx'],
+  entry: ['./src/main.jsx'],
   output: {
     filename: isDevelopment ? 'bundle.[hash].js' : '[contenthash].bundle.js',
     path: resolve(__dirname, '..', 'dist'),

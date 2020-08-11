@@ -62,11 +62,11 @@ export function MarkdownEditor() {
         <EditorBase
           style={{ height: '400px' }}
           config={{
-            view: { menu: true, md: true, html: false },
+            view: { menu: true, md: true, html: true },
             canView: {
               menu: true,
               md: true,
-              html: false,
+              html: true,
               fullScreen: false,
               hideMenu: false,
             },

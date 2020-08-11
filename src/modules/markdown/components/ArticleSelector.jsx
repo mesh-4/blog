@@ -11,7 +11,8 @@ export function ArticleSelector() {
   const [keyword, setKeyword] = useState('')
   const { markdown, initEditor } = useArticleEditorContext()
   const [articles, loading] = useCollectionData(
-    firestore().collection('markdowns').orderBy('createdAt', 'desc')
+    firestore().collection('markdowns').orderBy('createdAt', 'desc'),
+    { idField: 'id' }
   )
 
   function handleKeywordChange(_event, word) {

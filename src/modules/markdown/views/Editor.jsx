@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 import './index.css'
 import { ArticleEditorProvider } from '../context'
@@ -11,9 +11,7 @@ export function Editor() {
       <Grid item xs={1} />
       <Grid item xs={10}>
         <ArticleEditorProvider>
-          <Typography className="pt-8" variant="h5" gutterBottom>
-            Article Editor
-          </Typography>
+          <p className="pt-8 mb-4 text-3xl">Article Editor</p>
           <ArticleEditor />
         </ArticleEditorProvider>
       </Grid>
