@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { CloudUpload } from '@material-ui/icons'
-import { Grid, Button, Hidden, Typography } from '@material-ui/core'
+
+import { MdCloudUpload } from 'react-icons/md'
+import { Grid, Button, Hidden } from '@material-ui/core'
 
 import { PodcastList } from '../components/PodcastList'
 import { PodcastCreateModal } from '../components/PodcastCreateModal'
@@ -14,21 +15,21 @@ export function Audios() {
         <Grid item md={1} />
       </Hidden>
       <Grid item xs={12} md={10}>
-        <Typography className="pt-8" variant="h5" gutterBottom>
-          Audios
-        </Typography>
+        <p className="pt-8 mb-4 text-3xl">Audios Manager</p>
 
         <Button
           size="small"
           color="primary"
           variant="contained"
-          startIcon={<CloudUpload />}
+          startIcon={<MdCloudUpload />}
           onClick={() => setCreateOpen(true)}
         >
           Upload
         </Button>
 
-        <PodcastList />
+        <ul className="mt-6 list-none p-0">
+          <PodcastList />
+        </ul>
 
         <PodcastCreateModal
           open={createOpen}

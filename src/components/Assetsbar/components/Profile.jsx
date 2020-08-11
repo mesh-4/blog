@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, navigate } from '@reach/router'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { auth } from 'firebase/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaInfoCircle, FaGithub, FaTwitter } from 'react-icons/fa'
@@ -7,6 +8,7 @@ import { FaInfoCircle, FaGithub, FaTwitter } from 'react-icons/fa'
 import avatar from '@/images/avatar.png'
 
 export function Profile() {
+  const navigate = useNavigate()
   const [user, loading] = useAuthState(auth())
 
   return (
@@ -66,7 +68,7 @@ export function Profile() {
 
       <p className="mt-0 flex-auto h-full">Keep sharp.</p>
 
-      <div className="flex flex-none items-center" style={{ height: '30px' }}>
+      <div className="flex-none flex items-center" style={{ height: '30px' }}>
         {!loading && !user ? (
           <>
             <a
@@ -89,13 +91,26 @@ export function Profile() {
             </a>
           </>
         ) : (
-          <button
-            className="flex-auto block text-primary bg-teal-700 rounded w-full h-full text-xs"
-            type="button"
-            onClick={() => navigate('/dashboard')}
-          >
-            <span>Dashboard</span>
-          </button>
+          <>
+            <button
+              className="flex-1 mr-2 block text-primary bg-teal-700 rounded w-full h-full text-xs"
+              type="button"
+              onClick={() => navigate('/dashboard')}
+            >
+              <span>Dashboard</span>
+            </button>
+
+            <button
+              className="flex-1 block text-primary bg-red-600 rounded w-full h-full text-xs"
+              type="button"
+              onClick={async () => {
+                await auth().signOut()
+                toast.success('Logout successfully!')
+              }}
+            >
+              <span>Logout</span>
+            </button>
+          </>
         )}
       </div>
     </div>

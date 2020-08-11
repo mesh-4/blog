@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ToastContainer } from 'react-toastify'
+import { BrowserRouter } from 'react-router-dom'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -10,7 +11,7 @@ import 'firebase/analytics'
 
 import { RecoilRoot } from 'recoil'
 
-import './index.css'
+import './main.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
 import App from './App'
@@ -22,18 +23,20 @@ firebase.analytics()
 
 ReactDOM.render(
   <RecoilRoot>
-    <App />
-    <ToastContainer
-      position="bottom-right"
-      hideProgressBar={false}
-      newestOnTop={false}
-      autoClose={3000}
-      closeOnClick
-      rtl={false}
-      draggable
-      pauseOnHover
-      pauseOnFocusLoss
-    />
+    <BrowserRouter>
+      <App />
+      <ToastContainer
+        position="bottom-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        autoClose={3000}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover
+        pauseOnFocusLoss
+      />
+    </BrowserRouter>
   </RecoilRoot>,
   document.getElementById('root')
 )

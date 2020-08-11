@@ -65,14 +65,7 @@
 }
 
 .assets-bar-files__inner {
-  padding: 1em 1em;
   border-bottom: 1px solid #c5c5c5;
-  width: 90%;
-  margin: 0 5%;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--senlima-text-color);
-  background-color: var(--senlima-background-secondary-color);
 }
 
 .assets-bar-files__inner:last-child {

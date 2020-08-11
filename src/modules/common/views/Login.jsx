@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { auth } from 'firebase/app'
 import { toast } from 'react-toastify'
-import { navigate } from '@reach/router'
+import { useNavigate } from 'react-router-dom'
 import { Grid, Button, TextField } from '@material-ui/core'
 
 export function Login() {
+  const navigate = useNavigate()
   const [loginForm, setForm] = useState({ email: '', password: '' })
 
   const handleLoginFieldChange = e => {
