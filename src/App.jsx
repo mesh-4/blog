@@ -1,13 +1,11 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
-import { useSelector } from 'react-redux'
-import { isLoaded } from 'react-redux-firebase'
+
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import { Routes } from './Routes'
-import { LoadingScreen } from './components/Loading'
 
 const theme = createMuiTheme({
   palette: {
@@ -25,10 +23,6 @@ const theme = createMuiTheme({
 })
 
 export function App() {
-  const auth = useSelector(state => state.firebase.auth)
-
-  if (!isLoaded(auth)) return <LoadingScreen />
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

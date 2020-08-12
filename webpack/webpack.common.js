@@ -1,19 +1,19 @@
 const { resolve } = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
 const { ReactLoadablePlugin } = require('react-loadable/webpack')
-const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: ['./src/index.jsx'],
+  entry: ['./src/main.jsx'],
   output: {
     filename: isDevelopment ? 'bundle.[hash].js' : '[contenthash].bundle.js',
     path: resolve(__dirname, '..', 'dist'),
-    publicPath: '/',
+    publicPath: isDevelopment ? '/' : 'https://senlima.blog/',
   },
   externals: {
     react: 'React',
@@ -23,6 +23,14 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       '@': resolve('src'),
+      '@store': resolve('src/store'),
+      '@components': resolve('src/components'),
+      '@modules': resolve('src/modules'),
+      '@common': resolve('src/modules/common'),
+      '@audio': resolve('src/modules/audio'),
+      '@article': resolve('src/modules/article'),
+      '@podcast': resolve('src/modules/podcast'),
+      '@markdown': resolve('src/modules/markdown'),
     },
   },
   module: {
@@ -55,35 +63,23 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|jpe?g)$/,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 75,
-              },
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              webp: {
-                quality: 75,
-              },
-            },
-          },
-        ],
+        use: ['file-loader'],
       },
       {
         test: /\.svg$/,
         use: ['@svgr/webpack', 'url-loader'],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
       },
     ],
   },
@@ -115,21 +111,13 @@ module.exports = {
       filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
     }),
+    new CopyPlugin({
+      patterns: [{ from: './src/assets', to: './assets' }],
+    }),
     new ReactLoadablePlugin({
       filename: './dist/react-loadable.json',
     }),
     new ManifestPlugin(),
-    new WorkboxPlugin.GenerateSW({
-      swDest: 'sw.js',
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [
-        {
-          urlPattern: new RegExp('https://senlima.blog'),
-          handler: 'StaleWhileRevalidate',
-        },
-      ],
-    }),
   ],
   performance: false,
 }
