@@ -30,6 +30,10 @@ body {
   background-color: var(--senlima-body-color);
 }
 
+.Typewriter {
+  display: inline;
+}
+
 .rhap_container {
   background-color: var(--senlima-body-color) !important;
 }
@@ -41,6 +45,10 @@ body {
 button {
   outline: none !important;
   border: none;
+}
+
+.mix-blend-difference {
+  mix-blend-mode: difference;
 }
 
 @import './markdown.css';

@@ -1,8 +1,11 @@
 import React from 'react'
-import { FaReact, FaPython, FaBook, FaMicrophoneAlt } from 'react-icons/fa'
+import Typewriter from 'typewriter-effect'
+import { Link } from 'react-router-dom'
 
 import { Head } from '@components/seo/Head'
 import { Footer } from '@components/seo/Footer'
+
+import { MotionBack } from '../components/MotionBack'
 
 export function Home() {
   return (
@@ -13,73 +16,60 @@ export function Home() {
         cover="https://senlima.blog/assets/cover.png"
         url="https://senlima.blog"
       />
-      <div className="m-auto mt-12 mb-0 w-11/12 max-w-screen-sm">
-        <header className="mt-4">
-          <h1 className="mb-0 font-semibold text-3xl">
-            Senlima Sun&apos;s blog
-          </h1>
-          <h2 className="my-1 font-semibold text-secondary text-xl">
-            Web development note
-          </h2>
-        </header>
-
-        <p className="mt-6 mb-4 text-base">
-          blog會不斷地更新它的頁面、架構和各種功能。 未來
-          blog將會有以下種類的內容：
-        </p>
-
-        <div className="flex flex-wrap justify-between">
-          <div className="mb-2 p-4 flex-initial w-5/12 bg-white rounded flex flex-no-wrap items-center">
-            <FaReact
-              className="flex-none h-full mr-4"
-              style={{ color: '#00d8ff', width: '40px' }}
-            />
-            <div className="flex-auto w-full text-black">
-              <h3>前端</h3>
-              <p className="text-secondary">
-                主要使用 React，也會寫其他框架以及工具
-              </p>
-            </div>
-          </div>
-
-          <div className="mb-2 p-4 flex-initial w-5/12 bg-white rounded flex flex-no-wrap items-center">
-            <FaPython
-              className="flex-none h-full mr-4"
-              style={{ color: '#4584b6', width: '40px' }}
-            />
-            <div className="flex-auto w-full text-black">
-              <h3>後端</h3>
-              <p className="text-secondary">使用 Python以及 Node，無所不造</p>
-            </div>
-          </div>
-
-          <div className="p-4 flex-initial w-5/12 bg-white rounded flex flex-no-wrap items-center">
-            <div
-              className="flex-none h-full mr-4 text-black flex items-center justify-between"
-              style={{ width: '40px' }}
+      <MotionBack />
+      <div className="w-full h-screen flex items-center justify-around">
+        <div className="w-5/6 md:w-auto">
+          <main>
+            <h1 className="font-black" style={{ fontSize: '81px' }}>
+              Senlima Sun
+            </h1>
+            <h2 className="font-semibold text-2xl">
+              Developer of{' '}
+              <Typewriter
+                options={{
+                  loop: true,
+                  autoStart: true,
+                  strings: [
+                    'Serverless',
+                    'Full Stack Application',
+                    'PWA',
+                    'Micro Service',
+                    'API service',
+                  ],
+                }}
+              />
+            </h2>
+          </main>
+          <nav className="relative mt-8 w-full flex items-center justify-between">
+            <Link
+              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              to="articles"
+              title="Articles"
             >
-              <FaMicrophoneAlt style={{ width: '30px', height: '60%' }} />
-            </div>
-            <div className="flex-auto w-full text-black">
-              <h3>Podcast</h3>
-              <p className="text-secondary">
-                會講一些對架構或是其他事物的使用心得或看法
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 flex-initial w-5/12 bg-white rounded flex flex-no-wrap items-center">
-            <div
-              className="flex-none h-full mr-4 text-black flex items-center justify-between"
-              style={{ width: '40px' }}
+              Articles
+            </Link>
+            <Link
+              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              to="podcasts"
+              title="Podcasts"
             >
-              <FaBook style={{ width: '30px', height: '60%' }} />
-            </div>
-            <div className="flex-auto w-full text-black">
-              <h3>Tutorial</h3>
-              <p className="text-secondary">一些關於網頁或是其他工具的教學</p>
-            </div>
-          </div>
+              Podcasts
+            </Link>
+            <Link
+              className="px-4 py-2 border border-solid border-disabled rounded-lg text-secondary pointer-events-none"
+              to="images"
+              aria-label="Coming soon..."
+            >
+              Images
+            </Link>
+            <Link
+              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              to="about"
+              title="About"
+            >
+              About
+            </Link>
+          </nav>
         </div>
       </div>
       <Footer />

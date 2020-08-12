@@ -38,11 +38,14 @@
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-share": "^4.2.1",
+    "react-spring": "^8.0.27",
     "react-syntax-highlighter": "^13.2.1",
     "react-toastify": "^6.0.8",
+    "react-transition-group": "^4.4.1",
     "recoil": "^0.0.10",
     "rich-markdown-editor": "^10.4.0-1",
     "tailwindcss": "^1.6.2",
+    "typewriter-effect": "^2.13.1",
     "use-immer": "^0.4.1"
   },
   "devDependencies": {

@@ -20,6 +20,7 @@ module.exports = {
     }),
     borderColor: () => ({
       primary: 'var(--senlima-primary-color)',
+      disabled: 'var(--senlima-text-secondary-color)',
     }),
     backgroundColor: theme => ({
       ...theme('colors'),
