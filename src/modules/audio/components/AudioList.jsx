@@ -2,9 +2,9 @@ import React from 'react'
 import { firestore } from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-import { PodcastItem } from './PodcastItem'
+import { AudioItem } from './AudioItem'
 
-export function PodcastList() {
+export function AudioList() {
   const [podcasts, loading] = useCollectionData(
     firestore().collection('audio').orderBy('createdAt', 'desc'),
     {
@@ -21,7 +21,7 @@ export function PodcastList() {
       key={podcast.id}
       className="mt-3 mb-3 border-b border-solid border-primary"
     >
-      <PodcastItem audio={podcast} />
+      <AudioItem audio={podcast} />
     </li>
   ))
 }

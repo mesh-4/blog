@@ -1,32 +1,33 @@
 import React, { useState, Fragment } from 'react'
-import { useParams, Link, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Markdown from 'react-markdown'
 import { toast } from 'react-toastify'
 import { FaAngleLeft } from 'react-icons/fa'
-import { useMediaQuery } from '@material-ui/core'
+import { useParams, Link, Navigate } from 'react-router-dom'
+
 import { firestore } from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+
+import { useMediaQuery } from '@material-ui/core'
+
+import Markdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
 import dark from 'react-syntax-highlighter/dist/cjs/styles/prism/vsc-dark-plus'
 
-import './index.css'
 import { Head } from '@components/seo/Head'
 import { Footer } from '@components/seo/Footer'
-
 import { ShareRow } from '@article/components/ShareRow'
 import { ArticleSkeleton } from '@article/components/ArticleSkeleton'
 
+import './index.css'
+
 SyntaxHighlighter.registerLanguage('javascript', js)
 
-const CodeSection = ({ language, value }) => {
-  return (
-    <SyntaxHighlighter language={language} style={dark}>
-      {value}
-    </SyntaxHighlighter>
-  )
-}
+const CodeSection = ({ language, value }) => (
+  <SyntaxHighlighter language={language} style={dark}>
+    {value}
+  </SyntaxHighlighter>
+)
 
 CodeSection.propTypes = {
   language: PropTypes.string.isRequired,
@@ -39,6 +40,7 @@ export function Article() {
     firestore().collection('markdowns').where('slug', '==', slug),
     { idField: 'id' }
   )
+
   const isMobile = useMediaQuery('(max-width:959px)')
   const [coverLoading, updateCoverLoading] = useState(true)
 
@@ -70,6 +72,7 @@ export function Article() {
           </Link>
         </div>
       )}
+
       <section>
         <h1 className="mt-0 mb-1 text-xl">{title}</h1>
         <h2 className="mt-0 text-secondary text-lg font-light leading-normal break-words">
