@@ -72,7 +72,7 @@ export function Profile() {
         {!loading && !user ? (
           <>
             <a
-              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center mr-2"
+              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center mr-2 assets_info_btn"
               title="Email contact"
               aria-label="Email link"
               href="mailto:senlima0430@gmail.com"
@@ -80,7 +80,7 @@ export function Profile() {
               <span>Contact</span>
             </a>
             <a
-              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center"
+              className="flex-auto block border border-solid border-white hover:border-primary hover:text-theme-primary rounded px-2 py-1 text-xs text-center assets_info_btn"
               rel="noopener noreferrer"
               target="_blank"
               title="Buy me a coffee"

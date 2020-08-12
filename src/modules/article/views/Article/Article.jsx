@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
+import { toast } from 'react-toastify'
 import { FaAngleLeft } from 'react-icons/fa'
 import { useMediaQuery } from '@material-ui/core'
 import { firestore } from 'firebase/app'
@@ -46,6 +47,11 @@ export function Article() {
   }
 
   if (loading) return <ArticleSkeleton />
+
+  if (result.length === 0) {
+    toast.error('An invaild article link')
+    return <Navigate to="/" replace />
+  }
 
   return result.map(({ title, subtitle, cover, content }) => (
     <Fragment key={slug}>

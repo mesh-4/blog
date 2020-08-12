@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useRecoilState } from 'recoil'
 
 import './index.css'
+import { assetsbarState } from '@/store'
 import { Profile } from './components/Profile'
 import { ArticleAssetList } from './components/Articles'
 import { PodcastAssetList } from './components/Podcasts'
@@ -21,7 +23,7 @@ const genreList = [
 ]
 
 export const Assetsbar = () => {
-  const [genre, setGenre] = useState('Articles')
+  const [genre, setGenre] = useRecoilState(assetsbarState)
 
   const handleGenreSwitch = target => {
     setGenre(target)
