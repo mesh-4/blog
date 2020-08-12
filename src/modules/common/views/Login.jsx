@@ -13,11 +13,9 @@ export function Login() {
     setForm({ ...loginForm, [name]: value })
   }
 
-  const handleLogin = async () => {
+  const handleLogin = async (email, password) => {
     try {
-      const { email, password } = loginForm
       await auth().signInWithEmailAndPassword(email, password)
-
       toast.success('💁🏻 Login success')
       navigate('/')
     } catch (err) {
@@ -39,8 +37,12 @@ export function Login() {
             name="email"
             label="Email"
             variant="outlined"
+            aria-label="email"
             placeholder="Email"
             onChange={handleLoginFieldChange}
+            inputProps={{
+              'data-testid': 'email-input',
+            }}
           />
         </div>
         <div className="mb-4">
@@ -51,15 +53,20 @@ export function Login() {
             name="password"
             label="Password"
             variant="outlined"
+            aria-label="password"
             placeholder="Password"
             onChange={handleLoginFieldChange}
+            inputProps={{
+              'data-testid': 'password-input',
+            }}
           />
         </div>
         <Button
           fullWidth
           color="primary"
           variant="contained"
-          onClick={handleLogin}
+          onClick={() => handleLogin(loginForm.email, loginForm.password)}
+          data-testid="login-btn"
         >
           Login
         </Button>

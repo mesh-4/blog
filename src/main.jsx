@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ToastContainer } from 'react-toastify'
+import { RecoilRoot } from 'recoil'
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -9,16 +11,11 @@ import 'firebase/storage'
 import 'firebase/firestore'
 import 'firebase/analytics'
 
-import { RecoilRoot } from 'recoil'
-
 import './main.css'
-import 'react-toastify/dist/ReactToastify.css'
 import { firebaseConfig } from './firebase.config'
 import App from './App'
 
 firebase.initializeApp(firebaseConfig)
-firebase.storage()
-firebase.firestore()
 firebase.analytics()
 
 ReactDOM.render(
