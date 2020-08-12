@@ -3,33 +3,35 @@ import { auth } from 'firebase/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate, useRoutes } from 'react-router-dom'
 
-import { useMediaQuery } from '@material-ui/core'
-
-import { Assetsbar } from '@components/Assetsbar'
 import { Dashboard } from '@components/Dashboard'
 import { LoadingScreen } from '@components/LoadingScreen'
 import { AdminContainer } from '@components/AdminContainer'
 import { VisitorContainer } from '@components/VisitorContainer'
 
 import { Home } from '@common/views/Home'
+import { About } from '@common/views/About'
 import { Login } from '@common/views/Login'
 import { NotFound } from '@common/views/NotFound'
 
 import { Audios } from '@audio/views/Audios'
 import { Editor } from '@markdown/views/Editor'
 
+import { Articles } from '@article/views/Articles'
+import { Podcasts } from '@podcast/views/Podcasts'
 import { ArticleContainer, Article } from '@article/views/Article'
 import { PodcastContainer, Podcast } from '@podcast/views/Podcast'
 
 export function Routes() {
   const [user, loading] = useAuthState(auth())
-  const isMobile = useMediaQuery('(max-width:959px)')
   const routes = useRoutes([
     {
       path: '/',
       element: <VisitorContainer />,
       children: [
-        { path: '/', element: isMobile ? <Assetsbar /> : <Home /> },
+        { path: '/', element: <Home /> },
+        { path: 'about', element: <About /> },
+        { path: 'articles', element: <Articles /> },
+        { path: 'podcasts', element: <Podcasts /> },
         {
           path: 'article/*',
           element: <ArticleContainer />,
