@@ -3,7 +3,6 @@ import { useRecoilState } from 'recoil'
 import PlayerBase from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 import { makeStyles } from '@material-ui/styles'
-import { IconButton } from '@material-ui/core'
 
 import { MdHighlightOff } from 'react-icons/md'
 
@@ -22,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '8px',
     border: `2px solid ${theme.palette.divider}`,
     background: '#161616',
-    zIndex: 55,
+    zIndex: 9999,
     [theme.breakpoints.down(960)]: {
       right: '2.5vw',
       bottom: '10px',
@@ -56,13 +55,10 @@ export function PodcastPlayer() {
           {player.title}
         </span>
 
-        <IconButton
-          className="flex-none p-0 w-4"
-          size="small"
+        <MdHighlightOff
+          className="cursor-pointer flex-none p-0 text-lg"
           onClick={handlePlayerClear}
-        >
-          <MdHighlightOff />
-        </IconButton>
+        />
       </div>
       <PlayerBase
         className="outline-none rounded-md"
