@@ -2,25 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { storage, firestore } from 'firebase/app'
-import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
 import imageUrl from '@/images/throw_trash.svg'
-import { ModalContainer } from '@/components/Layout/ModalContainer'
+import { ModalContainer } from '@common/components/ModalContainer'
 
-const useStyles = makeStyles(theme => ({
-  image: {
-    margin: '0 30%',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    width: '40%',
-    height: 'auto',
-  },
-}))
-
-export function PodcastDeleteModal({ open, onClose, target }) {
-  const classes = useStyles()
-
+export function AudioDeleteModal({ open, onClose, target }) {
   const handleDelete = async () => {
     try {
       await firestore().collection('audio').doc(target.id).delete()
@@ -38,7 +25,12 @@ export function PodcastDeleteModal({ open, onClose, target }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Delete {target.fileName}?</Typography>
 
-      <img className={classes.image} src={imageUrl} alt="delete" />
+      <img
+        className="py-4"
+        style={{ margin: '0 30%', width: '40%', height: 'auto' }}
+        src={imageUrl}
+        alt="delete"
+      />
 
       <Button variant="contained" color="primary" onClick={handleDelete}>
         Confirm
@@ -47,7 +39,7 @@ export function PodcastDeleteModal({ open, onClose, target }) {
   )
 }
 
-PodcastDeleteModal.propTypes = {
+AudioDeleteModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   target: PropTypes.shape({

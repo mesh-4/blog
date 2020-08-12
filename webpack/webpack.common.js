@@ -27,6 +27,7 @@ module.exports = {
       '@components': resolve('src/components'),
       '@modules': resolve('src/modules'),
       '@common': resolve('src/modules/common'),
+      '@audio': resolve('src/modules/audio'),
       '@article': resolve('src/modules/article'),
       '@podcast': resolve('src/modules/podcast'),
       '@markdown': resolve('src/modules/markdown'),

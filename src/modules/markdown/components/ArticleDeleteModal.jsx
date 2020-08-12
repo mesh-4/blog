@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography } from '@material-ui/core'
 
 import imageUrl from '@/images/throw_trash.svg'
-import { ModalContainer } from '@/components/Layout/ModalContainer'
+import { ModalContainer } from '@common/components/ModalContainer'
 import { useArticleEditorContext } from '../context'
 
 const useStyles = makeStyles(theme => ({

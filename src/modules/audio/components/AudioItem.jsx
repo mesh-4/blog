@@ -12,12 +12,12 @@ import {
   FaPollH,
 } from 'react-icons/fa'
 
-import { PodcastDeleteModal } from './PodcastDeleteModal'
-import { PodcastPublishModal } from './PodcastPublishModal'
+import { AudioDeleteModal } from './AudioDeleteModal'
+import { AudioPublishModal } from './AudioPublishModal'
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 
-export function PodcastItem({ audio }) {
+export function AudioItem({ audio }) {
   const { id, title, description, fileName, draft } = audio
 
   const [editorOpen, setEditorOpen] = useState(false)
@@ -125,12 +125,12 @@ export function PodcastItem({ audio }) {
         </div>
       </div>
 
-      <PodcastDeleteModal
+      <AudioDeleteModal
         open={modals.delete}
         onClose={() => handleModalStatus('delete', false)}
         target={{ id, fileName }}
       />
-      <PodcastPublishModal
+      <AudioPublishModal
         open={modals.publish}
         onClose={() => handleModalStatus('publish', false)}
         target={{ id, fileName }}
@@ -139,7 +139,7 @@ export function PodcastItem({ audio }) {
   )
 }
 
-PodcastItem.propTypes = {
+AudioItem.propTypes = {
   audio: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

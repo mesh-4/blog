@@ -5,20 +5,21 @@ import { Navigate, useRoutes } from 'react-router-dom'
 
 import { useMediaQuery } from '@material-ui/core'
 
+import { Assetsbar } from '@components/Assetsbar'
+import { Dashboard } from '@components/Dashboard'
+import { LoadingScreen } from '@components/LoadingScreen'
+import { AdminContainer } from '@components/AdminContainer'
+import { VisitorContainer } from '@components/VisitorContainer'
+
 import { Home } from '@common/views/Home'
 import { Login } from '@common/views/Login'
 import { NotFound } from '@common/views/NotFound'
-import { Article } from '@article/views/Article'
-import { Editor } from '@markdown/views/Editor'
-import { Audios } from '@podcast/views/Audios'
-import { ArticleContainer } from '@article/views/Article/Container'
-import { PodcastContainer, Podcast } from '@podcast/views/Podcast'
-import { LoadingScreen } from '@components/LoadingScreen'
 
-import { Assetsbar } from '@components/Assetsbar'
-import { Dashboard } from '@components/Dashboard'
-import { AdminContainer } from '@components/containers/AdminContainer'
-import { VisitorContainer } from '@components/containers/VisitorContainer'
+import { Audios } from '@audio/views/Audios'
+import { Editor } from '@markdown/views/Editor'
+
+import { ArticleContainer, Article } from '@article/views/Article'
+import { PodcastContainer, Podcast } from '@podcast/views/Podcast'
 
 export function Routes() {
   const [user, loading] = useAuthState(auth())

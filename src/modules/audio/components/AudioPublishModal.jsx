@@ -5,9 +5,9 @@ import { firestore } from 'firebase/app'
 import { Button, Typography } from '@material-ui/core'
 
 import imageUrl from '@/images/put_files.svg'
-import { ModalContainer } from '@/components/Layout/ModalContainer'
+import { ModalContainer } from '@common/components/ModalContainer'
 
-export function PodcastPublishModal({ open, onClose, target }) {
+export function AudioPublishModal({ open, onClose, target }) {
   const handlePublish = async () => {
     try {
       await firestore()
@@ -40,7 +40,7 @@ export function PodcastPublishModal({ open, onClose, target }) {
   )
 }
 
-PodcastPublishModal.propTypes = {
+AudioPublishModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   target: PropTypes.shape({

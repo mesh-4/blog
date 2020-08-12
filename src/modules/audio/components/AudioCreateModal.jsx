@@ -2,24 +2,12 @@ import React, { createRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { storage, firestore } from 'firebase/app'
-import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, LinearProgress } from '@material-ui/core'
 
 import imageUrl from '@/images/upload_file.svg'
-import { ModalContainer } from '@/components/Layout/ModalContainer'
+import { ModalContainer } from '@common/components/ModalContainer'
 
-const useStyles = makeStyles(theme => ({
-  uploadImage: {
-    margin: '0 30%',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    width: '40%',
-    height: 'auto',
-  },
-}))
-
-export function PodcastCreateModal({ open, onClose }) {
-  const classes = useStyles()
+export function AudioCreateModal({ open, onClose }) {
   const uploadRef = createRef()
   const [uploading, setUploading] = useState(false)
   const [uploadPercent, setPercent] = useState(false)
@@ -66,7 +54,12 @@ export function PodcastCreateModal({ open, onClose }) {
     <ModalContainer open={open} onClose={onClose}>
       <Typography variant="h4">Upload audio file</Typography>
 
-      <img className={classes.uploadImage} src={imageUrl} alt="upload" />
+      <img
+        className="py-4"
+        style={{ margin: '0 30%', width: '40%', height: 'auto' }}
+        src={imageUrl}
+        alt="upload"
+      />
 
       <div style={{ margin: '1em 5%', width: '90%' }}>
         {uploading && (
@@ -88,7 +81,7 @@ export function PodcastCreateModal({ open, onClose }) {
   )
 }
 
-PodcastCreateModal.propTypes = {
+AudioCreateModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 }

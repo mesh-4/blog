@@ -4,8 +4,8 @@ import { Outlet } from 'react-router-dom'
 import { useMediaQuery } from '@material-ui/core'
 
 import { playerAtom } from '@/store'
-import { Assetsbar } from '../Assetsbar'
-import { PodcastPlayer } from '../PodcastPlayer'
+import { PodcastPlayer } from '@podcast/components/PodcastPlayer'
+import { Assetsbar } from './Assetsbar'
 
 export function VisitorContainer() {
   const player = useRecoilValue(playerAtom)

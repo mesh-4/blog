@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Button, Typography, LinearProgress } from '@material-ui/core'
 
 import imageUrl from '@/images/upload_file.svg'
-import { ModalContainer } from '@/components/Layout/ModalContainer'
+import { ModalContainer } from '@common/components/ModalContainer'
 import { useArticleEditorContext } from '../context'
 
 const useStyles = makeStyles(theme => ({
