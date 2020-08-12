@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
+    "test:coverage": "jest --coverage",
+    "test": "jest",
     "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
     "build": "NODE_ENV=production BABEL_ENV=production webpack --mode production --config ./webpack/webpack.prod.js",
     "deploy": "firebase deploy --only hosting"
@@ -77,6 +79,7 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
     "file-loader": "^6.0.0",
+    "firebase-mock": "^2.3.2",
     "html-webpack-plugin": "^4.3.0",
     "image-webpack-loader": "^6.0.0",
     "jest": "^26.1.0",
@@ -94,7 +97,6 @@
     "thread-loader": "^2.1.3",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
-    "webpack-atomizer-loader": "^1.0.2",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
@@ -189,5 +191,20 @@
       "functions/",
       "*.config.js"
     ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@modules/(.*)$": "<rootDir>/src/modules/$1",
+      "^@common/(.*)$": "<rootDir>/src/modules/common/$1",
+      "^@audio/(.*)$": "<rootDir>/src/modules/audio/$1",
+      "^@article/(.*)$": "<rootDir>/src/modules/article/$1",
+      "^@podcast/(.*)$": "<rootDir>/src/modules/podcast/$1",
+      "^@markdown/(.*)$": "<rootDir>/src/modules/markdown/$1"
+    }
   }
 }
