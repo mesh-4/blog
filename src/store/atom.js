@@ -13,6 +13,11 @@ export const playerAtom = atom({
   },
 })
 
+export const assetsbarState = atom({
+  key: 'assetsbar',
+  default: 'Articles',
+})
+
 export const editorAtom = atom({
   key: 'markdown-editor',
   default: {

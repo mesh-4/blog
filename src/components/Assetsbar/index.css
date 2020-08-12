@@ -8,6 +8,7 @@
   grid-template-columns: 100%;
   grid-template-rows: 200px 40px calc(100vh - 40px);
   z-index: 100;
+  overflow: hidden;
 }
 
 .assets-bar-select__base {
@@ -28,12 +29,17 @@
   transition: width 0.58s ease-in-out;
 }
 
+.assets-bar-select__option:hover {
+  color: #34e468;
+}
+
 .assets-bar-select__option:disabled {
   cursor: default;
 }
 
 .assets-bar-select__option.activate {
   width: 48%;
+  pointer-events: none;
 }
 
 .assets-bar-select__option:nth-of-type(2)::before {
@@ -85,4 +91,15 @@
 .assets-bar-audio__inner-header section {
   margin: 0;
   margin-bottom: 16px;
+}
+
+.assets_info_btn {
+  outline: 0px solid white;
+  transition: all 0.1s ease-in;
+}
+
+.assets_info_btn:hover {
+  border-radius: 0;
+  outline: 1px solid var(--senlima-primary-color);
+  outline-offset: 2px !important;
 }
