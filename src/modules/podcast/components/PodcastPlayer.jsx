@@ -11,8 +11,8 @@ import { playerAtom } from '@/store'
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
-    right: '385px',
-    bottom: '2.5vh',
+    right: '1vw',
+    bottom: '1vh',
     transition: 'all 0.3s ease-in-out',
     display: 'flex',
     outline: 'none',

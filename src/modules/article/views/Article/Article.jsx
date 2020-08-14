@@ -7,8 +7,6 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { firestore } from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-import { useMediaQuery } from '@material-ui/core'
-
 import Markdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
@@ -41,7 +39,6 @@ export function Article() {
     { idField: 'id' }
   )
 
-  const isMobile = useMediaQuery('(max-width:959px)')
   const [coverLoading, updateCoverLoading] = useState(true)
 
   const removePlaceholder = () => {
@@ -64,14 +61,12 @@ export function Article() {
         description={subtitle}
         url={`https://senlima.blog/article/${slug}`}
       />
-      {isMobile && (
-        <div className="mb-4 w-1/2">
-          <Link className="flex items-center" to="/">
-            <FaAngleLeft className="inline mr-2" />
-            to home page
-          </Link>
-        </div>
-      )}
+      <div className="mb-4 w-1/2">
+        <Link className="flex items-center" to="/articles">
+          <FaAngleLeft className="inline mr-2" />
+          to Articles
+        </Link>
+      </div>
 
       <section>
         <h1 className="mt-0 mb-1 text-xl">{title}</h1>
