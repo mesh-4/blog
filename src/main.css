@@ -51,4 +51,19 @@ button {
   mix-blend-mode: difference;
 }
 
+.outline-dotted-primary {
+  outline: 1px dotted var(--senlima-primary-color) !important;
+}
+
+.article-item {
+  height: 300px;
+  transition: all 0.1s ease-in-out;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-item {
+    height: 175px;
+  }
+}
+
 @import './markdown.css';

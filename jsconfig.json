@@ -6,6 +6,7 @@
       "@components/*": ["./src/components/*"],
       "@modules/*": ["./src/modules/*"],
       "@common/*": ["./src/modules/common/*"],
+      "@image/*": ["./src/modules/image/*"],
       "@audio/*": ["./src/modules/audio/*"],
       "@article/*": ["./src/modules/article/*"],
       "@podcast/*": ["./src/modules/podcast/*"],

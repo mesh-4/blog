@@ -9,11 +9,11 @@ const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
 export function ArticleItem({ article, imgNeed, showTime, gutterBottom }) {
   return (
     <li className={`w-full ${gutterBottom ? 'mb-4' : 'mb-0'}`}>
-      <article className="flex items-start" style={{ height: '175px' }}>
+      <article className="flex flex-col md:flex-row items-start article-item">
         {imgNeed && (
           <Link
             to={`/article/${article.slug}`}
-            className="block flex-none w-6/12 h-full mr-4"
+            className="block flex-none w-full md:w-6/12 h-40 md:h-full mb-2 md:mr-4 md:mb-0"
             style={{
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -29,10 +29,12 @@ export function ArticleItem({ article, imgNeed, showTime, gutterBottom }) {
             to={`/article/${article.slug}`}
             className="block leading-normal"
           >
-            <h2 className="mb-1 text-xl font-semibold">{article.title}</h2>
+            <h2 className="mb-1 text-lg md:text-xl font-semibold">
+              {article.title}
+            </h2>
           </Link>
           <Link className="block mb-2" to={`/article/${article.slug}`}>
-            <p className="text-base font-normal">{article.subtitle}</p>
+            <p className="md:text-base font-normal">{article.subtitle}</p>
           </Link>
           <div className="text-secondary">
             <ResponsiveEllipsis

@@ -16,6 +16,7 @@ import { NotFound } from '@common/views/NotFound'
 import { Audios } from '@audio/views/Audios'
 import { Editor } from '@markdown/views/Editor'
 
+import { Images } from '@image/views/Images'
 import { Articles } from '@article/views/Articles'
 import { Podcasts } from '@podcast/views/Podcasts'
 import { ArticleContainer, Article } from '@article/views/Article'
@@ -28,19 +29,41 @@ export function Routes() {
       path: '/',
       element: <VisitorContainer />,
       children: [
-        { path: '/', element: <Home /> },
-        { path: 'about', element: <About /> },
-        { path: 'articles', element: <Articles /> },
-        { path: 'podcasts', element: <Podcasts /> },
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: 'about',
+          element: <About />,
+        },
+        {
+          path: 'articles',
+          element: <Articles />,
+        },
+        {
+          path: 'podcasts',
+          element: <Podcasts />,
+        },
         {
           path: 'article/*',
           element: <ArticleContainer />,
-          children: [{ path: ':slug', element: <Article /> }],
+          children: [
+            {
+              path: ':slug',
+              element: <Article />,
+            },
+          ],
         },
         {
           path: 'podcast/*',
           element: <PodcastContainer />,
-          children: [{ path: ':id', element: <Podcast /> }],
+          children: [
+            {
+              path: ':id',
+              element: <Podcast />,
+            },
+          ],
         },
       ],
     },
@@ -53,12 +76,16 @@ export function Routes() {
           element: !user ? <Navigate to="/" replace /> : <Dashboard />,
         },
         {
-          path: 'markdown',
-          element: !user ? <Navigate to="/" replace /> : <Editor />,
+          path: 'images',
+          element: !user ? <Navigate to="/" replace /> : <Images />,
         },
         {
           path: 'audios',
           element: !user ? <Navigate to="/" replace /> : <Audios />,
+        },
+        {
+          path: 'markdown',
+          element: !user ? <Navigate to="/" replace /> : <Editor />,
         },
       ],
     },
