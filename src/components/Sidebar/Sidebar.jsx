@@ -6,6 +6,7 @@ import {
   MdDashboard,
   MdDescription,
   MdAssessment,
+  MdImage,
 } from 'react-icons/md'
 
 const fields = [
@@ -28,6 +29,11 @@ const fields = [
     name: 'audios',
     to: '/dashboard/audios',
     icon: <MdAssessment />,
+  },
+  {
+    name: 'images',
+    to: '/dashboard/images',
+    icon: <MdImage />,
   },
 ]
 

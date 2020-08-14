@@ -22,7 +22,7 @@ export function Articles() {
           <h1 className="block text-3xl font-semibold">Articles</h1>
           <PublishNav />
         </div>
-        <h2 className="block text-xl text-secondary">
+        <h2 className="block text-lg md:text-xl text-secondary">
           All published articles by Senlima Sun
         </h2>
       </header>

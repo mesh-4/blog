@@ -2,10 +2,12 @@ import React from 'react'
 import { firestore } from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Skeleton } from '@material-ui/lab'
+import { useMediaQuery } from '@material-ui/core'
 
 import { ArticleItem } from '../../ArticleItem'
 
 export function ArticlePublishList() {
+  const isMoblie = useMediaQuery('(max-width:680px)')
   const [articles, loading] = useCollectionData(
     firestore()
       .collection('markdowns')
@@ -58,7 +60,7 @@ export function ArticlePublishList() {
       <ArticleItem
         key={id}
         imgNeed
-        showTime
+        showTime={!isMoblie}
         article={{
           slug,
           cover,

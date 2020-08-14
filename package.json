@@ -23,6 +23,7 @@
     "markdown-it": "^11.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-cropper": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.2.0",
     "react-h5-audio-player": "^3.2.0",
@@ -46,7 +47,8 @@
     "rich-markdown-editor": "^10.4.0-1",
     "tailwindcss": "^1.6.2",
     "typewriter-effect": "^2.13.1",
-    "use-immer": "^0.4.1"
+    "use-immer": "^0.4.1",
+    "wavesurfer.js": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
