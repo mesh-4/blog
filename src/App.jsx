@@ -1,5 +1,7 @@
 import React from 'react'
-import { hot } from 'react-hot-loader/root'
+import { RecoilRoot } from 'recoil'
+import { ToastContainer } from 'react-toastify'
+import { BrowserRouter } from 'react-router-dom'
 
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
@@ -24,11 +26,24 @@ const theme = createMuiTheme({
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Routes />
-    </ThemeProvider>
+    <RecoilRoot>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes />
+        </ThemeProvider>
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar={false}
+          newestOnTop={false}
+          autoClose={3000}
+          closeOnClick
+          rtl={false}
+          draggable
+          pauseOnHover
+          pauseOnFocusLoss
+        />
+      </BrowserRouter>
+    </RecoilRoot>
   )
 }
-
-export default hot(App)

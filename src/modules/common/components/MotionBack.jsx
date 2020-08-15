@@ -16,7 +16,7 @@ export function MotionBack() {
       onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}
     >
       <animated.div
-        class="absolute w-32 h-64 bg-white rounded-full mix-blend-difference"
+        className="absolute w-32 h-64 bg-white rounded-full mix-blend-difference"
         style={{
           top: '28vh',
           left: '7.5vw',

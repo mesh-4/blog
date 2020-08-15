@@ -18,12 +18,12 @@ export function ArticlePublishList() {
 
   if (loading) {
     return (
-      <li className="w-full flex">
-        <div className="flex-none mr-4 w-6/12 h-full">
+      <li className="w-full flex flex-col md:flex-row md:items-start article-item">
+        <div className="flex-none w-full md:w-6/12 mb-2 md:mr-4 md:mb-0">
           <Skeleton variant="rect" height={175} animation="wave" />
         </div>
 
-        <div className="flex-auto w-full h-full flex flex-col">
+        <div className="relative flex-auto w-full h-full flex flex-col">
           <h2 className="mb-1 text-xl">
             <Skeleton width="60%" variant="text" animation="wave" />
           </h2>
