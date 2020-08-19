@@ -23,7 +23,7 @@ export function ShareRow({ slug, title, subtitle }) {
         <FaLinkedin className="w-6 h-6" />
       </LinkedinShareButton>
       <a
-        rel="noreferrer"
+        rel="noopener noreferrer"
         target="_blank"
         title="Support link"
         aria-label="Senlima's support link"

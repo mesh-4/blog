@@ -42,28 +42,28 @@ export function Home() {
           </main>
           <nav className="relative mt-8 w-full flex items-center justify-between">
             <Link
-              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              className="p-0 md:px-4 md:py-2 md:border border-solid border-primary rounded-lg text-theme-primary"
               to="articles"
               title="Articles"
             >
               Articles
             </Link>
             <Link
-              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              className="p-0 md:px-4 md:py-2 md:border border-solid border-primary rounded-lg text-theme-primary"
               to="podcasts"
               title="Podcasts"
             >
               Podcasts
             </Link>
             <Link
-              className="px-4 py-2 border border-solid border-disabled rounded-lg text-secondary pointer-events-none"
+              className="p-0 md:px-4 md:py-2 md:border border-solid border-disabled rounded-lg text-secondary pointer-events-none"
               to="images"
               aria-label="Coming soon..."
             >
               Images
             </Link>
             <Link
-              className="px-4 py-2 border border-solid border-primary rounded-lg text-theme-primary"
+              className="p-0 md:px-4 md:py-2 md:border border-solid border-primary rounded-lg text-theme-primary"
               to="about"
               title="About"
             >
