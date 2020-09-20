@@ -1,34 +1,30 @@
 module.exports = {
-  purge: ['./src/**/*.css', './src/**/*.js', './src/**/*.jsx'],
-  target: 'relaxed',
-  prefix: '',
-  important: false,
-  separator: ':',
-  theme: {
-    screens: {
-      sm: '680px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-    },
-    primary: 'var(--senlima-primary-color)',
-    textColor: theme => ({
-      ...theme('colors'),
-      primary: 'var(--senlima-text-color)',
-      secondary: 'var(--senlima-text-secondary-color)',
-      'theme-primary': 'var(--senlima-primary-color)',
-    }),
-    borderColor: () => ({
-      primary: 'var(--senlima-primary-color)',
-      disabled: 'var(--senlima-text-secondary-color)',
-    }),
-    backgroundColor: theme => ({
-      ...theme('colors'),
-      dark: 'var(--senlima-dark-100)',
-      dark1: 'var(--senlima-dark-200)',
-      dark2: 'var(--senlima-dark-300)',
-    }),
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
-  corePlugins: {},
-  plugins: [],
-}
+  purge: ["./components/**/*.tsx", "./pages/**/*.tsx"],
+  theme: {
+    extend: {
+      spacing: {
+        28: "7rem",
+      },
+      letterSpacing: {
+        tighter: "-.04em",
+      },
+      lineHeight: {
+        tight: 1.2,
+      },
+      fontSize: {
+        "5xl": "2.5rem",
+        "6xl": "2.75rem",
+        "7xl": "4.5rem",
+        "8xl": "6.25rem",
+      },
+      boxShadow: {
+        small: "0 5px 10px rgba(0, 0, 0, 0.12)",
+        medium: "0 8px 30px rgba(0, 0, 0, 0.12)",
+      },
+    },
+  },
+};
