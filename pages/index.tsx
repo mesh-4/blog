@@ -1,18 +1,18 @@
-import Head from "next/head";
-import Link from "next/link";
+import Head from 'next/head'
+import Link from 'next/link'
 
-import Post from "types/post";
-import { getAllPosts } from "lib/api";
-import { DefaultLayout } from "@layouts/default";
+import Post from 'types/post'
+import { getAllPosts } from 'src/api'
+import { DefaultLayout } from 'layouts/default'
 
 type Props = {
-  allPosts: Post[];
-};
+  allPosts: Post[]
+}
 
 export default function Index({ allPosts }: Props) {
   const articleBlock = {
-    borderBottom: "1px solid #8a8a8a",
-  };
+    borderBottom: '1px solid #8a8a8a',
+  }
 
   return (
     <>
@@ -23,7 +23,10 @@ export default function Index({ allPosts }: Props) {
         <header className="h-56 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl font-extrabold">Senlima Sun's Blog</h1>
-            <h2>一些想法、點子和抱怨的聚集地</h2>
+            <h2>太過有感才會發，也有可能隨便發一些網頁技術的文章</h2>
+            <p className="text-xs font-thin">
+              您可以透過最下面的資訊和我聯絡，目前可接案
+            </p>
           </div>
         </header>
         <div className="w-4/5 max-w-2xl mx-auto">
@@ -46,19 +49,19 @@ export default function Index({ allPosts }: Props) {
         </div>
       </DefaultLayout>
     </>
-  );
+  )
 }
 
 export async function getStaticProps() {
   const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "content",
-    "excerpt",
-  ]);
+    'title',
+    'date',
+    'slug',
+    'content',
+    'excerpt',
+  ])
 
   return {
     props: { allPosts },
-  };
+  }
 }

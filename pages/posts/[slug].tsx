@@ -1,26 +1,26 @@
-import Head from "next/head";
-import ErrorPage from "next/error";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import ErrorPage from 'next/error'
+import { useRouter } from 'next/router'
 
-import { ArticleLayout } from "@layouts/article";
+import { ArticleLayout } from 'layouts/article'
 
-import { PostHeader } from "@components/post/header";
-import { PostBody } from "@components/post/body";
-import { PostSocial } from "@components/post/social";
+import { PostBody } from 'components/post/body'
+import { PostHeader } from 'components/post/header'
+import { PostSocial } from 'components/post/social'
 
-import { getPostBySlug, getAllPosts } from "lib/api";
-import markdownToHtml from "lib/markdownToHtml";
-import PostType from "types/post";
+import { getPostBySlug, getAllPosts } from 'src/api'
+import markdownToHtml from 'src/convert'
+import PostType from 'types/post'
 
 type Props = {
-  post: PostType;
-};
+  post: PostType
+}
 
 export default function Post({ post }: Props) {
-  const router = useRouter();
+  const router = useRouter()
 
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={404} />
   }
 
   return (
@@ -34,35 +34,37 @@ export default function Post({ post }: Props) {
               <title>{post.title} | Senlima Sun's Blog</title>
               <meta property="og:image" content={post.ogImage.url} />
             </Head>
+
             <PostHeader title={post.title} date={post.date} />
             <PostSocial
               url={`https://senlima.blog/posts/${post.slug}`}
               title={post.title}
             />
+
             <PostBody content={post.content} />
           </article>
         </>
       )}
     </ArticleLayout>
-  );
+  )
 }
 
 type Params = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
-    "title",
-    "date",
-    "slug",
-    "content",
-    "ogImage",
-    "coverImage",
-  ]);
-  const content = await markdownToHtml(post.content || "");
+    'title',
+    'date',
+    'slug',
+    'content',
+    'ogImage',
+    'coverImage',
+  ])
+  const content = await markdownToHtml(post.content || '')
 
   return {
     props: {
@@ -71,20 +73,20 @@ export async function getStaticProps({ params }: Params) {
         content,
       },
     },
-  };
+  }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
+  const posts = getAllPosts(['slug'])
 
   return {
-    paths: posts.map((posts) => {
+    paths: posts.map(posts => {
       return {
         params: {
           slug: posts.slug,
         },
-      };
+      }
     }),
     fallback: false,
-  };
+  }
 }

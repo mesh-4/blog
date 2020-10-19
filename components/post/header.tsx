@@ -1,7 +1,7 @@
 type Props = {
-  title: string;
-  date: string;
-};
+  title: string
+  date: string
+}
 
 export function PostHeader({ title, date }: Props) {
   return (
@@ -11,5 +11,5 @@ export function PostHeader({ title, date }: Props) {
       </h1>
       <time className="block mb-6 text-sm text-gray-600">{date}</time>
     </>
-  );
+  )
 }

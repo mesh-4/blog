@@ -1,9 +1,9 @@
-import { Meta } from "@components/meta";
-import { Footer } from "@components/footer";
+import { Meta } from 'components/meta'
+import { Footer } from 'components/footer'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export function DefaultLayout({ children }: Props) {
   return (
@@ -14,5 +14,5 @@ export function DefaultLayout({ children }: Props) {
       </div>
       <Footer />
     </>
-  );
+  )
 }

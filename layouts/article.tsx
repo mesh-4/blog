@@ -1,10 +1,10 @@
-import { Meta } from "@components/meta";
-import { Footer } from "@components/footer";
-import { Header } from "@components/header";
+import { Meta } from 'components/meta'
+import { Footer } from 'components/footer'
+import { Header } from 'components/header'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export function ArticleLayout({ children }: Props) {
   return (
@@ -18,5 +18,5 @@ export function ArticleLayout({ children }: Props) {
       </div>
       <Footer />
     </>
-  );
+  )
 }

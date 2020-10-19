@@ -1,11 +1,11 @@
-import { TwitterShareButton } from "react-share";
-import { FiTwitter } from "react-icons/fi";
-import { BiCoffeeTogo } from "react-icons/bi";
+import { FiTwitter } from 'react-icons/fi'
+import { BiCoffeeTogo } from 'react-icons/bi'
+import { TwitterShareButton } from 'react-share'
 
 type Props = {
-  url: string;
-  title: string;
-};
+  url: string
+  title: string
+}
 
 export function PostSocial({ url, title }: Props) {
   return (
@@ -22,5 +22,5 @@ export function PostSocial({ url, title }: Props) {
         <BiCoffeeTogo />
       </a>
     </aside>
-  );
+  )
 }
