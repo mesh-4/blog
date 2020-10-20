@@ -2,7 +2,7 @@
 title: '做了 2年全(偏前)端的感想'
 excerpt: '一言難盡，簡潔一點就是只能繼續只以理想驅動'
 coverImage: '/assets/cover.jpg'
-date: '2020-10-20'
+date: '2020-10-19'
 ogImage:
   url: '/assets/cover.jpg'
 ---
