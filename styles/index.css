@@ -13,3 +13,7 @@
 /* Stop purging. */
 
 @import './markdown.css';
+
+#nprogress .bar {
+  background: #000;
+}

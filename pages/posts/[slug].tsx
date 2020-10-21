@@ -32,6 +32,7 @@ export default function Post({ post }: Props) {
           <article className="mb-32">
             <Head>
               <title>{post.title} | Senlima Sun's Blog</title>
+              <meta name="description" content={post.excerpt} />
               <meta property="og:image" content={post.ogImage.url} />
             </Head>
 
@@ -56,10 +57,11 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const post = await getPostBySlug(params.slug, [
     'title',
     'date',
     'slug',
+    'excerpt',
     'content',
     'ogImage',
     'coverImage',
@@ -77,7 +79,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = await getAllPosts(['slug'])
 
   return {
     paths: posts.map(posts => {

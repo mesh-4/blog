@@ -11,7 +11,7 @@ export function ArticleLayout({ children }: Props) {
     <>
       <Meta />
       <div className="min-h-screen">
-        <main className="max-w-2xl mx-auto">
+        <main className="w-10/12 md:w-4/5 max-w-2xl mx-auto">
           <Header />
           {children}
         </main>

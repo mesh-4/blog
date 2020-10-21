@@ -20,10 +20,14 @@ export default function Index({ allPosts }: Props) {
         <Head>
           <title>Senlima Sun's Blog</title>
         </Head>
-        <header className="h-56 flex items-center justify-center">
+        <header className="w-4/5 max-w-2xl mx-auto h-56 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold">Senlima Sun's Blog</h1>
-            <h2>太過有感才會發，也有可能隨便發一些網頁技術的文章</h2>
+            <h1 className="text-3xl md:text-4xl font-extrabold">
+              Senlima Sun's Blog
+            </h1>
+            <h2 className="text-sm md:text-base">
+              太過有感才會發，也有可能隨便發一些網頁技術的文章
+            </h2>
             <p className="text-xs font-thin">
               您可以透過最下面的資訊和我聯絡，目前可接案
             </p>
@@ -53,7 +57,7 @@ export default function Index({ allPosts }: Props) {
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts([
+  const allPosts = await getAllPosts([
     'title',
     'date',
     'slug',
