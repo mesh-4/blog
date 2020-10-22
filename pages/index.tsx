@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Post from 'types/post'
 import { getAllPosts } from 'src/api'
+import { generateRSS } from 'src/rss'
 import { DefaultLayout } from 'layouts/default'
 
 type Props = {
@@ -19,6 +20,7 @@ export default function Index({ allPosts }: Props) {
       <DefaultLayout>
         <Head>
           <title>Senlima Sun's Blog</title>
+          <link rel="canonical" href="https://senlima.blog" />
         </Head>
         <header className="w-4/5 max-w-2xl mx-auto h-56 flex items-center justify-center">
           <div className="text-center">
@@ -64,6 +66,8 @@ export async function getStaticProps() {
     'content',
     'excerpt',
   ])
+
+  await generateRSS(allPosts)
 
   return {
     props: { allPosts },

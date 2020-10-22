@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Senlima Sun's Blog]]></title>
+        <description><![CDATA[太過有感才會發，也有可能隨便發一些網頁技術的文章]]></description>
+        <link>https://senlima.blog</link>
+        <image>
+            <url>https://senlima.blog/assets/cover.jpg</url>
+            <title>Senlima Sun&apos;s Blog</title>
+            <link>https://senlima.blog</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 22 Oct 2020 20:18:51 GMT</lastBuildDate>
+        <atom:link href="https://senlima.blog/rss.xml" rel="self" type="application/rss+xml"/>
+        <copyright><![CDATA[2020 Senlima Sun]]></copyright>
+        <language><![CDATA[zh-TW]]></language>
+        <managingEditor><![CDATA[senlima0430@gmail.com]]></managingEditor>
+        <webMaster><![CDATA[senlima0430@gmail.com]]></webMaster>
+        <ttl>60</ttl>
+        <item>
+            <title><![CDATA[關於一些 UI 框架]]></title>
+            <description><![CDATA[抱怨一些 UI框架，另外推薦我現在常用的]]></description>
+            <link>https://senlima.blog/posts/about-ui-framework</link>
+            <guid isPermaLink="false">about-ui-framework</guid>
+            <dc:creator><![CDATA[Senlima Sun]]></dc:creator>
+            <pubDate>Thu, 22 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[這個 blog]]></title>
+            <description><![CDATA[新的，內容更單一化，以及其他目前想做的]]></description>
+            <link>https://senlima.blog/posts/greeting</link>
+            <guid isPermaLink="false">greeting</guid>
+            <dc:creator><![CDATA[Senlima Sun]]></dc:creator>
+            <pubDate>Tue, 20 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[做了 2年全(偏前)端的感想]]></title>
+            <description><![CDATA[一言難盡，簡潔一點就是只能繼續只以理想驅動]]></description>
+            <link>https://senlima.blog/posts/no-really</link>
+            <guid isPermaLink="false">no-really</guid>
+            <dc:creator><![CDATA[Senlima Sun]]></dc:creator>
+            <pubDate>Mon, 19 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[舊 blog重溫]]></title>
+            <description><![CDATA[因為忘記卸載 pwa了，所以還看得到之前的內容，剛好就搬過來了]]></description>
+            <link>https://senlima.blog/posts/old-blog</link>
+            <guid isPermaLink="false">old-blog</guid>
+            <dc:creator><![CDATA[Senlima Sun]]></dc:creator>
+            <pubDate>Fri, 14 Aug 2020 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

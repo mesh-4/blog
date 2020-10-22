@@ -34,6 +34,10 @@ export default function Post({ post }: Props) {
               <title>{post.title} | Senlima Sun's Blog</title>
               <meta name="description" content={post.excerpt} />
               <meta property="og:image" content={post.ogImage.url} />
+              <link
+                rel="canonical"
+                href={`https://senlima.blog/${post.slug}`}
+              />
             </Head>
 
             <PostHeader title={post.title} date={post.date} />

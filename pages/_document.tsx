@@ -11,6 +11,12 @@ export default class MyDocument extends Document {
             data-website-id="3d450f27-000c-4d61-aa92-a111945e22f4"
             src="https://umami-gilt.vercel.app/umami.js"
           ></script>
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS feed for blog posts"
+            href="https://senlima.info/rss.xml"
+          />
         </Head>
         <body>
           <Main />

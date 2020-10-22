@@ -73,7 +73,6 @@ export function Meta() {
         href="/favicon-16x16.png"
       />
       <link rel="manifest" href="/manifest.json" />
-      <link rel="canonical" href="https://senlima.blog/" />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       <meta name="theme-color" content="#ffffff" />
