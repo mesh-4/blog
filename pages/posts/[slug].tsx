@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import ErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
 import { ArticleLayout } from 'layouts/article'
@@ -25,31 +25,33 @@ export default function Post({ post }: Props) {
 
   return (
     <ArticleLayout>
-      {router.isFallback ? (
-        <p>Loading…</p>
-      ) : (
-        <>
-          <article className="mb-32">
-            <Head>
-              <title>{post.title} | Senlima Sun's Blog</title>
-              <meta name="description" content={post.excerpt} />
-              <meta property="og:image" content={post.ogImage.url} />
-              <link
-                rel="canonical"
-                href={`https://senlima.blog/${post.slug}`}
-              />
-            </Head>
+      <NextSeo
+        title={`${post.title} | Senlima Sun's Blog`}
+        description={post.excerpt}
+        canonical={`https://senlima.blog/${post.slug}`}
+        openGraph={{
+          type: 'article',
+          site_name: "Senlima Sun's Blog",
+          title: post.title,
+          description: post.excerpt,
+          images: [{ url: post.ogImage.url }],
+          url: `https://senlima.blog/${post.slug}`,
+        }}
+        twitter={{
+          handle: '@senlima4',
+          site: '@senlima4',
+          cardType: 'summary_large_image',
+        }}
+      />
+      <article className="mb-32">
+        <PostHeader title={post.title} date={post.date} />
+        <PostSocial
+          title={post.title}
+          url={`https://senlima.blog/posts/${post.slug}`}
+        />
 
-            <PostHeader title={post.title} date={post.date} />
-            <PostSocial
-              url={`https://senlima.blog/posts/${post.slug}`}
-              title={post.title}
-            />
-
-            <PostBody content={post.content} />
-          </article>
-        </>
-      )}
+        <PostBody content={post.content} />
+      </article>
     </ArticleLayout>
   )
 }

@@ -9,13 +9,21 @@
             <link>https://senlima.blog</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 22 Oct 2020 20:18:51 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 09 Nov 2020 05:17:27 GMT</lastBuildDate>
         <atom:link href="https://senlima.blog/rss.xml" rel="self" type="application/rss+xml"/>
         <copyright><![CDATA[2020 Senlima Sun]]></copyright>
         <language><![CDATA[zh-TW]]></language>
         <managingEditor><![CDATA[senlima0430@gmail.com]]></managingEditor>
         <webMaster><![CDATA[senlima0430@gmail.com]]></webMaster>
         <ttl>60</ttl>
+        <item>
+            <title><![CDATA[現在在做的事]]></title>
+            <description><![CDATA[沒有工作，也已經快沒錢維生了，但無聲信還是拿一堆]]></description>
+            <link>https://senlima.blog/posts/no-work</link>
+            <guid isPermaLink="false">no-work</guid>
+            <dc:creator><![CDATA[Senlima Sun]]></dc:creator>
+            <pubDate>Mon, 09 Nov 2020 00:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[關於一些 UI 框架]]></title>
             <description><![CDATA[抱怨一些 UI框架，另外推薦我現在常用的]]></description>

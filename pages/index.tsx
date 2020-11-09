@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 import Post from 'types/post'
 import { getAllPosts } from 'src/api'
@@ -18,10 +18,24 @@ export default function Index({ allPosts }: Props) {
   return (
     <>
       <DefaultLayout>
-        <Head>
-          <title>Senlima Sun's Blog</title>
-          <link rel="canonical" href="https://senlima.blog" />
-        </Head>
+        <NextSeo
+          title="Senlima Sun's Blog"
+          description="一些紀錄和心路歷程"
+          canonical="https://senlima.blog"
+          openGraph={{
+            type: 'website',
+            url: 'https://senlima.blog',
+            title: "Senlima Sun's Blog",
+            description: '一些紀錄和心路歷程',
+            images: [{ url: '/assets/cover.jpg' }],
+            site_name: "Senlima Sun's Blog",
+          }}
+          twitter={{
+            handle: '@senlima4',
+            site: '@senlima4',
+            cardType: 'summary_large_image',
+          }}
+        />
         <header className="w-4/5 max-w-2xl mx-auto h-56 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl md:text-4xl font-extrabold">
@@ -35,7 +49,7 @@ export default function Index({ allPosts }: Props) {
             </p>
           </div>
         </header>
-        <div className="w-4/5 max-w-2xl mx-auto">
+        <main className="w-4/5 max-w-2xl mx-auto mb-12">
           {allPosts &&
             allPosts.map((post, i) => (
               <article
@@ -52,7 +66,7 @@ export default function Index({ allPosts }: Props) {
                 <section>{post.excerpt}</section>
               </article>
             ))}
-        </div>
+        </main>
       </DefaultLayout>
     </>
   )

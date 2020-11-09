@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
             rel="alternate"
             type="application/rss+xml"
             title="RSS feed for blog posts"
-            href="https://senlima.info/rss.xml"
+            href="https://senlima.blog/rss.xml"
           />
         </Head>
         <body>

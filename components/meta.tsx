@@ -79,9 +79,6 @@ export function Meta() {
         content="/favicons/ms-icon-144x144.png"
       />
       <meta name="theme-color" content="#ffffff" />
-
-      <meta name="description" content="一些紀錄和心路歷程" />
-      <meta property="og:image" content="/assets/cover.jpg" />
     </Head>
   )
 }
