@@ -1,20 +1,16 @@
-import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 
 import Post from 'types/post'
 import { getAllPosts } from 'src/api'
 import { generateRSS } from 'src/rss'
 import { DefaultLayout } from 'layouts/default'
+import { PostItem } from 'components/post/item'
 
 type Props = {
   allPosts: Post[]
 }
 
 export default function Index({ allPosts }: Props) {
-  const articleBlock = {
-    borderBottom: '1px solid #8a8a8a',
-  }
-
   return (
     <>
       <DefaultLayout>
@@ -52,19 +48,11 @@ export default function Index({ allPosts }: Props) {
         <main className="w-4/5 max-w-2xl mx-auto mb-12">
           {allPosts &&
             allPosts.map((post, i) => (
-              <article
+              <PostItem
                 key={post.slug}
-                className="py-6"
-                style={i === allPosts.length - 1 ? {} : articleBlock}
-              >
-                <Link href={`/posts/${post.slug}`}>
-                  <a>
-                    <h3 className="text-xl font-bold">{post.title}</h3>
-                  </a>
-                </Link>
-                <time className="text-sm text-gray-600">{post.date}</time>
-                <section>{post.excerpt}</section>
-              </article>
+                post={post}
+                isLast={i === allPosts.length - 1}
+              />
             ))}
         </main>
       </DefaultLayout>
