@@ -1,5 +1,6 @@
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 // @ts-ignore
 import hydrate from 'next-mdx-remote/hydrate'
 
@@ -7,7 +8,11 @@ import { ArticleLayout } from 'layouts/article'
 
 import { PostHeader } from 'components/post/header'
 import { PostSocial } from 'components/post/social'
-import { MDXProvider } from 'components/MDXProvider'
+
+const DynamicMDX = dynamic(async () => {
+  const mod = await import('components/MDXProvider')
+  return mod.MDXProvider
+})
 
 type Post = {
   data: Record<string, any>
@@ -56,7 +61,7 @@ export default function Post({ post }: Props) {
           title={post.data.title}
           url={`https://senlima.blog/posts/${router.pathname}`}
         />
-        <MDXProvider>{content}</MDXProvider>
+        <DynamicMDX>{content}</DynamicMDX>
       </article>
     </ArticleLayout>
   )
