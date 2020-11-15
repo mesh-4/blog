@@ -2,15 +2,63 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 
-const postsDirectory = join(process.cwd(), '_posts')
+const postsDirectory = join(process.cwd(), 'posts')
 
-export async function getPostSlugs() {
+export async function getFilenames() {
   return await fs.promises.readdir(postsDirectory)
 }
 
+export async function getAllPostSlugs() {
+  const fileNames = await getFilenames()
+  return fileNames.map(filename => {
+    return {
+      params: {
+        slug: filename.replace('.mdx', ''),
+      },
+    }
+  })
+}
+
+export async function getAllPosts() {
+  const filenames = await getFilenames()
+  const posts = await Promise.all(
+    filenames.map(async filename => {
+      const slug = filename.replace('.mdx', '')
+      const fullPath = join(postsDirectory, filename)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+      const { data } = matter(fileContents)
+
+      return {
+        slug,
+        data,
+      }
+    })
+  )
+
+  return posts.sort((a, b) => {
+    if (new Date(a.data.date) < new Date(b.data.date)) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+}
+
+export async function getPost(slug: string) {
+  const fullPath = join(postsDirectory, `${slug}.mdx`)
+  const postContent = await fs.promises.readFile(fullPath, 'utf8')
+  const { data, content } = matter(postContent)
+
+  return {
+    data,
+    content,
+  }
+}
+
 export async function getPostBySlug(slug: string, fields: string[] = []) {
-  const realSlug = slug.replace(/\.md$/, '')
-  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const realSlug = slug.replace(/\.mdx$/, '')
+  const fullPath = join(postsDirectory, `${realSlug}.mdx`)
   const fileContents = await fs.promises.readFile(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
@@ -27,13 +75,4 @@ export async function getPostBySlug(slug: string, fields: string[] = []) {
   })
 
   return items
-}
-
-export async function getAllPosts(fields: string[] = []) {
-  const slugs = await getPostSlugs()
-  const posts = await Promise.all(
-    slugs.map(async slug => await getPostBySlug(slug, fields))
-  )
-
-  return posts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
 }

@@ -1,6 +1,6 @@
-import { Meta } from 'components/meta'
-import { Footer } from 'components/footer'
-import { Header } from 'components/header'
+import { Box, Center } from '@chakra-ui/react'
+
+import { Header } from 'components/common/header'
 
 type Props = {
   children: React.ReactNode
@@ -9,14 +9,15 @@ type Props = {
 export function ArticleLayout({ children }: Props) {
   return (
     <>
-      <Meta />
-      <div className="min-h-screen">
-        <main className="w-10/12 md:w-4/5 max-w-2xl mx-auto">
+      <Box minH="100vh" pos="relative">
+        <Box as="main" mx="auto" pos="relative" w="90%" maxW="680px" py="5vh">
           <Header />
           {children}
-        </main>
-      </div>
-      <Footer />
+        </Box>
+      </Box>
+      <Center w="100%" h="100px">
+        © 2020. All rights reserved.
+      </Center>
     </>
   )
 }

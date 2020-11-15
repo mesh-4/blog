@@ -1,0 +1,126 @@
+---
+title: '關於樣式框架'
+date: '2020-10-22'
+excerpt: '抱怨一些 UI和 CSS框架，另外推薦我現在常用的'
+---
+
+用過一些 UI 和 CSS 框架，雖然大部分的框架都還可以，能解決各個情境的需求：
+形象網站的特別效果、後台系統的介面排版、呈現給各式各樣客戶的前台組件。
+都還不錯，但是在現在越來越多需要客制化樣式的時候，大多數框架很難應付其需求的上下限和維護成本的問題。
+
+在 CSS 框架上，最主要使用過 Atomic CSS 和 Tailwind CSS，可能是因為 Atomic CSS 整個生態圈沒有太多擴展和活躍，
+所以現在大部分人會推薦 Tailwind CSS，在這裡會主要講 Tailwind CSS 的一些問題：
+
+1. 當你的 width 或是 height 有指定的值，使用 unit base 很麻煩，但特地獨立出來一個 style 又感覺沒有必要。
+
+```html
+<!-- how to deal with 75px, 3.5vh, calc(100% - 34px) -->
+<div class="w-4"></div>
+```
+
+2. 當組件需要自適應樣式的時候，你只能無力地看著它慢慢越變越長直至 120 多字
+
+3. line-heigt? leading? 這樣的命名並沒有比較明瞭，然後就會很常浪費不必要的時間去查一些不確定的值。
+
+「一眼就被看出來套框架」的點都是因為 UI 框架將組件的「樣式」限制住了，當然這就是 UI 框架的「目的」，
+所以除非其樣式太過難看或是不易使用，不然只要提供一些客制方法應該都能滿足需求才對。
+
+但是 Tailwind CSS 限制住的是「寫法」，當然這就是 CSS 框架的目的，但是它並不能太恰當地應付客制化的上下限，
+也不能簡潔化一個繁雜需求的設計語法，在我現在的開發中，我並不會把 CSS 框架作為一個選項。
+
+不過當使用 UI 框架的時候，似乎每一個框架都很難在「全面客制」和「依賴(框架的)原生」之間達到平衡，大部分都是因為以下幾點：
+
+1. 組件的 props 沒有提供全面的選項，提供的客制方法也會破壞檔案架構
+
+面對一個 180 行但是只有 35 行是組件本體還是分成 small.jsx 和 small.style.js 但是 small.style.js 只有 7 行。
+
+2. props 命名不明確，增加不必要的成本
+
+gutterBottom、elevation、margin(not for css margin)不僅要多一些查文檔的時間，還有可能被誤導
+
+3. 因為組件的樣式使得其可使用場景受限
+
+antd without any css override
+
+4. 強制從無開始建構，極大的成本
+
+當你不滿意 material ui 或 antd 那些一成不變的東西時，你可以選擇用 styled system，
+不過你最好要有充足的時間，打造一個相較全面的元件庫的樣式設計、測試的流程的成本不比以上框架的各種客制成本低。
+
+所以整理出來只要有個 UI 框架能做到以下幾點在我眼裡就代表「好」的框架：
+
+1. 自有 props 以及客制化樣式 props 能夠在 component 的 tag 中被管理
+
+2. 客制化樣式的 props 大部分能夠與其 css 值有直接對應
+
+3. 在大規模客制化的時候，其客制設定能以一致的方式被歸類到一個檔案夾中
+
+4. 可以滿足亮暗模式的切換
+
+5. 能在不用太多額外設定下與第三方工具套件銜接
+
+6. 正常活躍度以及更新速度
+
+7. 拜託，現在已經 2020 了，支援 Typescript 沒有那麼難
+
+### 噢天！如果我跟你說現在就有一個了呢
+
+沒錯，就是現在！ **@chakra-ui/react**正式發表了 1.0 版本，基於 styled-system 所建立起來的 UI 框架，
+提供了組件樣式外，也依靠了 styled-system 以及 emotion 讓你可以直觀的客制化你的組件：
+
+```jsx
+const Item = () => {
+  return (
+    <Box
+      as="article"
+      width="100%"
+      maxW={
+        // it is responsive
+        { base: '375px', lg: '768px' }
+      }
+    >
+      <Heading as="h1" size="sm">
+        Title
+      </Heading>
+    </Box>
+  )
+}
+```
+
+當你使用 framer-motion 的時候，組件可以透過各種 Transition 的組件去使用，
+你可以選擇透過組件提供的方式或是用 motion.\*的方式去實現：
+
+```jsx
+const Item = () => {
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  }
+  return (
+    <Box width="100%">
+      <Fade
+        in
+        {/*
+          you can treat it like motion.div
+
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+        */}>
+        <Heading as="h1" size="sm">
+          Fade in
+        </Heading>
+      </Fade>
+    </Box>
+  )
+}
+```
+
+你可以依照這個[文檔](https://chakra-ui.com/docs/theming/customize-theme)作為標準來有規模地管理你所有的客制元件或是全局樣式。
+
+你可以透過 cookie 或是 localStorage 去管理亮暗模式，在組件中使用 useColorMode 這個 hook 去提取和更換現在的亮暗模式。
+就這樣！你不需要其他落落長的設定就能正常地使用這些功能。
+
+如今這個框架才剛發佈 1.0 就能有如此多對開發者友善的功能，從 rc6 開始使用到現在都非常順暢，
+這是一個有著非常大的潛力的 UI 框架，搭配著活躍的社群以及堅固的使用基礎再加上平緩的學習曲線，
+非常期待後續的更新也推薦看到這篇文章的你能試用這個框架。

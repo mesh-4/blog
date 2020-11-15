@@ -1,15 +1,22 @@
+import { Heading, Text } from '@chakra-ui/react'
 type Props = {
   title: string
+  excerpt: string
   date: string
 }
 
-export function PostHeader({ title, date }: Props) {
+export function PostHeader({ title, excerpt, date }: Props) {
   return (
     <>
-      <h1 className="mb-2 text-3xl font-bold tracking-tighter leading-tight md:leading-none text-left">
+      <Heading as="h1" mt="2.5vh">
         {title}
-      </h1>
-      <time className="block mb-6 text-sm text-gray-600">{date}</time>
+      </Heading>
+      <Heading as="h2" size="md" fontWeight="400">
+        {excerpt}
+      </Heading>
+      <Text as="time" fontSize="0.85rem">
+        {date}
+      </Text>
     </>
   )
 }

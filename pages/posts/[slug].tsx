@@ -1,41 +1,44 @@
-import ErrorPage from 'next/error'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
+// @ts-ignore
+import hydrate from 'next-mdx-remote/hydrate'
 
 import { ArticleLayout } from 'layouts/article'
 
-import { PostBody } from 'components/post/body'
 import { PostHeader } from 'components/post/header'
 import { PostSocial } from 'components/post/social'
+import { MDXProvider } from 'components/MDXProvider'
 
-import { getPostBySlug, getAllPosts } from 'src/api'
-import markdownToHtml from 'src/convert'
-import PostType from 'types/post'
+type Post = {
+  data: Record<string, any>
+  content: string
+}
 
 type Props = {
-  post: PostType
+  post: Post
 }
 
 export default function Post({ post }: Props) {
   const router = useRouter()
-
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
-  }
+  const content = hydrate(post.content)
 
   return (
     <ArticleLayout>
       <NextSeo
-        title={`${post.title} | Senlima Sun's Blog`}
-        description={post.excerpt}
-        canonical={`https://senlima.blog/${post.slug}`}
+        title={`${post.data.title} | Senlima Sun's Blog`}
+        description={post.data.excerpt}
+        canonical={`https://senlima.blog${router.pathname}`}
         openGraph={{
           type: 'article',
           site_name: "Senlima Sun's Blog",
-          title: post.title,
-          description: post.excerpt,
-          images: [{ url: post.ogImage.url }],
-          url: `https://senlima.blog/${post.slug}`,
+          url: `https://senlima.blog${router.pathname}`,
+          title: post.data.title,
+          description: post.data.excerpt,
+          images: [
+            {
+              url: 'https://senlima.blog/assets/cover.jpg',
+            },
+          ],
         }}
         twitter={{
           handle: '@senlima4',
@@ -43,14 +46,17 @@ export default function Post({ post }: Props) {
           cardType: 'summary_large_image',
         }}
       />
-      <article className="mb-32">
-        <PostHeader title={post.title} date={post.date} />
-        <PostSocial
-          title={post.title}
-          url={`https://senlima.blog/posts/${post.slug}`}
+      <article>
+        <PostHeader
+          title={post.data.title}
+          excerpt={post.data.excerpt}
+          date={post.data.date}
         />
-
-        <PostBody content={post.content} />
+        <PostSocial
+          title={post.data.title}
+          url={`https://senlima.blog/posts/${router.pathname}`}
+        />
+        <MDXProvider>{content}</MDXProvider>
       </article>
     </ArticleLayout>
   )
@@ -62,39 +68,30 @@ type Params = {
   }
 }
 
-export async function getStaticProps({ params }: Params) {
-  const post = await getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'excerpt',
-    'content',
-    'ogImage',
-    'coverImage',
-  ])
-  const content = await markdownToHtml(post.content || '')
+// @ts-ignore
+import renderToString from 'next-mdx-remote/render-to-string'
 
+import { getPost, getAllPostSlugs } from 'src/api'
+
+export async function getStaticPaths() {
+  const paths = await getAllPostSlugs()
   return {
-    props: {
-      post: {
-        ...post,
-        content,
-      },
-    },
+    paths,
+    fallback: false,
   }
 }
 
-export async function getStaticPaths() {
-  const posts = await getAllPosts(['slug'])
-
+export async function getStaticProps({ params }: Params) {
+  const { data, content } = await getPost(params.slug)
+  const mdxSource = await renderToString(content, {
+    scope: data,
+  })
   return {
-    paths: posts.map(posts => {
-      return {
-        params: {
-          slug: posts.slug,
-        },
-      }
-    }),
-    fallback: false,
+    props: {
+      post: {
+        data,
+        content: mdxSource,
+      },
+    },
   }
 }
