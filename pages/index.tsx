@@ -5,7 +5,7 @@ import {
   Heading,
   VStack,
   StackDivider,
-  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import crs from 'crypto-random-string'
 
@@ -23,7 +23,7 @@ type Props = {
 }
 
 export default function Index({ allPosts }: Props) {
-  const { colorMode } = useColorMode()
+  const dividerColor = useColorModeValue('black', 'white')
   return (
     <>
       <NextSeo
@@ -60,21 +60,20 @@ export default function Index({ allPosts }: Props) {
           divider={
             <StackDivider
               key={crs({ length: 5 })}
-              borderColor={colorMode === 'light' ? 'black' : 'white'}
+              borderColor={dividerColor}
             />
           }
           spacing="0.5rem"
           align="stretch"
         >
-          {allPosts &&
-            allPosts.map((post, i) => (
-              <PostItem
-                key={post.slug}
-                slug={post.slug}
-                post={post.data}
-                index={i}
-              />
-            ))}
+          {allPosts?.map((post, i) => (
+            <PostItem
+              key={post.slug}
+              slug={post.slug}
+              post={post.data}
+              index={i}
+            />
+          ))}
         </VStack>
       </DefaultLayout>
     </>
