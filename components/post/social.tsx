@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { FiTwitter } from 'react-icons/fi'
 import { BiCoffeeTogo } from 'react-icons/bi'
 import { TwitterShareButton } from 'react-share'
@@ -16,6 +16,7 @@ export function PostSocial({ url, title }: Props) {
         title={title}
         style={{ marginRight: '1em' }}
       >
+        <Box d="none">twitter</Box>
         <FiTwitter />
       </TwitterShareButton>
       <a
@@ -23,6 +24,7 @@ export function PostSocial({ url, title }: Props) {
         rel="noopener noreferrer"
         href="https://www.buymeacoffee.com/senlima"
       >
+        <Box d="none">buy me a coffee</Box>
         <BiCoffeeTogo />
       </a>
     </Flex>
