@@ -24,7 +24,7 @@ export function PostItem({ slug, post, index }: PropTypes) {
         <Link
           d="block"
           w="min-content"
-          href={`http://localhost:3000/posts/${slug}`}
+          href={`/posts/${slug}`}
           fontSize="1.25rem"
           fontWeight="600"
         >
