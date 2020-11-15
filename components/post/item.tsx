@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Link } from '@chakra-ui/react'
+import { Box, Heading, Text, Link, useColorModeValue } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 type PropTypes = {
@@ -8,6 +8,7 @@ type PropTypes = {
 }
 
 export function PostItem({ slug, post, index }: PropTypes) {
+  const timeColor = useColorModeValue('gray.500', 'gray.300')
   const variants = {
     hidden: () => ({
       opacity: 0,
@@ -32,7 +33,7 @@ export function PostItem({ slug, post, index }: PropTypes) {
             {post.title}
           </Heading>
         </Link>
-        <Text as="time" color="gray.300" fontSize="0.85rem">
+        <Text as="time" color={timeColor} fontSize="0.85rem">
           {post.date}
         </Text>
         <Text as="section" mt="0.5rem">
