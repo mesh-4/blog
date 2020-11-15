@@ -6,9 +6,9 @@ import {
   Link,
   Code,
   Divider,
+  ListItem,
   OrderedList,
   UnorderedList,
-  ListItem,
 } from '@chakra-ui/react'
 
 type Props = {

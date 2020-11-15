@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import hydrate from 'next-mdx-remote/hydrate'
 
 import { ArticleLayout } from 'layouts/article'
-
 import { PostHeader } from 'components/post/header'
 import { PostSocial } from 'components/post/social'
 

@@ -27,6 +27,8 @@ export function ASide() {
       <IconButton
         variant="unstyled"
         ml="1em"
+        w="min-content"
+        minW="0px"
         aria-label="switch color mode"
         colorScheme={colorMode === 'light' ? 'black' : 'light'}
         icon={colorMode === 'light' ? <FaRegMoon /> : <FaRegSun />}
