@@ -8,7 +8,7 @@ type PropTypes = {
 }
 
 export function PostItem({ slug, post, index }: PropTypes) {
-  const timeColor = useColorModeValue('gray.500', 'gray.300')
+  const timeColor = useColorModeValue('gray.700', 'gray.300')
   const variants = {
     hidden: () => ({
       opacity: 0,
