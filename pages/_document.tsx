@@ -28,9 +28,9 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <script
             async
-            defer
-            data-website-id="3d450f27-000c-4d61-aa92-a111945e22f4"
-            src="https://umami-gilt.vercel.app/umami.js"
+            src="https://ackee.senlima0430.vercel.app/tracker.js"
+            data-ackee-server="https://ackee.senlima0430.vercel.app"
+            data-ackee-domain-id="88273618-ce06-4d6b-8596-094a2d2f4bde"
           ></script>
           <link
             rel="alternate"

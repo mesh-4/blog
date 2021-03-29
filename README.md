@@ -9,4 +9,6 @@
 - umami for user analytics
 - AWS RDS for umami storage
 
-[lighthouse test](./lighthouse.png)
+## lighthouse
+
+![lighthouse test](https://raw.githubusercontent.com/senlima0430/blog/master/lighthouse.png)

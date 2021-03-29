@@ -1,7 +1,20 @@
-import { Flex } from '@chakra-ui/react'
-import { FiTwitter } from 'react-icons/fi'
-import { BiCoffeeTogo } from 'react-icons/bi'
-import { TwitterShareButton } from 'react-share'
+import {
+  Box,
+  Text,
+  HStack,
+  Button,
+  IconButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  useClipboard,
+} from '@chakra-ui/react'
+import { FaLink, FaTwitter, FaFacebook } from 'react-icons/fa'
+import { TwitterShareButton, FacebookShareButton } from 'react-share'
 
 type Props = {
   url: string
@@ -9,23 +22,48 @@ type Props = {
 }
 
 export function PostSocial({ url, title }: Props) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { onCopy } = useClipboard(url)
+
   return (
-    <Flex as="aside" my="2.5vh" align="center" fontSize="0.9rem">
-      <TwitterShareButton
-        url={url}
-        title={title}
-        style={{ marginRight: '1em' }}
-      >
-        <FiTwitter />
-      </TwitterShareButton>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.buymeacoffee.com/senlima"
-        aria-label="buy author a coffee(support link)"
-      >
-        <BiCoffeeTogo />
-      </a>
-    </Flex>
+    <Box my="2vh">
+      <Button size="sm" onClick={onOpen}>
+        分享文章
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>分享該文章</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text mb="1em">
+              可以透過複製連結或是轉至 twitter或 facebook平台
+            </Text>
+            <HStack as="aside" mb="1rem" spacing="1rem" fontSize="1.25em">
+              <IconButton
+                variant="unstyle"
+                size="sm"
+                aria-label="copy link"
+                fontSize="20px"
+                icon={<FaLink style={{ margin: '0 auto' }} />}
+                onClick={onCopy}
+              />
+              <TwitterShareButton
+                url={url}
+                title={title}
+                via="senlima4"
+                style={{ marginRight: '11px' }}
+              >
+                <FaTwitter />
+              </TwitterShareButton>
+              <FacebookShareButton url={url}>
+                <FaFacebook />
+              </FacebookShareButton>
+            </HStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </Box>
   )
 }

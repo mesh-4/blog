@@ -1,12 +1,11 @@
 import { Box, Center } from '@chakra-ui/react'
 
-type Props = {
-  children: React.ReactNode
-}
+import { SEO } from 'components/common/seo'
 
-export function DefaultLayout({ children }: Props) {
+export function DefaultLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <SEO />
       <Box minH="100vh" pos="relative">
         <Box as="main" mx="auto" pos="relative" w="90%" maxW="680px" py="5vh">
           {children}

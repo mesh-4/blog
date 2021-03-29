@@ -1,75 +1,41 @@
-import { NextSeo } from 'next-seo'
-import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 // @ts-ignore
 import hydrate from 'next-mdx-remote/hydrate'
 
 import { ArticleLayout } from 'layouts/article'
 import { PostHeader } from 'components/post/header'
 import { PostSocial } from 'components/post/social'
+import { components } from 'components/mdx/components'
 
 const DynamicMDX = dynamic(async () => {
-  const mod = await import('components/MDXProvider')
+  const mod = await import('components/mdx/provider')
   return mod.MDXProvider
 })
 
-type Post = {
-  data: Record<string, any>
-  content: string
-}
-
 type Props = {
-  post: Post
+  mdxSource: string
+  frontMatter: Record<string, any>
 }
 
-export default function Post({ post }: Props) {
+export default function Post({ frontMatter, mdxSource }: Props) {
   const router = useRouter()
-  const content = hydrate(post.content)
+  const content = hydrate(mdxSource, { components })
 
   return (
-    <ArticleLayout>
-      <NextSeo
-        title={`${post.data.title} | Senlima Sun's Blog`}
-        description={post.data.excerpt}
-        canonical={`https://senlima.blog${router.pathname}`}
-        openGraph={{
-          type: 'article',
-          site_name: "Senlima Sun's Blog",
-          url: `https://senlima.blog${router.pathname}`,
-          title: post.data.title,
-          description: post.data.excerpt,
-          images: [
-            {
-              url: 'https://senlima.blog/assets/cover.jpg',
-            },
-          ],
-        }}
-        twitter={{
-          handle: '@senlima4',
-          site: '@senlima4',
-          cardType: 'summary_large_image',
-        }}
+    <ArticleLayout frontMatter={frontMatter}>
+      <PostHeader
+        date={frontMatter.date}
+        title={frontMatter.title}
+        excerpt={frontMatter.excerpt}
       />
-      <article>
-        <PostHeader
-          title={post.data.title}
-          excerpt={post.data.excerpt}
-          date={post.data.date}
-        />
-        <PostSocial
-          title={post.data.title}
-          url={`https://senlima.blog/posts/${router.pathname}`}
-        />
-        <DynamicMDX>{content}</DynamicMDX>
-      </article>
+      <PostSocial
+        title={frontMatter.title}
+        url={`https://senlima.blog/posts/${router.query.slug}`}
+      />
+      <DynamicMDX>{content}</DynamicMDX>
     </ArticleLayout>
   )
-}
-
-type Params = {
-  params: {
-    slug: string
-  }
 }
 
 // @ts-ignore
@@ -85,17 +51,17 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }: Params) {
+export async function getStaticProps({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const { data, content } = await getPost(params.slug)
-  const mdxSource = await renderToString(content, {
-    scope: data,
-  })
+  const mdxSource = await renderToString(content)
   return {
     props: {
-      post: {
-        data,
-        content: mdxSource,
-      },
+      mdxSource,
+      frontMatter: data,
     },
   }
 }

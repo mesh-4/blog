@@ -91,21 +91,9 @@ const Item = () => {
 
 ```jsx
 const Item = () => {
-  const variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  }
   return (
     <Box width="100%">
-      <Fade
-        in
-        {/*
-          you can treat it like motion.div
-
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-        */}>
+      <Fade in>
         <Heading as="h1" size="sm">
           Fade in
         </Heading>
