@@ -19,7 +19,9 @@
     "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.72",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
+    "react-audio-player": "^0.16.1",
     "react-dom": "^17.0.1"
   },
   "browserslist": {
@@ -33,5 +35,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 80,
+    "endOfLine": "lf",
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "jsxSingleQuote": false,
+    "jsxBracketSameLine": false
   }
 }

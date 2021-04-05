@@ -6,6 +6,8 @@ tags: [react, relay]
 
 原本是用 Apollo GraphQL 在開發的，有鑑於 GraphQL 是由 Facebook 開發的，所以自然對於 Relay 感到好奇。
 
+<!--truncate-->
+
 相比於 Apollo GraphQL 的自由性以及高社群活躍性，Relay 的學習曲線不僅高，而且也找不到什麼可以用的專案參考，
 而且 Facebook 在三月初才剛推出 [relay hooks](https://relay.dev/blog/2021/03/09/introducing-relay-hooks)，整個 documentation 的排列和內容都還有許多可以改進的內容。
 
