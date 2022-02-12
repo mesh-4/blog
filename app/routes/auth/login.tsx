@@ -16,7 +16,7 @@ import { authenticator, supabaseStrategy } from '~/utils/auth.server'
 import { sessionStorage } from '~/utils/session.server'
 
 export const action: ActionFunction = async ({ request }) => {
-  await authenticator.authenticate('sb', request, {
+  return await authenticator.authenticate('sb', request, {
     successRedirect: '/dashboard',
     failureRedirect: '/',
   })

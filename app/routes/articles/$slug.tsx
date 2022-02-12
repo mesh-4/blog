@@ -1,6 +1,6 @@
 import type { LoaderFunction, MetaFunction } from 'remix'
-import { json, useLoaderData } from 'remix'
-import { Heading, Text, Box } from '@chakra-ui/react'
+import { json, useCatch, useLoaderData, Link } from 'remix'
+import { Heading, Button, Text, Box } from '@chakra-ui/react'
 
 import { supabase } from '~/utils/supabase.server'
 import type { Article } from '~/types.d'
@@ -24,11 +24,21 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     .filter('slug', 'eq', slug)
     .single()
 
+  if (error) {
+    console.log(error.message)
+  }
+
+  if (!data) throw new Response('Not Found', { status: 404 })
   return json<LoaderData>({ article: data })
 }
 
+const NOT_FOUND_META = {
+  title: 'Article Not Found',
+  description: 'Go back to home page',
+}
+
 export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
-  const { article } = data
+  const article = data?.article || NOT_FOUND_META
 
   return {
     title: `${article.title} | Senlima Sun's blog`,
@@ -52,7 +62,7 @@ export default function Article() {
   return (
     <CommonLayout>
       <Box
-        w="95%"
+        w="90%"
         maxW={{ base: '375px', sm: '768px', md: '968px', lg: '1024' }}
         mx="auto"
       >
@@ -66,6 +76,43 @@ export default function Article() {
         <Box as="main" mt={8}>
           {article.content && <MarkdownRenderer content={article.content} />}
         </Box>
+      </Box>
+    </CommonLayout>
+  )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch()
+
+  return (
+    <CommonLayout>
+      <Box
+        w="90%"
+        maxW={{ base: '375px', sm: '768px', md: '968px', lg: '1024' }}
+        mx="auto"
+      >
+        {caught.status === 404 ? (
+          <>
+            <Heading as="h1" my={4}>
+              Not Found Article
+            </Heading>
+            <Link to="/">
+              <Button mx="auto">Back to home page</Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Heading as="h1" my={4}>
+              Something went wrong
+            </Heading>
+            <Text as="h2" color="gray.600">
+              {caught.status}
+            </Text>
+            <Text as="h2" color="gray.600">
+              {caught.data}
+            </Text>
+          </>
+        )}
       </Box>
     </CommonLayout>
   )

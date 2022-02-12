@@ -46,7 +46,7 @@ export default function ArticleList() {
     <CommonLayout>
       <Box
         mx="auto"
-        w="95%"
+        w="90%"
         maxW={{ base: '375px', sm: '768px', md: '968px', lg: '1024' }}
       >
         <VStack as="header" mt={4} mb={6} spacing={2} align="flex-start">

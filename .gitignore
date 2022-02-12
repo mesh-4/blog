@@ -20,3 +20,5 @@ public/build
 api/_build
 
 .env
+
+tests/state.json
