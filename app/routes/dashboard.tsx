@@ -11,7 +11,7 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await supabaseStrategy.checkSession(request, {
-    failureRedirect: '/login',
+    failureRedirect: '/',
   })
 
   return json<LoaderData>({ email: session.user?.email })
