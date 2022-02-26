@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { json, useLoaderData, Link } from 'remix'
-import { Box, Text, Flex, VStack, Heading } from '@chakra-ui/react'
+import { Box, Text, Flex, Button, VStack, Heading } from '@chakra-ui/react'
 
 import type { LoaderFunction } from 'remix'
 
@@ -19,23 +19,15 @@ export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url)
   const q = url.searchParams.get('q')
 
-  if (q) {
-    const { data, count } = await supabase
-      .from<Article>('article')
-      .select('*', { count: 'exact' })
-      .filter('is_public', 'eq', true)
-      .textSearch('title', `'${q}'`)
-      .order('created_at', { ascending: true })
-
-    return json<LoaderData>({ articles: data || [], count: count || 0, q })
-  }
-
-  const { data, count } = await supabase
+  const query = supabase
     .from<Article>('article')
     .select('*', { count: 'exact' })
     .filter('is_public', 'eq', true)
     .order('created_at', { ascending: true })
 
+  if (typeof q === 'string' && q.length > 0) query.textSearch('title', `'${q}'`)
+
+  const { data, count } = await query
   return json<LoaderData>({ articles: data || [], count: count || 0, q: '' })
 }
 
@@ -59,12 +51,21 @@ export default function ArticleList() {
             文章列表
           </Heading>
 
-          {articles.length === 0 && <Text>No articles found.</Text>}
+          {articles.length === 0 && (
+            <Flex flexDir="column" align="center" justify="center" h="200px">
+              <Text mb={2}>No articles found.</Text>
+              <Link to="/">
+                <Button size="sm" colorScheme="teal">
+                  Back to home
+                </Button>
+              </Link>
+            </Flex>
+          )}
 
           {articles.length > 0 &&
             articles.map(article => (
-              <Box key={article.id} mb={2} w="full" h="75px">
-                <Link to={`/articles/${article.slug}`}>
+              <Link key={article.id} to={`/articles/${article.slug}`}>
+                <Box mb={2} w="full" h="75px">
                   <Flex p={1} h="full" flexDir="column">
                     <Text fontWeight="semibold" lineHeight="4">
                       {article.title}
@@ -76,8 +77,8 @@ export default function ArticleList() {
                       {format(new Date(article.created_at), 'yyyy-MM-dd')}
                     </Text>
                   </Flex>
-                </Link>
-              </Box>
+                </Box>
+              </Link>
             ))}
         </Box>
       </Box>

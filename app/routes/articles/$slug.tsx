@@ -24,9 +24,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     .filter('slug', 'eq', slug)
     .single()
 
-  if (error) {
-    console.log(error.message)
-  }
+  if (error) console.log(error.message)
 
   if (!data) throw new Response('Not Found', { status: 404 })
   return json<LoaderData>({ article: data })
