@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { json, useLoaderData, Link } from 'remix'
-import { Box, Text, Flex, VStack, Heading } from '@chakra-ui/react'
+import { Box, Text, Flex, Button, VStack, Heading } from '@chakra-ui/react'
 
 import type { LoaderFunction } from 'remix'
 
@@ -51,7 +51,16 @@ export default function ArticleList() {
             文章列表
           </Heading>
 
-          {articles.length === 0 && <Text>No articles found.</Text>}
+          {articles.length === 0 && (
+            <Flex flexDir="column" align="center" justify="center" h="200px">
+              <Text mb={2}>No articles found.</Text>
+              <Link to="/">
+                <Button size="sm" colorScheme="teal">
+                  Back to home
+                </Button>
+              </Link>
+            </Flex>
+          )}
 
           {articles.length > 0 &&
             articles.map(article => (
